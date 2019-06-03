@@ -3,12 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="1839f77a-7ca7-4001-b999-3ba9afb2360c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Thread.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Thread.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/app.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/profiles/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/profiles/show.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/threads/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/threads/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/threads/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/threads/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -23,13 +21,10 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php">
+        <entry file="file://$PROJECT_DIR$/app/Providers/AuthServiceProvider.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="132" column="36" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
-              <folding>
-                <element signature="e#40#56#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="78">
+              <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -51,8 +46,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/phpunit.xml" />
-        <option value="$PROJECT_DIR$/database/seeds/Development/RepliesTableSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/Development/ThreadTableSeeder.php" />
         <option value="$PROJECT_DIR$/database/seeds/Development/ReplyTableSeeder.php" />
@@ -92,16 +85,18 @@
         <option value="$PROJECT_DIR$/app/User.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ProfilesController.php" />
         <option value="$PROJECT_DIR$/resources/views/threads/reply.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/threads/index.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/profiles/show.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/app.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/layouts/nav.blade.php" />
         <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_05_24_072838_create_replies_table.php" />
         <option value="$PROJECT_DIR$/app/Thread.php" />
+        <option value="$PROJECT_DIR$/resources/views/threads/index.blade.php" />
         <option value="$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php" />
-        <option value="$PROJECT_DIR$/resources/views/threads/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php" />
+        <option value="$PROJECT_DIR$/resources/views/threads/show.blade.php" />
+        <option value="$PROJECT_DIR$/resources/views/profiles/show.blade.php" />
+        <option value="$PROJECT_DIR$/app/Policies/ThreadPolicy.php" />
       </list>
     </option>
   </component>
@@ -231,6 +226,18 @@
             <path>
               <item name="forum" type="b2602c69:ProjectViewProjectNode" />
               <item name="forum" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Policies" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="forum" type="b2602c69:ProjectViewProjectNode" />
+              <item name="forum" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Providers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="forum" type="b2602c69:ProjectViewProjectNode" />
+              <item name="forum" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -331,7 +338,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHPUnit.CreateThreadsTest.guests_cannot_delete_threads">
+  <component name="RunManager" selected="PHPUnit.tests">
     <configuration name="CreateThreadsTest.a_thread_can_be_deleted" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
       <TestRunner class="Tests\Feature\CreateThreadsTest" file="$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php" method="a_thread_can_be_deleted" scope="Method" />
       <method v="2" />
@@ -340,12 +347,12 @@
       <TestRunner class="Tests\Feature\CreateThreadsTest" file="$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php" method="guests_cannot_delete_threads" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="ProfilesTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Feature\ProfilesTest" file="$PROJECT_DIR$/tests/Feature/ProfilesTest.php" scope="Class" />
+    <configuration name="CreateThreadsTest.unauthorized_users_may_not_delete_threads" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\CreateThreadsTest" file="$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php" method="unauthorized_users_may_not_delete_threads" scope="Method" />
       <method v="2" />
     </configuration>
-    <configuration name="ProfilesTest.profiles_display_all_threads_created_by_the_associated_user" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
-      <TestRunner class="Tests\Feature\ProfilesTest" file="$PROJECT_DIR$/tests/Feature/ProfilesTest.php" method="profiles_display_all_threads_created_by_the_associated_user" scope="Method" />
+    <configuration name="ProfilesTest" type="PHPUnitRunConfigurationType" factoryName="PHPUnit" temporary="true">
+      <TestRunner class="Tests\Feature\ProfilesTest" file="$PROJECT_DIR$/tests/Feature/ProfilesTest.php" scope="Class" />
       <method v="2" />
     </configuration>
     <configuration name="phpunit.xml" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -358,11 +365,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="PHPUnit.tests" />
+        <item itemvalue="PHPUnit.CreateThreadsTest.unauthorized_users_may_not_delete_threads" />
         <item itemvalue="PHPUnit.CreateThreadsTest.guests_cannot_delete_threads" />
         <item itemvalue="PHPUnit.CreateThreadsTest.a_thread_can_be_deleted" />
-        <item itemvalue="PHPUnit.tests" />
         <item itemvalue="PHPUnit.ProfilesTest" />
-        <item itemvalue="PHPUnit.ProfilesTest.profiles_display_all_threads_created_by_the_associated_user" />
       </list>
     </recent_temporary>
   </component>
@@ -378,44 +385,44 @@
       <updated>1558681715319</updated>
       <workItem from="1558681716794" duration="59224000" />
       <workItem from="1559296988364" duration="598000" />
-      <workItem from="1559540842694" duration="9085000" />
+      <workItem from="1559540842694" duration="11517000" />
     </task>
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="tests - 2019.06.03 at 10h 57m 17s.xml">
-      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 11h 50m 02s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 11h 51m 30s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 11h 52m 17s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 11h 56m 36s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 11h 57m 49s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 12h 00m 28s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_a_thread_can_be_deleted - 2019.06.03 at 12h 00m 42s.xml">
-      <configuration name="CreateThreadsTest.a_thread_can_be_deleted" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
-    <history-entry file="CreateThreadsTest_guests_cannot_delete_threads - 2019.06.03 at 12h 04m 58s.xml">
-      <configuration name="CreateThreadsTest.guests_cannot_delete_threads" configurationId="PHPUnitRunConfigurationType" />
-    </history-entry>
     <history-entry file="CreateThreadsTest_guests_cannot_delete_threads - 2019.06.03 at 12h 05m 22s.xml">
       <configuration name="CreateThreadsTest.guests_cannot_delete_threads" configurationId="PHPUnitRunConfigurationType" />
     </history-entry>
+    <history-entry file="CreateThreadsTest_unauthorized_users_may_not_delete_threads - 2019.06.03 at 16h 23m 37s.xml">
+      <configuration name="CreateThreadsTest.unauthorized_users_may_not_delete_threads" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="CreateThreadsTest_unauthorized_users_may_not_delete_threads - 2019.06.03 at 16h 32m 28s.xml">
+      <configuration name="CreateThreadsTest.unauthorized_users_may_not_delete_threads" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 33m 55s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 35m 18s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 40m 00s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 40m 11s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 40m 23s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 40m 35s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
+    <history-entry file="tests - 2019.06.03 at 16h 48m 23s.xml">
+      <configuration name="tests" configurationId="PHPUnitRunConfigurationType" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="68907000" />
+    <option name="totallyTimeSpent" value="71339000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -447,20 +454,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Providers/AuthServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-197">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Providers/BroadcastServiceProvider.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="109">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Providers/EventServiceProvider.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
@@ -653,13 +646,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/utilities/functions.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="9" column="54" lean-forward="true" selection-start-line="9" selection-start-column="54" selection-end-line="9" selection-end-column="54" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Filters/ThreadFilters.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="623">
@@ -769,20 +755,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/threads/index.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/profiles/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="868">
-          <caret line="31" column="39" selection-start-line="31" selection-start-column="39" selection-end-line="31" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/layouts/app.blade.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="311">
@@ -824,30 +796,65 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/threads/index.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="27" column="61" selection-start-line="27" selection-start-column="61" selection-end-line="27" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/utilities/functions.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="112">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/Feature/CreateThreadsTest.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="566">
-          <caret line="83" column="16" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
+        <state relative-caret-position="214">
+          <caret line="70" column="68" selection-start-line="70" selection-start-column="68" selection-end-line="70" selection-end-column="68" />
           <folding>
             <element signature="e#33#52#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/threads/show.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ThreadsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="132" column="36" selection-start-line="132" selection-start-column="36" selection-end-line="132" selection-end-column="36" />
+        <state relative-caret-position="365">
+          <caret line="126" column="44" selection-start-line="126" selection-start-column="44" selection-end-line="126" selection-end-column="44" />
           <folding>
             <element signature="e#40#56#0#PHP" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/threads/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="487">
+          <caret line="23" column="35" lean-forward="true" selection-start-line="23" selection-start-column="35" selection-end-line="23" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/profiles/show.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="19" column="58" selection-start-line="19" selection-start-column="58" selection-end-line="19" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Policies/ThreadPolicy.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="224">
+          <caret line="10" column="29" selection-start-line="10" selection-start-column="29" selection-end-line="10" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Providers/AuthServiceProvider.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="78">
+          <caret line="15" column="53" selection-start-line="15" selection-start-column="53" selection-end-line="15" selection-end-column="53" />
         </state>
       </provider>
     </entry>

@@ -114,7 +114,7 @@ class ThreadsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete the given thread.
      *
      * @param  Thread  $thread
      * @param          $channel
@@ -124,6 +124,8 @@ class ThreadsController extends Controller
      */
     public function destroy($channel, Thread $thread)
     {
+        $this->authorize('update', $thread);
+
         $thread->delete();
 
         if (request()->wantsJson()) {

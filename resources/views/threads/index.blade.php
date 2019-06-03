@@ -3,7 +3,7 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            @foreach ($threads as $thread)
+            @forelse ($threads as $thread)
                 <div class="col-md-8 mb-4">
                     <div class="card">
                         <div class="card-header">
@@ -13,7 +13,9 @@
                                         {{ $thread->title }}
                                     </a>
                                 </h4>
-                                <a href="{{ $thread->path() }}">{{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}</a>
+                                <a href="{{ $thread->path() }}">
+                                    {{ $thread->replies_count }} {{ Str::plural('reply', $thread->replies_count) }}
+                                </a>
                             </div>
                         </div>
 
@@ -22,7 +24,9 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <p>There are no relevant result at this time.</p>
+            @endforelse
         </div>
     </div>
 @endsection
