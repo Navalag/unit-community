@@ -18,6 +18,15 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <!--  Scripts  -->
+    <script>
+        window.App = {!! json_encode([
+        'csrfToken' => csrf_token(),
+        'signedIn' => auth()->check(),
+        'user' => Auth::user(),
+        ]) !!};
+    </script>
     <style>
         body { padding-bottom: 100px; }
         .level { display: flex; align-items: center; }
