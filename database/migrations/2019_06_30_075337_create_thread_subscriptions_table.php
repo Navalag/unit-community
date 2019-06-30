@@ -18,6 +18,8 @@ class CreateThreadSubscriptionsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('thread_id');
             $table->timestamps();
+
+            $table->unique(['user_id', 'thread_id']);
         });
 
         Schema::table('thread_subscriptions', function(Blueprint $table) {
