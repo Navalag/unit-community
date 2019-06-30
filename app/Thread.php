@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
+use function Sodium\increment;
 
 class Thread extends Model
 {
@@ -22,10 +23,6 @@ class Thread extends Model
     protected static function boot()
     {
         parent::boot();
-
-        static::addGlobalScope('replyCount', function ($builder){
-            $builder->withCount('replies');
-        });
 
         static::deleting(function ($thread){
             $thread->replies->each->delete();
