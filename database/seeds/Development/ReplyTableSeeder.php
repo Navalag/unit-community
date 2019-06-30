@@ -16,7 +16,7 @@ class ReplyTableSeeder extends Seeder
         $threads = Thread::all();
 
         $threads->each(function ($thread) {
-            factory(Reply::class, 10)->create(['thread_id' => $thread->id]);
+            factory(Reply::class, 30)->create(['thread_id' => $thread->id]);
         });
     }
 }
