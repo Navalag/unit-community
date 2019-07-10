@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
+use Illuminate\Http\RedirectResponse;
+use App\Inspections\Spam;
 use Illuminate\Http\Request;
 use App\Reply;
 use App\Thread;
@@ -32,15 +35,17 @@ class RepliesController extends Controller
     /**
      * Persist a new reply.
      *
-     * @param  integer $channelId
-     * @param  Thread  $thread
+     * @param integer $channelId
+     * @param Thread $thread
+     * @param Spam $spam
      * @return mixed
      *
-     * @throws
+     * @throws Exception
      */
-    public function store($channelId, Thread $thread)
+    public function store($channelId, Thread $thread, Spam $spam)
     {
         $this->validate(request(), ['body' => 'required']);
+        $spam->detect(request('body'));
 
         $reply = $thread->addReply([
             'body' => request('body'),
@@ -72,7 +77,7 @@ class RepliesController extends Controller
      * Delete the given reply.
      *
      * @param  Reply $reply
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      *
      * @throws
      */
