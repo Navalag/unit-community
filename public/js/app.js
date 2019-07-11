@@ -1759,23 +1759,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['message'],
   data: function data() {
     return {
       body: this.message,
+      level: 'success',
       show: false
     };
   },
   created: function created() {
     if (this.message) {
       this.flash(this.message);
-    } // window.events.$on('flash', message => this.flash(message));
+    } // window.events.$on('flash', data => this.flash(data));
 
   },
   methods: {
-    flash: function flash(message) {
-      this.body = message;
+    flash: function flash(data) {
+      this.body = data.message;
+      this.level = data.level;
       this.show = true;
       this.hide();
     },
@@ -1840,6 +1845,7 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.post(location.pathname + '/replies', {
         body: this.body
+      })["catch"](function (error) {// flash(error.response.data, 'danger');
       }).then(function (_ref) {
         var data = _ref.data;
         _this.body = ''; //TODO: fix this
@@ -2059,6 +2065,7 @@ __webpack_require__.r(__webpack_exports__);
     update: function update() {
       axios.patch('/replies/' + this.data.id, {
         body: this.body
+      })["catch"](function (error) {// flash(error.response.data, 'danger');
       });
       this.editing = false; // flash('Updated!');
     },
@@ -55751,17 +55758,15 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    {
-      directives: [
-        { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
-      ],
-      staticClass: "alert alert-success alert-flash",
-      attrs: { role: "alert" }
-    },
-    [_c("strong", [_vm._v("Success!")]), _vm._v(" " + _vm._s(_vm.body) + "\n")]
-  )
+  return _c("div", {
+    directives: [
+      { name: "show", rawName: "v-show", value: _vm.show, expression: "show" }
+    ],
+    staticClass: "alert alert-flash",
+    class: "alert-" + _vm.level,
+    attrs: { role: "alert" },
+    domProps: { textContent: _vm._s(_vm.body) }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -68397,8 +68402,8 @@ Vue.component('thread-view', __webpack_require__(/*! ./pages/Thread.vue */ "./re
 var app = new Vue({
   el: '#app'
 });
-window.events = new Vue(); // window.flash = function (message) {
-//     window.events.$emit('flash', message);
+window.events = new Vue(); // window.flash = function (message, level = 'success') {
+//     window.events.$emit('flash', { message, level });
 // };
 
 /***/ }),
