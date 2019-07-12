@@ -5,7 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
-use App\Events\ThreadHasNewReply;
+use App\Events\ThreadReceivedNewReply;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Thread extends Model
 {
@@ -57,7 +59,7 @@ class Thread extends Model
     /**
      * A thread may have many replies.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function replies()
     {
@@ -69,7 +71,7 @@ class Thread extends Model
     /**
      * A thread belongs to a creator.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function creator()
     {
@@ -79,7 +81,7 @@ class Thread extends Model
     /**
      * A thread is assigned a channel.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function channel()
     {
@@ -96,22 +98,9 @@ class Thread extends Model
     {
         $reply = $this->replies()->create($reply);
 
-        $this->notifySubscribers($reply);
+        event(new ThreadReceivedNewReply($reply));
 
         return $reply;
-    }
-
-    /**
-     * Notify all thread subscribers about a new reply.
-     *
-     * @param \App\Reply $reply
-     */
-    public function notifySubscribers($reply)
-    {
-        $this->subscriptions
-            ->where('user_id', '!=', $reply->user_id)
-            ->each
-            ->notify($reply);
     }
 
     /**
@@ -156,7 +145,7 @@ class Thread extends Model
     /**
      * A thread can have many subscriptions.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function subscriptions()
     {

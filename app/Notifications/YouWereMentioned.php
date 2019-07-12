@@ -3,24 +3,14 @@
 namespace App\Notifications;
 
 use App\Reply;
-use App\Thread;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 
-class ThreadWasUpdated extends Notification
+class YouWereMentioned extends Notification
 {
     use Queueable;
 
     /**
-     * The thread that was updated.
-     *
-     * @var Thread
-     */
-    protected $thread;
-
-    /**
-     * The new reply.
-     *
      * @var Reply
      */
     protected $reply;
@@ -28,21 +18,20 @@ class ThreadWasUpdated extends Notification
     /**
      * Create a new notification instance.
      *
-     * @param $thread
-     * @param $reply
+     * @param \App\Reply $reply
      */
-    public function __construct($thread, $reply)
+    public function __construct($reply)
     {
-        $this->thread = $thread;
         $this->reply = $reply;
     }
 
     /**
      * Get the notification's delivery channels.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
         return ['database'];
     }
@@ -50,13 +39,14 @@ class ThreadWasUpdated extends Notification
     /**
      * Get the array representation of the notification.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
-            'message' => $this->reply->owner->name . ' replied to ' . $this->thread->title,
-            'link'    => $this->reply->path()
+            'message' => $this->reply->owner->name . ' mentioned you in ' . $this->reply->thread->title,
+            'link' => $this->reply->path()
         ];
     }
 }
