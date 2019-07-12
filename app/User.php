@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Carbon\Carbon;
@@ -38,19 +40,44 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    /**
+     * Get the route key name for Laravel.
+     *
+     * @return string
+     */
     public function getRouteKeyName()
     {
         return 'name';
     }
 
+    /**
+     * Fetch all threads that were created by the user.
+     *
+     * @return HasMany
+     */
     public function threads()
     {
         return $this->hasMany(Thread::class)->latest();
     }
 
+    /**
+     * Get all activity for the user.
+     *
+     * @return HasMany
+     */
     public function activity()
     {
         return $this->hasMany(Activity::class);
+    }
+
+    /**
+     * Fetch the last published reply for the user.
+     *
+     * @return HasOne
+     */
+    public function lastReply()
+    {
+        return $this->hasOne(Reply::class)->latest();
     }
 
     /**
@@ -65,10 +92,6 @@ class User extends Authenticatable
         Cache::rememberForever($this->visitedThreadCacheKey($thread), function () {
             return Carbon::now();
         });
-//        cache()->forever(
-//            $this->visitedThreadCacheKey($thread),
-//            Carbon::now()
-//        );
     }
 
     /**
