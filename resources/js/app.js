@@ -15,6 +15,12 @@ Vue.prototype.authorize = function (handler) {
     return user ? handler(user) : false;
 };
 
+window.events = new Vue();
+
+window.flash = function (message, level = 'success') {
+    window.events.$emit('flash', { message, level });
+};
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -42,8 +48,8 @@ const app = new Vue({
     el: '#app',
 });
 
-window.events = new Vue;
-
+// window.events = new Vue;
+//
 // window.flash = function (message, level = 'success') {
 //     window.events.$emit('flash', { message, level });
 // };

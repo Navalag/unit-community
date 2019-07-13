@@ -53,12 +53,13 @@ class RepliesController extends Controller
      * Update an existing reply.
      *
      * @param Reply $reply
-     *
      * @throws
      */
     public function update(Reply $reply)
     {
         $this->authorize('update', $reply);
+
+        $this->validate(request(), ['body' => 'required|spamfree']);
 
         $reply->update(request(['body']));
     }
