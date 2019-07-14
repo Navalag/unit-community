@@ -58,7 +58,7 @@ class ReadThreadsTest extends TestCase
     }
 
     /** @test */
-    public function a_user_can_filter_thread_by_popularity()
+    public function a_user_can_filter_threads_by_popularity()
     {
         $threadWithTwoReplies = create('App\Thread');
         create('App\Reply', ['thread_id' => $threadWithTwoReplies->id], 2);
@@ -69,7 +69,8 @@ class ReadThreadsTest extends TestCase
         $threadWithNoReplies = $this->thread;
 
         $response = $this->getJson('threads?popular=1')->json();
-        $this->assertEquals([3, 2, 0], array_column($response, 'replies_count'));
+
+        $this->assertEquals([3, 2, 0], array_column($response['data'], 'replies_count'));
     }
 
     /** @test */
@@ -80,7 +81,7 @@ class ReadThreadsTest extends TestCase
 
         $response = $this->getJson('threads?unanswered=1')->json();
 
-        $this->assertCount(1, $response);
+        $this->assertCount(1, $response['data']);
     }
 
     /** @test */

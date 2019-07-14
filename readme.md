@@ -1,7 +1,5 @@
 ## Project description
 
-The idea of the project is to create a simple forum engine with threads, replies, users and all the small details necessary in such applications. 
-
 A forum is a deceptively complex thing. Sure, it's made up of threads and replies, but what else might exist as part of a forum? What about profiles, or thread subscriptions, or filtering, or real-time notifications?
 
 All of these features, and not only them, are implemented in this project. 
@@ -23,7 +21,7 @@ composer install
 npm install
 ```
 
-Copy .env.example to .env and Update database credentials.
+Copy .env.example to .env and update database credentials.
 ```
 cp .env.example .env
 php artisan key:generate
