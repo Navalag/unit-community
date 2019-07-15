@@ -40,7 +40,9 @@
 
             persist(avatar) {
                 let data = new FormData();
+
                 data.append('avatar', avatar);
+
                 axios.post(`/api/users/${this.user.name}/avatar`, data)
                     .then(() => flash('Avatar uploaded!'));
             }
