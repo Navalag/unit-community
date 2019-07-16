@@ -4,8 +4,8 @@ namespace Tests\Feature;
 
 use App\Activity;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Thread;
 
 class CreateThreadsTest extends TestCase
 {
@@ -52,6 +52,36 @@ class CreateThreadsTest extends TestCase
     }
 
     /** @test */
+    public function a_thread_requires_a_valid_channel()
+    {
+        factory('App\Channel', 2)->create();
+
+        $this->publishThread(['channel_id' => null])
+            ->assertSessionHasErrors('channel_id');
+
+        $this->publishThread(['channel_id' => 999])
+            ->assertSessionHasErrors('channel_id');
+    }
+
+    /** @test */
+    function a_thread_requires_a_unique_slug()
+    {
+        $this->signIn();
+
+        $thread = create('App\Thread', ['title' => 'Foo Title 24', 'slug' => 'foo-title24']);
+
+        $this->assertEquals($thread->fresh()->slug, 'foo-title24');
+
+        $this->post(route('threads'), $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title24-2')->exists());
+
+        $this->post(route('threads'), $thread->toArray());
+
+        $this->assertTrue(Thread::whereSlug('foo-title24-3')->exists());
+    }
+
+    /** @test */
     public function unauthorized_users_may_not_delete_threads()
     {
         $this->withExceptionHandling();
@@ -80,18 +110,6 @@ class CreateThreadsTest extends TestCase
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
 
         $this->assertEquals(0, Activity::count());
-    }
-
-    /** @test */
-    public function a_thread_requires_a_valid_channel()
-    {
-        factory('App\Channel', 2)->create();
-
-        $this->publishThread(['channel_id' => null])
-            ->assertSessionHasErrors('channel_id');
-
-        $this->publishThread(['channel_id' => 999])
-            ->assertSessionHasErrors('channel_id');
     }
 
     public function publishThread($overrides = [])
