@@ -218,4 +218,14 @@ class Thread extends Model
     {
         return new Visits($this);
     }
+
+    /**
+     * Mark the given reply as the best answer.
+     *
+     * @param Reply $reply
+     */
+    public function markBestReply(Reply $reply)
+    {
+        $this->update(['best_reply_id' => $reply->id]);
+    }
 }
