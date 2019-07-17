@@ -35,7 +35,7 @@
                 <button class="btn btn-danger btn-sm mr-1" @click="destroy">Delete</button>
             </div>
 
-            <button class="btn btn-primary btn-sm ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply?</button>
+            <button class="btn btn-success btn-sm ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply?</button>
         </div>
     </div>
 </template>

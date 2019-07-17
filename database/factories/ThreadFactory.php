@@ -18,5 +18,6 @@ $factory->define(Thread::class, function (Faker $faker) {
         'title' => $title,
         'body' => $faker->paragraph,
         'slug' => Str::kebab($title),
+        'locked' => false,
     ];
 });

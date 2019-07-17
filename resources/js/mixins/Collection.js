@@ -17,8 +17,7 @@ export default {
 
             this.$emit('removed');
 
-            //TODO: fix this
-            // flash('Reply was deleted');
+            flash('Reply was deleted');
         }
     }
 }
