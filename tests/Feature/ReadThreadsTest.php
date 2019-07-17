@@ -101,10 +101,12 @@ class ReadThreadsTest extends TestCase
     {
         $thread = create('App\Thread');
 
-        $this->assertSame(0, $thread->visits);
+        $thread->visits()->reset();
+
+        $this->assertSame(0, $thread->visits()->count());
 
         $this->call('GET', $thread->path());
 
-        $this->assertEquals(1, $thread->fresh()->visits);
+        $this->assertEquals(1, $thread->fresh()->visits()->count());
     }
 }

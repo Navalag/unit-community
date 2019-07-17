@@ -31,7 +31,7 @@ class SpamFree implements Rule
      */
     public function message()
     {
-        // this message does not work
+        // TODO: this message does not work
         return 'Input contains spam.';
     }
 }

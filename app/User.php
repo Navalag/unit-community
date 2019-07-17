@@ -90,9 +90,7 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function read($thread)
     {
-        Cache::rememberForever($this->visitedThreadCacheKey($thread), function () {
-            return Carbon::now();
-        });
+        Cache::put($this->visitedThreadCacheKey($thread), Carbon::now());
     }
 
     /**

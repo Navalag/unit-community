@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Notifications\ThreadWasUpdated;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ThreadSubscription extends Model
 {
@@ -17,7 +18,7 @@ class ThreadSubscription extends Model
     /**
      * Get the user associated with the subscription.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -27,7 +28,7 @@ class ThreadSubscription extends Model
     /**
      * Get the thread associated with the subscription.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function thread()
     {
@@ -37,7 +38,7 @@ class ThreadSubscription extends Model
     /**
      * Notify the related user that the thread was updated.
      *
-     * @param \App\Reply $reply
+     * @param Reply $reply
      */
     public function notify($reply)
     {

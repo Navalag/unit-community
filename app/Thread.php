@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use App\Events\ThreadReceivedNewReply;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class Thread extends Model
@@ -177,7 +178,7 @@ class Thread extends Model
     {
         $key = $user->visitedThreadCacheKey($this);
 
-        return $this->updated_at > cache($key);
+        return $this->updated_at > Cache::get($key);
     }
 
     /**
@@ -206,5 +207,15 @@ class Thread extends Model
         }
 
         $this->attributes['slug'] = $slug;
+    }
+
+    /**
+     * Create new Visits instance.
+     *
+     * @return Visits
+     */
+    public function visits()
+    {
+        return new Visits($this);
     }
 }

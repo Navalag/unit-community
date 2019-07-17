@@ -4,9 +4,16 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Response;
 
 class UserAvatarController extends Controller
 {
+    /**
+     * Store a new user avatar.
+     *
+     * @return Response
+     * @throws
+     */
     public function store()
     {
         $this->validate(request(), [
