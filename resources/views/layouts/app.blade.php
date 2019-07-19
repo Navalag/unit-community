@@ -31,6 +31,8 @@
         .level-item { margin-right: 1em; }
         .ml-a { margin-left: auto; }
         [v-cloak] { display: none; }
+        .ais-highlight > em { background: yellow; font-style: normal; }
+        input.ais-refinement-list__checkbox { margin-right: .4em; }
     </style>
 
     @yield('head')

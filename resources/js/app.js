@@ -6,9 +6,13 @@
 
 require('./bootstrap');
 
+import InstantSearch from 'vue-instantsearch';
+
 window.Vue = require('vue');
 
 let authorizations = require('./authorizations');
+
+Vue.use(InstantSearch);
 
 Vue.prototype.authorize = function (...params) {
     if (! window.App.signedIn) return false;
@@ -55,9 +59,3 @@ Vue.component('thread-view', require('./pages/Thread.vue').default);
 const app = new Vue({
     el: '#app',
 });
-
-// window.events = new Vue;
-//
-// window.flash = function (message, level = 'success') {
-//     window.events.$emit('flash', { message, level });
-// };
