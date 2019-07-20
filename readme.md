@@ -7,6 +7,9 @@ All of these features, and not only them, are implemented in this project.
 #### Used technologies:
 - Laravel
 - Vue.js
+- Algolia search
+- Trix editor (WYSIWYG)
+- reCAPTCHA
  
 ## Installation
 
