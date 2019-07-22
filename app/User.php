@@ -122,6 +122,10 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     public function getAvatarPathAttribute($avatar)
     {
+        if (app()->environment('production')) {
+            return asset($avatar ? 'storage/' . $avatar : 'storage/avatars/default.png');
+        }
+
         return asset($avatar ?: 'avatars/default.png');
     }
 }
