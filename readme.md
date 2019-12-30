@@ -24,7 +24,7 @@ composer install
 npm install
 ```
 
-Copy .env.example to .env and update database credentials.
+Copy .env.example to .env and update database credentials (also you have to create new database to specify its name in .env).
 ```
 cp .env.example .env
 php artisan key:generate
@@ -32,7 +32,13 @@ php artisan key:generate
 
 Run migration and seeder
 ```
-php artisan migrate --seed
+php artisan migrate
+php artisan db:seed
+```
+
+Compile js and css files
+```
+npm run dev
 ```
 
 Run server
