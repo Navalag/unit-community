@@ -96140,3 +96140,4 @@ module.exports = __webpack_require__(/*! /Users/andrij/Code/forum/resources/sass
 /***/ })
 
 /******/ });
+//# sourceMappingURL=app.js.map
