@@ -39,7 +39,9 @@
 </head>
 <body style="padding-bottom: 180px">
     <div id="app">
-        @include('layouts.nav')
+        @if($_SERVER['REQUEST_URI'] != '/register')
+            @include('layouts.nav')
+        @endif
 
         <main class="py-4">
             @yield('content')
