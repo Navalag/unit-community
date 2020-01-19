@@ -3,11 +3,12 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="format-detection" content="telephone=no">
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -19,9 +20,9 @@
     <!--  Scripts  -->
     <script>
         window.App = {!! json_encode([
-        'csrfToken' => csrf_token(),
-        'signedIn' => auth()->check(),
-        'user' => Auth::user(),
+            'csrfToken' => csrf_token(),
+            'signedIn' => auth()->check(),
+            'user' => Auth::user(),
         ]) !!};
     </script>
     <style>
@@ -37,13 +38,9 @@
 
     @yield('head')
 </head>
-<body style="padding-bottom: 180px">
+<body class="@yield('bodyClass')">
     <div id="app">
-        @include('layouts.nav')
-
-        <main class="py-4">
-            @yield('content')
-        </main>
+        @yield('body')
 
         <flash message="{{ session('flash') }}"></flash>
     </div>

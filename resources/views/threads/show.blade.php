@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('head')
     <link rel="stylesheet" href="/css/vendor/jquery.atwho.css">
