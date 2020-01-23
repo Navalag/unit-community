@@ -16413,6 +16413,11 @@ hr {
   height: 18px;
 }
 
+.tt-btn-icon .tt-icon img {
+  width: 18px;
+  height: 18px;
+}
+
 .tt-btn-icon:hover .tt-icon {
   fill: #2172cd;
 }
@@ -16928,6 +16933,11 @@ hr {
 }
 
 .tt-avatar-icon.tt-size-md svg {
+  width: 40px;
+  height: 40px;
+}
+
+.tt-avatar-icon.tt-size-md img {
   width: 40px;
   height: 40px;
 }

@@ -98,6 +98,10 @@ hr{
             width: 18px;
             height: 18px;
         }
+        img{
+            width: 18px;
+            height: 18px;
+        }
     }
     &:hover{
         .tt-icon{
@@ -556,6 +560,10 @@ hr{
 .tt-avatar-icon{
     &.tt-size-md{
         svg{
+            width: 40px;
+            height: 40px;
+        }
+        img{
             width: 40px;
             height: 40px;
         }

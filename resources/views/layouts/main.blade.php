@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('body')
-    @include('layouts.nav')
+    @include('layouts.header')
 
-    <main class="py-4">
+    <main style="padding-top: 100px">
         @yield('content')
     </main>
 @endsection
