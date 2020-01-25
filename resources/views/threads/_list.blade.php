@@ -1,3 +1,4 @@
+{{-- Old design sampe, should be removed later --}}
 @forelse ($threads as $thread)
     <div class="card mb-4">
         <div class="card-header">

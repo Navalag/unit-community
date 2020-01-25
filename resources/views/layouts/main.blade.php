@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('body')
-    @include('layouts.header')
+    @include('layouts.partials.header')
 
-    <main style="padding-top: 100px">
+    <main id="tt-pageContent" class="@yield('mainClass')">
         @yield('content')
     </main>
 @endsection
