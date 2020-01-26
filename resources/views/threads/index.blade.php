@@ -13,7 +13,16 @@
                 <div class="tt-col-value hide-mobile">Views</div>
                 <div class="tt-col-value">Activity</div>
             </div>
-            @include('threads.partials.list')
+            @foreach($threads->where('is_trending', true) as $thread)
+                @include('threads.partials.list')
+            @endforeach
+            @forelse($threads as $thread)
+                @if(! in_array($thread->id, $trending))
+                    @include('threads.partials.list')
+                @endif
+            @empty
+                <p>There are no relevant results at this time.</p>
+            @endforelse
 
             {{ $threads->render() }}
         </div>

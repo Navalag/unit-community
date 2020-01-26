@@ -32,7 +32,7 @@ class ThreadsController extends Controller
      */
     public function index(Channel $channel, ThreadFilters $filters, Trending $trending)
     {
-        $threads = $this->getThreads($channel, $filters);
+        $threads = $this->getThreads($channel, $filters, $trending->get());
 
         if (request()->wantsJson()) {
             return $threads;
@@ -152,9 +152,10 @@ class ThreadsController extends Controller
      *
      * @param Channel       $channel
      * @param ThreadFilters $filters
+     * @param array         $trending
      * @return mixed
      */
-    protected function getThreads(Channel $channel, ThreadFilters $filters)
+    protected function getThreads(Channel $channel, ThreadFilters $filters, array $trending)
     {
         $threads = Thread::latest()->filter($filters);
 
@@ -162,6 +163,18 @@ class ThreadsController extends Controller
             $threads->where('channel_id', $channel->id);
         }
 
-        return $threads->paginate(10);
+        $threads = $threads->paginate(10);
+
+        $threads->map(function($thread) use ($trending) {
+            if (in_array($thread->id, $trending)) {
+                $thread->is_trending = true;
+            } else {
+                $thread->is_trending = false;
+            }
+
+            return $thread;
+        });
+
+        return $threads;
     }
 }
