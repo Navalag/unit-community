@@ -2,10 +2,9 @@
 	Single-Topic
 */
 .tt-single-topic-list{
-	> .tt-item{
-		&:not(:first-child){
-			margin-top: 30px;
-		}
+	.tt-item{
+        margin-top: 30px;
+
 		&:not([class^="tt-wrapper-success"]){
 			background-color:#ffffff;
 		}
@@ -38,6 +37,10 @@
 							width: 40px;
 							height: 40px;
 						}
+                        img{
+                            width: 40px;
+                            height: 40px;
+                        }
 					}
 				}
 				.tt-avatar-title{
@@ -66,6 +69,10 @@
 							width: 16px;
 							height: 16px;
 						}
+                        img{
+                            width: 16px;
+                            height: 16px;
+                        }
 					}
 				}
 			}
@@ -143,6 +150,10 @@
 						width: 40px;
 						height: 40px;
 					}
+                    img{
+                        width: 40px;
+                        height: 40px;
+                    }
 					@media (min-width: 1025px){
 						margin-right: 30px;
 					}
@@ -292,6 +303,10 @@
 		width: 40px;
 		height: 40px;
 	}
+    img{
+        width: 40px;
+        height: 40px;
+    }
 }
 .row-object-inline{
 	display: flex;

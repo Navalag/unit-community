@@ -1,5 +1,5 @@
 <template>
-    <button :class="classes" @click="subscribe">Subscribe</button>
+    <button :class="classes" @click="subscribe" v-text="btnText"></button>
 </template>
 
 <script>
@@ -8,7 +8,11 @@
 
         computed: {
             classes() {
-                return ['btn', this.active ? 'btn-primary' : 'btn-secondary'];
+                return ['btn', this.active ? 'btn-secondary' : 'btn-primary'];
+            },
+
+            btnText() {
+                return this.active ? 'Unsubscribe' : 'Subscribe';
             }
         },
 

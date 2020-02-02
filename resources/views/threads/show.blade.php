@@ -7,32 +7,12 @@
 @section('content')
     <thread-view :thread="{{ $thread }}" inline-template>
         <div class="container">
-            <div class="row">
-                <div class="col-md-8" v-cloak>
-                    @include ('threads._question')
-
-                    <replies @removed="repliesCount--" @added="repliesCount++"></replies>
+            <div class="tt-single-topic-list" v-cloak>
+                <div class="tt-item mt-0">
+                    @include('threads.partials.question')
                 </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <p>
-                                This thread was published {{ $thread->created_at->diffForHumans() }} by
-                                <a href="#">{{ $thread->creator->name }}</a>, and currently
-                                has <span v-text="repliesCount"></span> {{ Str::plural('comment', $thread->replies_count) }}.
-                            </p>
 
-                            <p>
-                                <subscribe-button :active="{{ json_encode($thread->isSubscribedTo) }}" v-if="signedIn"></subscribe-button>
-
-                                <button class="btn btn-secondary ml-1"
-                                        v-if="authorize('isAdmin')"
-                                        @click="toggleLock"
-                                        v-text="locked ? 'Unlock' : 'Lock'"></button>
-                            </p>
-                        </div>
-                    </div>
-                </div>
+                <replies @removed="repliesCount--" @added="repliesCount++"></replies>
             </div>
         </div>
     </thread-view>

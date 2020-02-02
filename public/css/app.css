@@ -16501,6 +16501,11 @@ hr {
   height: 15px;
 }
 
+.btn i img {
+  width: 16px;
+  height: 15px;
+}
+
 .btn-block {
   width: 100%;
 }
@@ -16642,8 +16647,15 @@ hr {
   transition: fill 0.2s linear;
 }
 
+.tt-icon-btn .tt-icon img {
+  width: 23px;
+  height: 18px;
+  fill: #666f74;
+  transition: fill 0.2s linear;
+}
+
 .tt-icon-btn .tt-icon + .tt-text {
-  margin-left: 10px;
+  margin-left: 3px;
 }
 
 .tt-icon-btn .tt-text {
@@ -16663,6 +16675,10 @@ hr {
   fill: #2172cd;
 }
 
+.tt-icon-btn:hover .tt-icon img {
+  fill: #2172cd;
+}
+
 .tt-icon-btn:hover.tt-hover-02 .tt-text {
   color: #182730;
 }
@@ -16675,12 +16691,16 @@ hr {
   fill: #182730;
 }
 
+.tt-icon-btn:hover.tt-hover-02 .tt-icon img {
+  fill: #182730;
+}
+
 .tt-icon-btn:not(.tt-small-indent) + .tt-icon-btn {
   margin-left: 29px;
 }
 
 .tt-icon-btn.tt-small-indent + .tt-icon-btn {
-  margin-left: 22px;
+  margin-left: 30px;
 }
 
 @media (min-width: 576px) {
@@ -16830,6 +16850,12 @@ hr {
   fill: #666e74;
 }
 
+.tt-button-icon .tt-icon img {
+  max-width: 78px;
+  max-height: 78px;
+  fill: #666e74;
+}
+
 .tt-button-icon .tt-text {
   color: #182730;
   display: block;
@@ -16856,6 +16882,11 @@ hr {
     max-height: 55px;
   }
 
+  .tt-button-icon .tt-icon img {
+    max-width: 55px;
+    max-height: 55px;
+  }
+
   .tt-button-icon .tt-text {
     margin-top: 11px;
   }
@@ -16863,6 +16894,11 @@ hr {
 
 @media (max-width: 575px) {
   .tt-button-icon .tt-icon svg {
+    max-width: 60px;
+    max-height: 60px;
+  }
+
+  .tt-button-icon .tt-icon img {
     max-width: 60px;
     max-height: 60px;
   }
@@ -18532,20 +18568,20 @@ hr {
 	Single-Topic
 */
 
-.tt-single-topic-list > .tt-item:not(:first-child) {
+.tt-single-topic-list .tt-item {
   margin-top: 30px;
 }
 
-.tt-single-topic-list > .tt-item:not([class^=tt-wrapper-success]) {
+.tt-single-topic-list .tt-item:not([class^=tt-wrapper-success]) {
   background-color: #ffffff;
 }
 
-.tt-single-topic-list > .tt-item.tt-wrapper-success {
+.tt-single-topic-list .tt-item.tt-wrapper-success {
   border: 1px solid #68c193;
   background-color: #e6fbf0;
 }
 
-.tt-single-topic-list > .tt-item.tt-wrapper-danger {
+.tt-single-topic-list .tt-item.tt-wrapper-danger {
   border: 1px dashed #f56e6f;
   background-color: #fff2f2;
 }
@@ -18566,6 +18602,11 @@ hr {
 }
 
 .tt-single-topic .tt-item-header .tt-item-info.info-top .tt-avatar-icon .tt-icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.tt-single-topic .tt-item-header .tt-item-info.info-top .tt-avatar-icon .tt-icon img {
   width: 40px;
   height: 40px;
 }
@@ -18600,6 +18641,11 @@ hr {
 }
 
 .tt-single-topic .tt-item-header .tt-item-info.info-top .tt-info-time .tt-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.tt-single-topic .tt-item-header .tt-item-info.info-top .tt-info-time .tt-icon img {
   width: 16px;
   height: 16px;
 }
@@ -18691,6 +18737,11 @@ hr {
 }
 
 .tt-single-topic .tt-item-description .topic-inner .topic-inner-title .topic-inner-avatar svg {
+  width: 40px;
+  height: 40px;
+}
+
+.tt-single-topic .tt-item-description .topic-inner .topic-inner-title .topic-inner-avatar img {
   width: 40px;
   height: 40px;
 }
@@ -18870,6 +18921,11 @@ hr {
   height: 40px;
 }
 
+.tt-icon-avatar img {
+  width: 40px;
+  height: 40px;
+}
+
 .row-object-inline {
   display: flex;
   flex-direction: row;
@@ -18890,7 +18946,6 @@ hr {
 .tt-badge {
   font-size: 14px;
   padding: 1px 7px 2px;
-  color: #ffffff;
   line-height: 1;
   font-weight: 500;
   height: 25px;

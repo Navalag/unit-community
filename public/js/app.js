@@ -10908,6 +10908,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['reply'],
@@ -10922,7 +10926,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     classes: function classes() {
-      return ['btn', this.active ? 'btn-primary' : 'btn-outline-primary'];
+      return [// 'tt-icon-btn',
+      'btn', this.active ? 'btn-primary' : 'btn-outline-primary'];
     },
     endpoint: function endpoint() {
       return '/replies/' + this.reply.id + '/favorites';
@@ -11303,6 +11308,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11370,7 +11424,10 @@ __webpack_require__.r(__webpack_exports__);
   props: ['active'],
   computed: {
     classes: function classes() {
-      return ['btn', this.active ? 'btn-primary' : 'btn-secondary'];
+      return ['btn', this.active ? 'btn-secondary' : 'btn-primary'];
+    },
+    btnText: function btnText() {
+      return this.active ? 'Unsubscribe' : 'Subscribe';
     }
   },
   methods: {
@@ -82710,122 +82767,151 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "card mb-3",
-      class: _vm.isBest ? "border-success" : "",
+      staticClass: "tt-item",
+      class: _vm.isBest ? "tt-wrapper-success" : "",
       attrs: { id: "reply-" + _vm.id }
     },
     [
-      _c("div", { staticClass: "card-header" }, [
-        _c("div", { staticClass: "level" }, [
-          _c("h6", { staticClass: "flex" }, [
-            _c("a", {
-              attrs: { href: "/profiles/" + _vm.reply.owner.name },
-              domProps: { textContent: _vm._s(_vm.reply.owner.name) }
-            }),
-            _vm._v(" said "),
-            _c("span", { domProps: { textContent: _vm._s(_vm.ago) } })
-          ]),
-          _vm._v(" "),
-          _vm.signedIn
-            ? _c("div", [_c("favorite", { attrs: { reply: _vm.reply } })], 1)
-            : _vm._e()
-        ])
-      ]),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card-body", class: _vm.isBest ? "text-success" : "" },
-        [
-          _vm.editing
-            ? _c("div", [
-                _c("form", { on: { submit: _vm.update } }, [
-                  _c(
-                    "div",
-                    { staticClass: "form-group" },
-                    [
-                      _c("wysiwyg", {
-                        model: {
-                          value: _vm.body,
-                          callback: function($$v) {
-                            _vm.body = $$v
-                          },
-                          expression: "body"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("button", { staticClass: "btn btn-primary btn-sm" }, [
-                    _vm._v("Update")
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-link btn-sm",
-                      attrs: { type: "button" },
-                      on: {
-                        click: function($event) {
-                          _vm.editing = false
-                        }
-                      }
-                    },
-                    [_vm._v("Cancel")]
-                  )
-                ])
+      _c("div", { staticClass: "tt-single-topic" }, [
+        _c("div", { staticClass: "tt-item-header pt-noborder" }, [
+          _c("div", { staticClass: "tt-item-info info-top" }, [
+            _c("div", { staticClass: "tt-avatar-icon" }, [
+              _c("i", { staticClass: "tt-icon" }, [
+                _c("img", {
+                  attrs: { src: _vm.reply.owner.avatar_path, alt: "" }
+                })
               ])
-            : _c("div", { domProps: { innerHTML: _vm._s(_vm.body) } })
-        ]
-      ),
-      _vm._v(" "),
-      _vm.authorize("owns", _vm.reply) ||
-      _vm.authorize("owns", _vm.reply.thread)
-        ? _c("div", { staticClass: "card-footer level" }, [
-            _vm.authorize("owns", _vm.reply)
-              ? _c("div", [
-                  !_vm.editing
-                    ? _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-secondary btn-sm mr-1",
-                          on: {
-                            click: function($event) {
-                              _vm.editing = true
-                            }
-                          }
-                        },
-                        [_vm._v("Edit")]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-danger btn-sm mr-1",
-                      on: { click: _vm.destroy }
-                    },
-                    [_vm._v("Delete")]
-                  )
-                ])
-              : _vm._e(),
+            ]),
             _vm._v(" "),
-            _vm.authorize("owns", _vm.reply.thread)
-              ? _c(
+            _c("div", { staticClass: "tt-avatar-title" }, [
+              _c("a", {
+                attrs: { href: "/profiles/" + _vm.reply.owner.name },
+                domProps: { textContent: _vm._s(_vm.reply.owner.name) }
+              })
+            ]),
+            _vm._v(" "),
+            _c("a", { staticClass: "tt-info-time", attrs: { href: "#" } }, [
+              _vm._m(0),
+              _vm._v(_vm._s(_vm.ago) + "\n                    ")
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _vm.editing
+          ? _c("div", { staticClass: "tt-item-description" }, [
+              _c("form", { on: { submit: _vm.update } }, [
+                _c(
+                  "div",
+                  { staticClass: "form-group" },
+                  [
+                    _c("wysiwyg", {
+                      model: {
+                        value: _vm.body,
+                        callback: function($$v) {
+                          _vm.body = $$v
+                        },
+                        expression: "body"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                  _vm._v("Update")
+                ]),
+                _vm._v(" "),
+                _c(
                   "button",
                   {
-                    staticClass: "btn btn-success btn-sm ml-a",
-                    on: { click: _vm.markBestReply }
+                    staticClass: "btn btn-link btn-sm",
+                    attrs: { type: "button" },
+                    on: {
+                      click: function($event) {
+                        _vm.editing = false
+                      }
+                    }
                   },
-                  [_vm._v("Best Reply?")]
+                  [_vm._v("Cancel")]
                 )
-              : _vm._e()
-          ])
-        : _vm._e()
+              ])
+            ])
+          : _c("div", {
+              staticClass: "tt-item-description",
+              domProps: { innerHTML: _vm._s(_vm.body) }
+            }),
+        _vm._v(" "),
+        _vm.signedIn
+          ? _c(
+              "div",
+              { staticClass: "tt-item-info info-bottom" },
+              [
+                _c("favorite", { attrs: { reply: _vm.reply } }),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-separator" }),
+                _vm._v(" "),
+                _vm.authorize("owns", _vm.reply) ||
+                _vm.authorize("owns", _vm.reply.thread)
+                  ? _c("div", [
+                      _vm.authorize("owns", _vm.reply)
+                        ? _c("div", [
+                            !_vm.editing
+                              ? _c(
+                                  "button",
+                                  {
+                                    staticClass:
+                                      "btn btn-secondary btn-sm mr-1",
+                                    on: {
+                                      click: function($event) {
+                                        _vm.editing = true
+                                      }
+                                    }
+                                  },
+                                  [_vm._v("Edit")]
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c(
+                              "button",
+                              {
+                                staticClass: "btn btn-danger btn-sm mr-1",
+                                on: { click: _vm.destroy }
+                              },
+                              [_vm._v("Delete")]
+                            )
+                          ])
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.authorize("owns", _vm.reply.thread)
+                        ? _c(
+                            "button",
+                            {
+                              staticClass: "btn btn-success btn-sm ml-a",
+                              on: { click: _vm.markBestReply }
+                            },
+                            [_vm._v("Best Reply?")]
+                          )
+                        : _vm._e()
+                    ])
+                  : _vm._e()
+              ],
+              1
+            )
+          : _vm._e()
+      ])
     ]
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("i", { staticClass: "tt-icon" }, [
+      _c("img", { attrs: { src: "/images/svg-sprite/icon-time.svg", alt: "" } })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -82847,9 +82933,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("button", { class: _vm.classes, on: { click: _vm.subscribe } }, [
-    _vm._v("Subscribe")
-  ])
+  return _c("button", {
+    class: _vm.classes,
+    domProps: { textContent: _vm._s(_vm.btnText) },
+    on: { click: _vm.subscribe }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
