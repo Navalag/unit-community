@@ -3,16 +3,20 @@
 */
 (function(){
 	var ttPopupSettings = $('#js-settings-btn');
+    console.log('shit');
+    console.log(ttPopupSettings.length);
 	if (ttPopupSettings.length){
 		 ptToggleCol();
 	}
 	function ptToggleCol() {
+        console.log('damn');
 		var $body = $('body'),
 			$html = $('html'),
 			$popupSettings = $('#js-popup-settings'),
 			$btnClose = $('.tt-btn-col-close');
 
         $('#js-settings-btn').on('click', function (e){
+            console.log('shit3');
             e.preventDefault();
             if($(this).hasClass('column-open')){
                 $btnClose.trigger('click');

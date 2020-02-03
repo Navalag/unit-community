@@ -61,6 +61,7 @@ Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
 
 Vue.component('thread-view', require('./pages/Thread.vue').default);
+Vue.component('user-profile', require('./pages/UserProfile.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

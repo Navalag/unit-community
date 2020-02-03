@@ -11,6 +11,7 @@
     max-width: inherit;
     text-align: left;
     transition: right 0.3s linear;
+    border: 1px solid red;
     &.column-open{
         right: 0;
     }
