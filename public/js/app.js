@@ -10908,10 +10908,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['reply'],
@@ -10926,8 +10922,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     classes: function classes() {
-      return [// 'tt-icon-btn',
-      'btn', this.active ? 'btn-primary' : 'btn-outline-primary'];
+      return ['btn', this.active ? 'btn-primary' : 'btn-outline-primary'];
     },
     endpoint: function endpoint() {
       return '/replies/' + this.reply.id + '/favorites';
@@ -11059,6 +11054,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jquery_caret__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(jquery_caret__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var at_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! at.js */ "./node_modules/at.js/dist/js/jquery.atwho.js");
 /* harmony import */ var at_js__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(at_js__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
 //
 //
 //
@@ -11309,54 +11306,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11498,6 +11447,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var trix__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! trix */ "./node_modules/trix/dist/trix.js");
 /* harmony import */ var trix__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(trix__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
 //
 //
 //
@@ -82556,37 +82507,39 @@ var render = function() {
   return _c("div", [
     _vm.signedIn
       ? _c("div", [
-          _c(
-            "div",
-            { staticClass: "form-group" },
-            [
-              _c("wysiwyg", {
-                attrs: {
-                  name: "body",
-                  placeholder: "Have something to say?",
-                  shouldClear: _vm.completed
-                },
-                model: {
-                  value: _vm.body,
-                  callback: function($$v) {
-                    _vm.body = $$v
+          _c("div", { staticClass: "tt-wrapper-inner" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("wysiwyg", {
+                  attrs: {
+                    name: "body",
+                    placeholder: "Have something to say?",
+                    shouldClear: _vm.completed
                   },
-                  expression: "body"
-                }
-              })
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "button",
-            {
-              staticClass: "btn btn-primary",
-              attrs: { type: "submit" },
-              on: { click: _vm.addReply }
-            },
-            [_vm._v("Post")]
-          )
+                  model: {
+                    value: _vm.body,
+                    callback: function($$v) {
+                      _vm.body = $$v
+                    },
+                    expression: "body"
+                  }
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "button",
+              {
+                staticClass: "btn btn-secondary",
+                attrs: { type: "submit" },
+                on: { click: _vm.addReply }
+              },
+              [_vm._v("Post")]
+            )
+          ])
         ])
       : _c("p", { staticClass: "text-center" }, [
           _vm._v("\n        Please "),
@@ -82792,7 +82745,7 @@ var render = function() {
             _vm._v(" "),
             _c("a", { staticClass: "tt-info-time", attrs: { href: "#" } }, [
               _vm._m(0),
-              _vm._v(_vm._s(_vm.ago) + "\n                    ")
+              _vm._v(_vm._s(_vm.ago) + "\n                ")
             ])
           ])
         ]),
@@ -83047,7 +83000,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    { staticClass: "pt-editor form-default" },
     [
+      _c("h6", { staticClass: "pt-title" }, [_vm._v("Post Your Reply")]),
+      _vm._v(" "),
       _c("input", {
         attrs: { id: "trix", type: "hidden", name: _vm.name },
         domProps: { value: _vm.value }

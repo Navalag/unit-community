@@ -1,6 +1,85 @@
 /*
     Editor
 */
+trix-toolbar {
+
+    .trix-button-row {
+        padding-bottom: 12px;
+
+        @media (min-width: 576px){
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+            align-content: stretch;
+            align-items: flex-start;
+        }
+        @media (max-width: 575px){
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        > *:not(:last-child){
+            margin-bottom: 10px;
+        }
+    }
+
+    .trix-button-group {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-content: stretch;
+        list-style: none;
+        border: none;
+
+        .trix-button {
+            outline: none;
+            border: none;
+            padding: 5px 14px;
+
+            &:not(:last-child) {
+                margin-right: 6px;
+            }
+        }
+
+        @media (min-width: 576px){
+            justify-content: flex-start;
+            align-items: flex-start;
+        }
+
+        @media (max-width: 575px){
+            justify-content: space-around;
+            align-items: center;
+            padding-bottom: 3px;
+
+            .trix-button{
+                padding-left: 8px;
+                padding-right: 8px;
+            }
+        }
+    }
+}
+
+trix-editor {
+    font-family: "Krub", sans-serif;
+    background: #e2e7ea;
+    color: #666f74;
+    border: 1px solid #e2e7ea;
+    font-size: 16px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 25px;
+
+    box-shadow: none;
+    outline: none;
+    width: 100%;
+    border-radius: 3px;
+    transition: border-color 0.2s linear;
+    padding: 20px 30px 23px 28px;
+    margin: 0;
+    min-height: 169px;
+}
+
 .pt-editor{
     padding-top: 36px;
     .pt-title{

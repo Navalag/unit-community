@@ -1,16 +1,18 @@
 <template>
     <div>
         <div v-if="signedIn">
-            <div class="form-group">
-                <wysiwyg name="body"
-                         v-model="body"
-                         placeholder="Have something to say?"
-                         :shouldClear="completed"></wysiwyg>
-            </div>
+            <div class="tt-wrapper-inner">
+                <div class="form-group">
+                    <wysiwyg name="body"
+                             v-model="body"
+                             placeholder="Have something to say?"
+                             :shouldClear="completed"></wysiwyg>
+                </div>
 
-            <button type="submit"
-                    class="btn btn-primary"
-                    @click="addReply">Post</button>
+                <button type="submit"
+                        class="btn btn-secondary"
+                        @click="addReply">Post</button>
+            </div>
         </div>
         <p v-else class="text-center">
             Please <a href="/login">Sing In</a> to participate in this discussion.

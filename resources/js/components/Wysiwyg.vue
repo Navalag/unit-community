@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div class="pt-editor form-default">
+        <h6 class="pt-title">Post Your Reply</h6>
+        
         <input id="trix" type="hidden" :name="name" :value="value">
 
         <trix-editor ref="trix" input="trix" :placeholder="placeholder"></trix-editor>
