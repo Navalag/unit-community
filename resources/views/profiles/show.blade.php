@@ -12,7 +12,8 @@
                 </div>
                 <div class="tt-col-title">
                     <div class="tt-title">
-                        <a href="#"></a>
+                        <a href="#"> {{ $profileUser->name }} </a>
+{{--                        <bold> {{ $profileUser->name }} </bold>--}}
                     </div>
                     <ul class="tt-list-badge">
                         <li><a href="#"><span class="tt-color14 tt-badge"></span></a></li>

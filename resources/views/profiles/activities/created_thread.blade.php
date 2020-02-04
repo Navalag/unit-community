@@ -23,6 +23,6 @@
     @endslot
     @slot('meta')
         <div class="tt-col-category"><span class="tt-color{{ $activity->subject->channel->id }} tt-badge">{{ $activity->subject->channel->name }}</span></div>
-        <div class="tt-col-value hide-mobile">{{ $activity->subject->created_at }}</div>
+        <div class="tt-col-value hide-mobile">{{ $activity->subject->created_at->diffForHumans() }}</div>
     @endslot
 @endcomponent
