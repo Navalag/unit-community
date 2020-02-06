@@ -45,6 +45,9 @@
         <flash message="{{ session('flash') }}"></flash>
     </div>
 
+    <!-- Svg sprite -->
+    {!! file_get_contents(asset('images/svg-sprite/sprite.svg')) !!}
+
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 

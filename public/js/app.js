@@ -11460,7 +11460,7 @@ __webpack_require__.r(__webpack_exports__);
 
 Vue.config.ignoredElements = ['trix-editor'];
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['name', 'value', 'placeholder', 'shouldClear'],
+  props: ['name', 'value', 'placeholder', 'title', 'shouldClear', 'classNames'],
   components: {
     Trix: trix__WEBPACK_IMPORTED_MODULE_0___default.a
   },
@@ -11473,6 +11473,11 @@ Vue.config.ignoredElements = ['trix-editor'];
     this.$watch('shouldClear', function () {
       _this.$refs.trix.value = '';
     });
+  },
+  computed: {
+    classes: function classes() {
+      return ['pt-editor form-default', this.classNames];
+    }
   }
 });
 
@@ -83000,9 +83005,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    { staticClass: "pt-editor form-default" },
+    { class: _vm.classes },
     [
-      _c("h6", { staticClass: "pt-title" }, [_vm._v("Post Your Reply")]),
+      _c("h6", {
+        staticClass: "pt-title",
+        domProps: { textContent: _vm._s(_vm.title) }
+      }),
       _vm._v(" "),
       _c("input", {
         attrs: { id: "trix", type: "hidden", name: _vm.name },
