@@ -1,3 +1,5 @@
+{{-- Old design sampe, should be removed later --}}
+
 {{-- Editing the question. --}}
 <div class="card mb-3" v-if="editing">
     <div class="card-header">

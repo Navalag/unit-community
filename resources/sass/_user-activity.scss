@@ -1,0 +1,16 @@
+/*-------  3.19 User Activity page  --------*/
+.tt-list-header.user-activity,
+.tt-item.user-activity {
+    .tt-col-value-large {
+        width: 120px;
+        min-width: 120px;
+    }
+}
+
+.tt-item.user-activity {
+    align-items: initial;
+
+    .tt-btn-icon {
+        height: initial;
+    }
+}

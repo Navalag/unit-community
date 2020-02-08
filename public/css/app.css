@@ -21689,5 +21689,23 @@ trix-editor {
   transform: rotate(45deg);
 }
 
+/*-------  3.19 User Activity page  --------*/
+
+/*-------  3.19 User Activity page  --------*/
+
+.tt-list-header.user-activity .tt-col-value-large,
+.tt-item.user-activity .tt-col-value-large {
+  width: 120px;
+  min-width: 120px;
+}
+
+.tt-item.user-activity {
+  align-items: initial;
+}
+
+.tt-item.user-activity .tt-btn-icon {
+  height: initial;
+}
+
 
 /*# sourceMappingURL=app.css.map*/

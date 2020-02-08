@@ -1,24 +1,56 @@
 @extends('layouts.main')
 
+@section('mainClass', 'tt-offset-small')
+
 @section('content')
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="pb-2 mt-4 mb-2 border-bottom">
-                    <avatar-form :user="{{ $profileUser }}"></avatar-form>
+    <div class="tt-wrapper-section">
+        <div class="container">
+            <div class="tt-user-header">
+                <div class="tt-col-avatar">
+                    <div class="tt-icon">
+                        <img class="tt-icon" src="{{ $profileUser->avatar_path }}" alt="{{ $profileUser->name }}">
+                    </div>
                 </div>
+                <div class="tt-col-title">
+                    <div class="tt-title">
+                        <a href="#">{{ $profileUser->name }}</a>
+                    </div>
+                    <ul class="tt-list-badge">
+                        <li><a href="#"><span class="tt-color14 tt-badge">LVL : 0</span></a></li>
+                    </ul>
+                    <a href="#" class="tt-btn-icon" id="js-settings-btn">
+                        <svg class="tt-icon">
+                            <use xlink:href="#icon-settings_fill"></use>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-                @forelse ($activities as $date => $activity)
-                    <h3 class="pb-2 mt-4 mb-2 border-bottom">{{ $date }}</h3>
-
-                    @foreach($activity as $record)
-                        @if(view()->exists("profiles.activities.{$record->type}"))
-                            @include ("profiles.activities.{$record->type}", ['activity' => $record])
-                        @endif
-                    @endforeach
+    <div class="container">
+        <div class="tt-tab-wrapper">
+            <div class="tt-topic-list">
+                <div class="tt-list-header user-activity">
+                    <div class="tt-col-topic">Topic</div>
+                    <div class="tt-col-value-large hide-mobile">Category</div>
+                    <div class="tt-col-value-large hide-mobile">Status</div>
+                    <div class="tt-col-value-large hide-mobile">Activity</div>
+                </div>
+                @forelse ($activities as $activity)
+                    @if(view()->exists("profiles.activities.{$activity->type}"))
+                        @include ("profiles.activities.{$activity->type}")
+                    @endif
                 @empty
                     <p>There is no activity for this user yet.</p>
                 @endforelse
+                <div class="tt-row-btn">
+                    <button type="button" class="btn-icon js-topiclist-showmore">
+                        <svg class="tt-icon">
+                            <use xlink:href="#icon-load_lore_icon"></use>
+                        </svg>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
