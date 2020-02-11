@@ -11147,6 +11147,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['dataSet'],
   data: function data() {
@@ -11172,6 +11174,9 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    classes: function classes(isSetPageLink) {
+      return ['page-item', !isSetPageLink ? 'disabled' : ''];
+    },
     broadcast: function broadcast() {
       return this.$emit('changed', this.page);
     },
@@ -82576,21 +82581,9 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _vm.shouldPaginate
-    ? _c("ul", { staticClass: "pagination" }, [
-        _c(
-          "li",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.prevUrl,
-                expression: "prevUrl"
-              }
-            ],
-            staticClass: "page-item"
-          },
-          [
+    ? _c("div", { staticClass: "tt-row py-4" }, [
+        _c("ul", { staticClass: "pagination" }, [
+          _c("li", { class: _vm.classes(_vm.prevUrl) }, [
             _c(
               "a",
               {
@@ -82603,25 +82596,15 @@ var render = function() {
                   }
                 }
               },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("«")])]
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [
+                  _vm._v("« Prev")
+                ])
+              ]
             )
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "li",
-          {
-            directives: [
-              {
-                name: "show",
-                rawName: "v-show",
-                value: _vm.nextUrl,
-                expression: "nextUrl"
-              }
-            ],
-            staticClass: "page-item"
-          },
-          [
+          ]),
+          _vm._v(" "),
+          _c("li", { class: _vm.classes(_vm.nextUrl) }, [
             _c(
               "a",
               {
@@ -82634,10 +82617,14 @@ var render = function() {
                   }
                 }
               },
-              [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("»")])]
+              [
+                _c("span", { attrs: { "aria-hidden": "true" } }, [
+                  _vm._v("Next »")
+                ])
+              ]
             )
-          ]
-        )
+          ])
+        ])
       ])
     : _vm._e()
 }

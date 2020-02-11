@@ -163,7 +163,7 @@ class ThreadsController extends Controller
             $threads->where('channel_id', $channel->id);
         }
 
-        $threads = $threads->paginate(10);
+        $threads = $threads->simplePaginate(10);
 
         $threads->map(function($thread) use ($trending) {
             if (in_array($thread->id, $trending)) {

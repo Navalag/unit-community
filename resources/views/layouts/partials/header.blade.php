@@ -35,15 +35,15 @@
                             <i class="tt-icon"><img src="{{ asset('images/svg-sprite/icon-notification.svg') }}" alt=""></i>
                         </a>
                         <div class="tt-avatar-icon tt-size-md">
-                            <i class="tt-icon"><img src="{{ asset('images/svg-sprite/icon-ava-a.svg') }}" alt=""></i>
+                            <i class="tt-icon"><img src="{{ auth()->user()->avatar_path }}" alt="{{ auth()->user()->name }}"></i>
                         </div>
                         <div class="custom-select-01">
                             <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ auth()->user()->name }} <span class="caret"></span>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('profile', Auth::user()) }}">
+                                <a class="dropdown-item" href="{{ route('profile', auth()->user()) }}">
                                     My Profile
                                 </a>
                                 <a class="dropdown-item" href="{{ route('logout') }}"

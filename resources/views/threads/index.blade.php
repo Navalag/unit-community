@@ -16,15 +16,15 @@
             @foreach($threads->where('is_trending', true) as $thread)
                 @include('threads.partials.list')
             @endforeach
-            @forelse($threads as $thread)
-                @if(! in_array($thread->id, $trending))
-                    @include('threads.partials.list')
-                @endif
+            @forelse($threads->where('is_trending', false) as $thread)
+                @include('threads.partials.list')
             @empty
                 <p>There are no relevant results at this time.</p>
             @endforelse
 
-            {{ $threads->render() }}
+            <div class="tt-row py-4">
+                {{ $threads->links() }}
+            </div>
         </div>
     </div>
 @endsection

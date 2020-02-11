@@ -7,7 +7,7 @@
                 <a href="{{ url('/') }}" class="tt-block-title">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo img">
                     <div class="tt-title">
-                        Welcome to Forum19
+                        Welcome to UNIT Community
                     </div>
                     <div class="tt-description">
                         Log into your account to unlock true power of community.
@@ -22,8 +22,8 @@
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -32,8 +32,8 @@
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="row">

@@ -1,17 +1,19 @@
 <template>
-    <ul class="pagination" v-if="shouldPaginate">
-        <li class="page-item" v-show="prevUrl">
-            <a class="page-link" href="#" aria-label="Previous" @click.prevent="page--">
-                <span aria-hidden="true">&laquo;</span>
-            </a>
-        </li>
+    <div class="tt-row py-4" v-if="shouldPaginate">
+        <ul class="pagination">
+            <li :class="classes(prevUrl)">
+                <a class="page-link" href="#" aria-label="Previous" @click.prevent="page--">
+                    <span aria-hidden="true">&laquo; Prev</span>
+                </a>
+            </li>
 
-        <li class="page-item" v-show="nextUrl">
-            <a class="page-link" href="#" aria-label="Next" @click.prevent="page++">
-                <span aria-hidden="true">&raquo;</span>
-            </a>
-        </li>
-    </ul>
+            <li :class="classes(nextUrl)">
+                <a class="page-link" href="#" aria-label="Next" @click.prevent="page++">
+                    <span aria-hidden="true">Next &raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -45,6 +47,10 @@
         },
 
         methods: {
+            classes(isSetPageLink) {
+                return ['page-item', ! isSetPageLink ? 'disabled' : ''];
+            },
+
             broadcast() {
                 return this.$emit('changed', this.page);
             },

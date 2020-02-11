@@ -5246,6 +5246,8 @@ img.mfp-img {
 	3.16 Followers List
 	3.17 Messages Layout
 	3.18 Create Topic
+	3.19 User Activity page
+	3.20 Pagination component
 ---------------------------------------*/
 
 /* Colors */
@@ -21705,6 +21707,45 @@ trix-editor {
 
 .tt-item.user-activity .tt-btn-icon {
   height: initial;
+}
+
+/*-------  3.20 Pagination component  --------*/
+
+/*-------  3.20 Pagination component  --------*/
+
+.pagination {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.pagination .page-item {
+  margin: 0 2px;
+  font-weight: bold;
+}
+
+.pagination .page-item .page-link {
+  position: relative;
+  display: block;
+  min-width: 32px;
+  color: #111;
+  padding: 0 0.5rem;
+  margin: 0;
+  line-height: inherit;
+  background-color: inherit;
+  border: none;
+}
+
+.pagination .page-item .page-link:hover {
+  background-color: inherit;
+  color: #2172cd;
+}
+
+.pagination .page-item.disabled .page-link {
+  font-weight: lighter;
+  background-color: inherit;
+  opacity: 0.8;
 }
 
 
