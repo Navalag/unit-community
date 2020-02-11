@@ -1,3 +1,5 @@
+@include('layouts.partials.mobileNav')
+
 <header id="tt-header">
     <div class="container">
         <div class="row tt-row no-gutters">

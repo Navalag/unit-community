@@ -1,7 +1,7 @@
 /*
 	Mobile Menu
 */
-(function (){
+$(document).ready(function (){
 	var delay_tab = 300,
 		delay_show_mm = 300,
 		delay_hide_mm = 300;
@@ -219,11 +219,14 @@
 	function getExternalContainer() {
 		return '<li id="entrypoint-objects"></li>';
 	}
-})();
+});
 
-var toggleMobileMenu = $('.toggle-mobile-menu'),
-	$ttDesctopMenu = $('.tt-desktop-menu'),
-	$ttMobilepMenu = $('#mobile-menu');
+$(document).ready(function(){
+
+    var toggleMobileMenu = $('.toggle-mobile-menu'),
+        $ttDesctopMenu = $('.tt-desktop-menu'),
+        $ttMobilepMenu = $('#mobile-menu');
+
 
 
 if ($ttDesctopMenu && toggleMobileMenu) {
@@ -236,5 +239,6 @@ if ($ttDesctopMenu && toggleMobileMenu) {
         breakpoint: 1025
     });
 }
+});
 
 /* /Mobile Menu*/
