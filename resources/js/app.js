@@ -6,7 +6,7 @@
 
 require('./bootstrap');
 
-// require('./modules/_mobile_menu');
+require('./modules/_mobile_menu');
 require('./modules/_desktop_ menu');
 require('./modules/_avatar_mobile_aside');
 // require('./modules/_avatar_scroll');

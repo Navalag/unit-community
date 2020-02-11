@@ -1,7 +1,7 @@
 /*
 	Mobile Menu
 */
-(function (){
+$(document).ready(function(){
 	var delay_tab = 300,
 		delay_show_mm = 300,
 		delay_hide_mm = 300;
@@ -219,22 +219,25 @@
 	function getExternalContainer() {
 		return '<li id="entrypoint-objects"></li>';
 	}
-})();
+});
 
-var toggleMobileMenu = $('.toggle-mobile-menu'),
-	$ttDesctopMenu = $('.tt-desktop-menu'),
-	$ttMobilepMenu = $('#mobile-menu');
+$(document).ready(function () {
+    var toggleMobileMenu = $('.toggle-mobile-menu'),
+        $ttDesctopMenu = $('.tt-desktop-menu'),
+        $ttMobilepMenu = $('#mobile-menu');
 
 
-if ($ttDesctopMenu && toggleMobileMenu) {
-    var ttDesktopMenu = $ttDesctopMenu.find('ul').first().children().clone();
+    if ($ttDesctopMenu && toggleMobileMenu) {
+        var ttDesktopMenu = $ttDesctopMenu.find('ul').first().children().clone();
 
-    $ttMobilepMenu.find('ul').append(ttDesktopMenu);
-    toggleMobileMenu.initMM({
-        enable_breakpoint: true,
-        mobile_button: true,
-        breakpoint: 1025
-    });
-}
+        $ttMobilepMenu.find('ul').append(ttDesktopMenu);
+        toggleMobileMenu.initMM({
+            enable_breakpoint: true,
+            mobile_button: true,
+            breakpoint: 1025
+        });
+    }
+});
+
 
 /* /Mobile Menu*/
