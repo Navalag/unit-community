@@ -26,7 +26,6 @@
         ]) !!};
     </script>
     <style>
-        body { padding-bottom: 100px; }
         .level { display: flex; align-items: center; }
         .flex { flex: 1; }
         .level-item { margin-right: 1em; }
@@ -44,6 +43,9 @@
 
         <flash message="{{ session('flash') }}"></flash>
     </div>
+
+    <!-- Svg sprite -->
+    {!! file_get_contents(asset('images/svg-sprite/sprite.svg')) !!}
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

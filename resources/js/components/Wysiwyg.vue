@@ -1,5 +1,7 @@
 <template>
-    <div>
+    <div :class="classes">
+        <h6 class="pt-title" v-text="title"></h6>
+        
         <input id="trix" type="hidden" :name="name" :value="value">
 
         <trix-editor ref="trix" input="trix" :placeholder="placeholder"></trix-editor>
@@ -12,7 +14,7 @@
     Vue.config.ignoredElements = ['trix-editor'];
 
     export default {
-        props: ['name', 'value', 'placeholder', 'shouldClear'],
+        props: ['name', 'value', 'placeholder', 'title', 'shouldClear', 'classNames'],
 
         components: { Trix },
 
@@ -24,6 +26,12 @@
             this.$watch('shouldClear', () => {
                 this.$refs.trix.value = '';
             });
+        },
+
+        computed: {
+            classes() {
+                return ['pt-editor form-default', this.classNames];
+            }
         }
     }
 </script>
