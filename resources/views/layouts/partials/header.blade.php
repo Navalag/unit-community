@@ -18,7 +18,7 @@
                 @include('layouts.partials.nav')
                 <!-- /desctop menu -->
                 <!-- tt-search -->
-{{--                @include('layouts.partials.search')--}}
+                @include('layouts.partials.search')
                 <!-- /tt-search -->
             </div>
             <div class="col-auto ml-auto">
@@ -33,8 +33,9 @@
                 @else
                     <div class="tt-user-info d-flex justify-content-center">
                         <user-notifications></user-notifications>
+                        {{-- refactor icon below to vue component --}}
                         <a href="#" class="tt-btn-icon">
-                            <i class="tt-icon"><img src="{{ asset('images/svg-sprite/icon-notification.svg') }}" alt=""></i>
+                            <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
                         </a>
                         <div class="tt-avatar-icon tt-size-md">
                             <i class="tt-icon"><img src="{{ auth()->user()->avatar_path }}" alt="{{ auth()->user()->name }}"></i>

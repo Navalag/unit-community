@@ -6,24 +6,24 @@
 $form_placeholder: #666f74;
 
 ::-webkit-input-placeholder{color:$form_placeholder;}
-::-moz-placeholder      {color:$form_placeholder;}
-:-moz-placeholder       {color:$form_placeholder;}
-:-ms-input-placeholder  {color:$form_placeholder;}
+::-moz-placeholder         {color:$form_placeholder;}
+:-moz-placeholder          {color:$form_placeholder;}
+:-ms-input-placeholder     {color:$form_placeholder;}
 
 ::-moz-placeholder, :-moz-placeholder {
     opacity: 1;
 }
 
 input:focus::-webkit-input-placeholder{color:transparent;}
-input:focus:-moz-placeholder{color:transparent;}
-input:focus::-moz-placeholder{color:transparent;}
-input:focus:-ms-input-placeholder{color:transparent;}
+input:focus:-moz-placeholder          {color:transparent;}
+input:focus::-moz-placeholder         {color:transparent;}
+input:focus:-ms-input-placeholder     {color:transparent;}
 
 
 textarea:focus::-webkit-input-placeholder{color:transparent;}
-textarea:focus:-moz-placeholder{color:transparent;}
-textarea:focus::-moz-placeholder{color:transparent;}
-textarea:focus:-ms-input-placeholder{color:transparent;}
+textarea:focus:-moz-placeholder          {color:transparent;}
+textarea:focus::-moz-placeholder         {color:transparent;}
+textarea:focus:-ms-input-placeholder     {color:transparent;}
 
 
 /*
@@ -201,6 +201,18 @@ select:disabled.simple-control::-ms-expand {
     position: relative;
     display: inline-block;
     vertical-align: middle;
+    a {
+        font-weight: 500;
+        line-height: 22px;
+        font-size: 16px;
+        color: $default_color2;
+        appearance: none;
+        transition: color 0.2s linear;
+        letter-spacing: 0.01em;
+    }
+    a:hover {
+        color: #2172cd;
+    }
     select{
         outline: none;
         border: none;
@@ -253,7 +265,6 @@ select:disabled.simple-control::-ms-expand {
         margin-top:-4px;
     }
 }
-
 
 /*
     Form Create Topic

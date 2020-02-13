@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('perfect-scrollbar/dist/js/perfect-scrollbar.jquery');
 
 require('./modules/_mobile_menu');
 require('./modules/_desktop_ menu');
@@ -14,8 +15,8 @@ require('./modules/_button_switching');
 require('./modules/_init_magnific_popup');
 require('./modules/_modal_show_overtime');
 require('./modules/_popup_settings');
-// require('./modules/_search_compose');
-// require('./modules/_search_popup');
+require('./modules/_search_compose');
+require('./modules/_search_popup');
 
 import InstantSearch from 'vue-instantsearch';
 

@@ -1,6 +1,6 @@
 <div class="tt-item @if($thread->is_trending) tt-itemselect @endif">
     <div class="tt-col-avatar">
-        <img class="tt-icon" src="{{ asset('images/svg-sprite/icon-ava-' . strtolower(substr($thread->creator->name, 0, 1)) . '.svg') }}" alt="">
+        <img class="tt-icon" src="{{ $thread->creator->avatar_path }}" alt="">
     </div>
     <div class="tt-col-description">
         <h6 class="tt-title">
