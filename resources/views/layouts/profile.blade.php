@@ -4,9 +4,9 @@
     @include('layouts.partials.header')
 
     <main id="tt-pageContent" class="@yield('mainClass')">
-        <div class="container">
-            @yield('content')
+        @yield('content')
 
+        <div class="container">
             @include('layouts.partials.footer')
         </div>
     </main>

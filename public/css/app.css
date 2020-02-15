@@ -5134,6 +5134,7 @@ img.mfp-img {
 	3.18 Create Topic
 	3.19 User Activity page
 	3.20 Pagination component
+	3.21 Footer
 ---------------------------------------*/
 
 /* Colors */
@@ -21621,6 +21622,7 @@ trix-editor {
   display: flex;
   justify-content: center;
   text-align: center;
+  margin: 0;
 }
 
 .pagination .page-item {
@@ -21649,6 +21651,35 @@ trix-editor {
   font-weight: lighter;
   background-color: inherit;
   opacity: 0.8;
+}
+
+/*-------  3.21 Footer  --------*/
+
+.tt-footer-line1 img {
+  width: 30px;
+}
+
+.tt-footer-line1 h6 {
+  display: inline-block;
+  margin-left: 0.5rem;
+}
+
+.tt-footer-line1 a:not(:last-child) {
+  margin-right: 1.5rem;
+}
+
+.tt-footer-line1 button {
+  float: right;
+}
+
+@media (max-width: 991px) {
+  .tt-footer-line1 img {
+    width: 25px;
+  }
+
+  .tt-footer-line1 h6 {
+    font-size: 14px;
+  }
 }
 
 
