@@ -16233,6 +16233,19 @@ html.win.ie body.no-scroll #tt-header {
   padding-right: 17px;
 }
 
+[v-cloak] {
+  display: none;
+}
+
+.ais-highlight > em {
+  background: yellow;
+  font-style: normal;
+}
+
+input.ais-refinement-list__checkbox {
+  margin-right: 0.4em;
+}
+
 @media (max-width: 767px) {
   [class^=col],
   .container-fluid,
@@ -17878,6 +17891,10 @@ hr {
 /*---------------------------------------*/
 
 /*-------  3.1 Basic settings for page content  --------*/
+
+#tt-pageContent {
+  min-height: calc(100vh - 136px);
+}
 
 #tt-pageContent:not([class^=tt-offset]) {
   padding-top: 100px;
@@ -19797,6 +19814,8 @@ html.ie.gecko body.modal-open {
   display: inline-block;
   transition: color 0.2s linear;
   font-weight: 500;
+  border: none;
+  padding: 0;
 }
 
 .tt-tab-wrapper .nav-tabs .nav-item a span {
@@ -21668,7 +21687,7 @@ trix-editor {
   margin-right: 1.5rem;
 }
 
-.tt-footer-line1 button {
+.tt-footer-line1 .btn-group.dropup {
   float: right;
 }
 

@@ -25,15 +25,6 @@
             'user' => Auth::user(),
         ]) !!};
     </script>
-    <style>
-        .level { display: flex; align-items: center; }
-        .flex { flex: 1; }
-        .level-item { margin-right: 1em; }
-        .ml-a { margin-left: auto; }
-        [v-cloak] { display: none; }
-        .ais-highlight > em { background: yellow; font-style: normal; }
-        input.ais-refinement-list__checkbox { margin-right: .4em; }
-    </style>
 
     @yield('head')
 </head>
@@ -48,8 +39,8 @@
     {!! file_get_contents(asset('images/svg-sprite/sprite.svg')) !!}
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ asset('js/app.js') }}"></script>
 
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>
