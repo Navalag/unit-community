@@ -126,6 +126,6 @@ class User extends Authenticatable implements MustVerifyEmail
 //            return asset($avatar ? 'storage/' . $avatar : 'images/svg-sprite/icon-ava-' . strtolower(substr($this->name, 0, 1)) . '.svg');
 //        }
 
-        return asset($avatar ? 'storage/' . $avatar : 'images/svg-sprite/icon-ava-' . strtolower(substr($this->name, 0, 1)) . '.svg');
+        return asset($avatar ? 'storage/' . $avatar : 'images/svg-sprite/icon-ava-' . mb_strtolower(mb_substr($this->name, 0, 1)) . '.svg');
     }
 }
