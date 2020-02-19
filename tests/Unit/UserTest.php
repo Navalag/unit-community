@@ -24,10 +24,10 @@ class UserTest extends TestCase
     {
         $user = create('App\User');
 
-        $this->assertEquals(asset('avatars/default.png'), $user->avatar_path);
+        $this->assertEquals(asset('images/svg-sprite/icon-ava-' . strtolower(substr($user->name, 0, 1)) . '.svg'), $user->avatar_path);
 
         $user->avatar_path = 'avatars/me.jpg';
 
-        $this->assertEquals(asset('avatars/me.jpg'), $user->avatar_path);
+        $this->assertEquals(asset('storage/avatars/me.jpg'), $user->avatar_path);
     }
 }
