@@ -49,3 +49,7 @@ Route::get('api/users', 'Api\UsersController@index');
 Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
 
 Route::get('about', 'StaticPagesController@index');
+
+Route::patch('profiles/{user}/settings', 'UserSettingsController@update');
+
+Route::get('profiles/{user}/settings/update-email/{id}/{token}/{email}', 'UserSettingsController@updateEmail')->name('emailverification');

@@ -1,5 +1,8 @@
 <template>
-    <input type="file" accept="image/*" @change="onChange">
+    <div>
+        <label for="imgupload" class="btn btn-primary custom-upload">Upload picture</label>
+        <input type="file" id="imgupload" accept="image/*" class="btn btn-primary custom-upload d-none" @change="onChange">
+    </div>
 </template>
 
 <script>

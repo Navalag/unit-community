@@ -1,14 +1,15 @@
 <template>
-    <div>
-        <div class="level">
-            <img :src="avatar" width="50" height="50" class="mr-2">
-
-            <h1 v-text="user.name"></h1>
+    <div class="row no-gutter">
+        <div class="col-auto">
+            <div class="tt-avatar">
+                <img :src="avatar" width="50" height="50" class="mr-2">
+            </div>
         </div>
-
-        <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
-            <image-upload name="avatar" class="mr-1" @loaded="onLoad"></image-upload>
-        </form>
+        <div class="col-auto ml-auto">
+            <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
+                <image-upload name="avatar" class="mr-1" @loaded="onLoad"></image-upload>
+            </form>
+        </div>
     </div>
 </template>
 

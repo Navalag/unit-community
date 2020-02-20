@@ -12,3 +12,6 @@ npm-debug.log
 yarn-error.log
 /.idea
 *.rdb
+.DS_Store
+**/.DS_Store
+gulpfile.js
