@@ -8,7 +8,7 @@
 
         computed: {
             classes() {
-                return ['btn', this.active ? 'btn-secondary' : 'btn-primary'];
+                return ['btn btn-color01 btn-sm', this.active ? 'btn-secondary' : 'btn-primary'];
             },
 
             btnText() {

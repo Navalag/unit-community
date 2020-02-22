@@ -16384,6 +16384,16 @@ hr {
   color: #ffffff;
 }
 
+.btn.btn-sm,
+.btn-group-sm > .btn,
+.btn.btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+  height: initial;
+}
+
 .btn.btn-color01 {
   background-color: #3b5998;
   color: #ffffff;
@@ -16581,35 +16591,43 @@ hr {
   transition: text 0.2s linear;
 }
 
-.tt-icon-btn:hover .tt-text {
+.tt-icon-btn:hover .tt-text,
+.tt-icon-btn.active .tt-text {
   color: #2172cd;
 }
 
-.tt-icon-btn:hover .tt-icon svg {
+.tt-icon-btn:hover .tt-icon svg,
+.tt-icon-btn.active .tt-icon svg {
   fill: #2172cd;
 }
 
-.tt-icon-btn:hover .tt-icon svg path {
+.tt-icon-btn:hover .tt-icon svg path,
+.tt-icon-btn.active .tt-icon svg path {
   fill: #2172cd;
 }
 
-.tt-icon-btn:hover .tt-icon img {
+.tt-icon-btn:hover .tt-icon img,
+.tt-icon-btn.active .tt-icon img {
   fill: #2172cd;
 }
 
-.tt-icon-btn:hover.tt-hover-02 .tt-text {
+.tt-icon-btn:hover.tt-hover-02 .tt-text,
+.tt-icon-btn.active.tt-hover-02 .tt-text {
   color: #182730;
 }
 
-.tt-icon-btn:hover.tt-hover-02 .tt-icon svg {
+.tt-icon-btn:hover.tt-hover-02 .tt-icon svg,
+.tt-icon-btn.active.tt-hover-02 .tt-icon svg {
   fill: #182730;
 }
 
-.tt-icon-btn:hover.tt-hover-02 .tt-icon svg path {
+.tt-icon-btn:hover.tt-hover-02 .tt-icon svg path,
+.tt-icon-btn.active.tt-hover-02 .tt-icon svg path {
   fill: #182730;
 }
 
-.tt-icon-btn:hover.tt-hover-02 .tt-icon img {
+.tt-icon-btn:hover.tt-hover-02 .tt-icon img,
+.tt-icon-btn.active.tt-hover-02 .tt-icon img {
   fill: #182730;
 }
 

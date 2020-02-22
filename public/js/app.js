@@ -10908,6 +10908,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['reply'],
@@ -10922,7 +10926,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     classes: function classes() {
-      return ['btn', this.active ? 'btn-primary' : 'btn-outline-primary'];
+      return ['tt-icon-btn', this.active ? 'active' : ''];
     },
     endpoint: function endpoint() {
       return '/replies/' + this.reply.id + '/favorites';
@@ -11311,6 +11315,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -11378,7 +11383,7 @@ __webpack_require__.r(__webpack_exports__);
   props: ['active'],
   computed: {
     classes: function classes() {
-      return ['btn', this.active ? 'btn-secondary' : 'btn-primary'];
+      return ['btn btn-color01 btn-sm', this.active ? 'btn-secondary' : 'btn-primary'];
     },
     btnText: function btnText() {
       return this.active ? 'Unsubscribe' : 'Subscribe';
@@ -83998,16 +84003,26 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "button",
+    "a",
     {
       class: _vm.classes,
-      attrs: { type: "submit" },
-      on: { click: _vm.toggle }
+      attrs: { href: "#" },
+      on: {
+        click: function($event) {
+          $event.preventDefault()
+          return _vm.toggle($event)
+        }
+      }
     },
     [
-      _c("i", { staticClass: "fas fa-heart" }),
+      _c("i", { staticClass: "tt-icon" }, [
+        _c("svg", [_c("use", { attrs: { "xlink:href": "#icon-favorite" } })])
+      ]),
       _vm._v(" "),
-      _c("span", { domProps: { textContent: _vm._s(_vm.count) } })
+      _c("span", {
+        staticClass: "tt-text",
+        domProps: { textContent: _vm._s(_vm.count) }
+      })
     ]
   )
 }
@@ -84328,6 +84343,7 @@ var render = function() {
                   { staticClass: "form-group" },
                   [
                     _c("wysiwyg", {
+                      attrs: { "class-names": "'pt-3'" },
                       model: {
                         value: _vm.body,
                         callback: function($$v) {
@@ -84340,7 +84356,7 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn btn-primary btn-sm" }, [
+                _c("button", { staticClass: "btn btn-secondary btn-sm" }, [
                   _vm._v("Update")
                 ]),
                 _vm._v(" "),
@@ -84373,49 +84389,41 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-separator" }),
                 _vm._v(" "),
-                _vm.authorize("owns", _vm.reply) ||
-                _vm.authorize("owns", _vm.reply.thread)
-                  ? _c("div", [
-                      _vm.authorize("owns", _vm.reply)
-                        ? _c("div", [
-                            !_vm.editing
-                              ? _c(
-                                  "button",
-                                  {
-                                    staticClass:
-                                      "btn btn-secondary btn-sm mr-1",
-                                    on: {
-                                      click: function($event) {
-                                        _vm.editing = true
-                                      }
-                                    }
-                                  },
-                                  [_vm._v("Edit")]
-                                )
-                              : _vm._e(),
-                            _vm._v(" "),
-                            _c(
-                              "button",
-                              {
-                                staticClass: "btn btn-danger btn-sm mr-1",
-                                on: { click: _vm.destroy }
-                              },
-                              [_vm._v("Delete")]
-                            )
-                          ])
-                        : _vm._e(),
-                      _vm._v(" "),
-                      _vm.authorize("owns", _vm.reply.thread)
-                        ? _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-success btn-sm ml-a",
-                              on: { click: _vm.markBestReply }
-                            },
-                            [_vm._v("Best Reply?")]
-                          )
-                        : _vm._e()
-                    ])
+                _vm.authorize("owns", _vm.reply) && !_vm.editing
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-primary btn-sm mr-2",
+                        on: {
+                          click: function($event) {
+                            _vm.editing = true
+                          }
+                        }
+                      },
+                      [_vm._v("Edit")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.authorize("owns", _vm.reply)
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-danger btn-sm mr-2",
+                        on: { click: _vm.destroy }
+                      },
+                      [_vm._v("Delete")]
+                    )
+                  : _vm._e(),
+                _vm._v(" "),
+                _vm.authorize("owns", _vm.reply.thread) && !_vm.editing
+                  ? _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-success btn-sm ml-2",
+                        on: { click: _vm.markBestReply }
+                      },
+                      [_vm._v("Best Reply?")]
+                    )
                   : _vm._e()
               ],
               1
@@ -84572,10 +84580,12 @@ var render = function() {
     "div",
     { class: _vm.classes },
     [
-      _c("h6", {
-        staticClass: "pt-title",
-        domProps: { textContent: _vm._s(_vm.title) }
-      }),
+      _vm.title
+        ? _c("h6", {
+            staticClass: "pt-title",
+            domProps: { textContent: _vm._s(_vm.title) }
+          })
+        : _vm._e(),
       _vm._v(" "),
       _c("input", {
         attrs: { id: "trix", type: "hidden", name: _vm.name },

@@ -32,12 +32,11 @@ class Activity extends Model
      * @param  int  $take
      * @return Collection;
      */
-    public static function feed($user, $take = 50)
+    public static function feed($user, $take = 20)
     {
         return static::where('user_id', $user->id)
             ->latest()
             ->with('subject')
-            ->take($take)
-            ->get();
+            ->simplePaginate($take);
     }
 }

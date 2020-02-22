@@ -1,6 +1,6 @@
 <template>
     <div :class="classes">
-        <h6 class="pt-title" v-text="title"></h6>
+        <h6 class="pt-title" v-if="title" v-text="title"></h6>
         
         <input id="trix" type="hidden" :name="name" :value="value">
 

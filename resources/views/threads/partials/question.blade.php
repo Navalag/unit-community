@@ -1,32 +1,53 @@
 {{-- Editing the question. --}}
-<div class="card mb-3" v-if="editing">
-    <div class="card-header">
-        <div class="level">
+<div class="tt-single-topic" v-if="editing">
+    <div class="tt-item-header">
+        <div class="tt-item-info info-top">
+            <div class="tt-avatar-icon">
+                <i class="tt-icon"><img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}"></i>
+            </div>
+            <div class="tt-avatar-title">
+                <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>
+            </div>
+            <a href="#" class="tt-info-time">
+                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>{{ $thread->created_at->diffForHumans() }}
+            </a>
+        </div>
+        <div class="form-default form-group mb-0 mt-3">
             <input type="text" class="form-control" v-model="form.title">
         </div>
     </div>
-
-    <div class="card-body">
-        <div class="form-group">
-            <wysiwyg v-model="form.body"></wysiwyg>
-        </div>
+    <div class="tt-item-description pt-3">
+        <wysiwyg v-model="form.body" :class-names="'pt-2'"></wysiwyg>
     </div>
-
-    <div class="card-footer">
-        <div class="level">
-            <button class="btn btn-primary btn-sm level-item" @click="update">Update</button>
-            <button class="btn btn-secondary btn-sm level-item" @click="resetForm">Cancel</button>
-
+    <div class="tt-item-info info-bottom">
+        <ul class="tt-list-badge tt-size-lg">
+            <li>
+                <button class="btn btn-secondary btn-sm" @click="update">Update</button>
+            </li>
+            <li>
+                <button class="btn btn-primary btn-sm" @click="resetForm">Cancel</button>
+            </li>
             @can ('update', $thread)
-                <form action="{{ $thread->path() }}" method="POST" class="ml-a">
-                    {{ csrf_field() }}
-                    {{ method_field('DELETE') }}
+                <li>
+                    <form action="{{ $thread->path() }}" method="POST">
+                        {{ csrf_field() }}
+                        {{ method_field('DELETE') }}
 
-                    <button type="submit" class="btn btn-link">Delete Thread</button>
-                </form>
+                        <button type="submit" class="btn btn-link btn-sm">Delete Thread</button>
+                    </form>
+                </li>
             @endcan
 
-        </div>
+        </ul>
+        <div class="col-separator"></div>
+        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
+            <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
+            <span class="tt-text" v-text="repliesCount"></span>
+        </a>
+        <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
+            <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
+            <span class="tt-text">{{ $thread->visits()->count() }}</span>
+        </a>
     </div>
 </div>
 
@@ -41,7 +62,7 @@
                 <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>
             </div>
             <a href="#" class="tt-info-time">
-                <i class="tt-icon"><img src="{{ asset('images/svg-sprite/icon-time.svg') }}" alt=""></i>{{ $thread->created_at->diffForHumans() }}
+                <i class="tt-icon"><svg><use xlink:href="#icon-time"></use></svg></i>{{ $thread->created_at->diffForHumans() }}
             </a>
         </div>
         <h3 class="tt-item-title">
@@ -53,25 +74,25 @@
     </div>
     <div class="tt-item-info info-bottom">
         <ul class="tt-list-badge tt-size-lg">
+            <li v-if="authorize('isAdmin')">
+                <button class="btn btn-secondary btn-color01 btn-sm"
+                        @click="toggleLock"
+                        v-text="locked ? 'Unlock' : 'Lock'"></button>
+            </li>
             <li v-if="signedIn">
                 <subscribe-button :active="{{ json_encode($thread->isSubscribedTo) }}"></subscribe-button>
             </li>
             <li v-if="authorize('owns', thread)">
-                <a href="#" @click="editing = true"><span class="tt-badge">Edit</span></a>
-            </li>
-            <li v-if="authorize('isAdmin')">
-                <a href="#" @click="toggleLock">
-                    <span class="tt-badge" v-text="locked ? 'Unlock' : 'Lock'"></span>
-                </a>
+                <button class="btn btn-primary btn-sm" @click="editing = true">Edit</button>
             </li>
         </ul>
         <div class="col-separator"></div>
         <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-            <i class="tt-icon"><img src="{{ asset('images/svg-sprite/icon-reply.svg') }}" alt=""></i>
+            <i class="tt-icon"><svg><use xlink:href="#icon-reply"></use></svg></i>
             <span class="tt-text" v-text="repliesCount"></span>
         </a>
         <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
-            <i class="tt-icon"><img src="{{ asset('images/svg-sprite/icon-view.svg') }}" alt=""></i>
+            <i class="tt-icon"><svg><use xlink:href="#icon-view"></use></svg></i>
             <span class="tt-text">{{ $thread->visits()->count() }}</span>
         </a>
     </div>

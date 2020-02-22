@@ -17,10 +17,10 @@
             <div v-if="editing" class="tt-item-description">
                 <form @submit="update">
                     <div class="form-group">
-                        <wysiwyg v-model="body"></wysiwyg>
+                        <wysiwyg v-model="body" class-names="'pt-3'"></wysiwyg>
                     </div>
 
-                    <button class="btn btn-primary btn-sm">Update</button>
+                    <button class="btn btn-secondary btn-sm">Update</button>
                     <button class="btn btn-link btn-sm" @click="editing = false" type="button">Cancel</button>
                 </form>
             </div>
@@ -28,14 +28,15 @@
             <div class="tt-item-info info-bottom" v-if="signedIn">
                 <favorite :reply="reply"></favorite>
                 <div class="col-separator"></div>
-                <div v-if="authorize('owns', reply) || authorize('owns', reply.thread)">
-                    <div v-if="authorize('owns', reply)">
-                        <button class="btn btn-secondary btn-sm mr-1" @click="editing = true" v-if="! editing">Edit</button>
-                        <button class="btn btn-danger btn-sm mr-1" @click="destroy">Delete</button>
-                    </div>
-
-                    <button class="btn btn-success btn-sm ml-a" @click="markBestReply" v-if="authorize('owns', reply.thread)">Best Reply?</button>
-                </div>
+                <button class="btn btn-primary btn-sm mr-2"
+                        v-if="authorize('owns', reply) && ! editing"
+                        @click="editing = true">Edit</button>
+                <button class="btn btn-danger btn-sm mr-2"
+                        v-if="authorize('owns', reply)"
+                        @click="destroy">Delete</button>
+                <button class="btn btn-success btn-sm ml-2"
+                        v-if="authorize('owns', reply.thread) && ! editing"
+                        @click="markBestReply">Best Reply?</button>
             </div>
         </div>
     </div>

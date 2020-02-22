@@ -34,7 +34,7 @@
                 <div class="tt-list-header user-activity">
                     <div class="tt-col-topic">Topic</div>
                     <div class="tt-col-value-large hide-mobile">Category</div>
-                    <div class="tt-col-value-large hide-mobile">Status</div>
+                    <div class="tt-col-value-large hide-mobile">Type</div>
                     <div class="tt-col-value-large hide-mobile">Activity</div>
                 </div>
                 @forelse ($activities as $activity)
@@ -44,12 +44,8 @@
                 @empty
                     <p>There is no activity for this user yet.</p>
                 @endforelse
-                <div class="tt-row-btn">
-                    <button type="button" class="btn-icon js-topiclist-showmore">
-                        <svg class="tt-icon">
-                            <use xlink:href="#icon-load_lore_icon"></use>
-                        </svg>
-                    </button>
+                <div class="tt-row py-4">
+                    {{ $activities->links() }}
                 </div>
             </div>
         </div>

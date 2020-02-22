@@ -14,7 +14,7 @@
             </div>
             <div class="col-md-3 col-6 order-2 order-md-1">
                 <div class="btn-group dropup">
-                    <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         English
                     </button>
                     <div class="dropdown-menu">

@@ -1,8 +1,8 @@
 <template>
-    <button type="submit" :class="classes" @click="toggle">
-        <i class="fas fa-heart"></i>
-        <span v-text="count"></span>
-    </button>
+    <a href="#" :class="classes" @click.prevent="toggle">
+        <i class="tt-icon"><svg><use xlink:href="#icon-favorite"></use></svg></i>
+        <span class="tt-text" v-text="count"></span>
+    </a>
 </template>
 
 <script>
@@ -23,8 +23,8 @@
         computed: {
             classes() {
                 return [
-                    'btn',
-                    this.active ? 'btn-primary' : 'btn-outline-primary'
+                    'tt-icon-btn',
+                    this.active ? 'active' : ''
                 ];
             },
 
