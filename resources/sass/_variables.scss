@@ -1,7 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Krub:400,500,600');
+@import url('https://fonts.googleapis.com/css?family=Krub:300,300i,400,400i,500,500i,600,600i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i&display=swap&subset=cyrillic');
 
 /* Bootstrap variables */
-$font-family-sans-serif: 'Krub', sans-serif;
+$font-family-sans-serif:    'Krub', 'Montserrat', sans-serif;
 $default_font:				$font-family-sans-serif;
 $body-bg:                   #f8f9fb !default;
 $body-color:                #666f74 !default;
