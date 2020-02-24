@@ -14,7 +14,7 @@ class KeyHeldDown
      */
     public function detect($body)
     {
-        if (preg_match('/(.)\\1{4,}/', $body)) {
+        if (preg_match('/[^\s\'\[\]{}=$\-\n](.)\1{6,}/', $body)) {
             throw new Exception('Your reply contains spam.');
         }
     }

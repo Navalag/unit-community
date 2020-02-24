@@ -11348,13 +11348,17 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     update: function update() {
+      var _this2 = this;
+
       axios.patch("/".concat(this.urlPrefix, "/replies/").concat(this.id), {
         body: this.body
+      }).then(function () {
+        flash(_this2.translations.flash_updated);
       })["catch"](function (error) {
         flash(error.response.data, 'danger');
+        _this2.editing = true;
       });
       this.editing = false;
-      flash(this.translations.flash_updated);
     },
     destroy: function destroy() {
       axios["delete"]("/".concat(this.urlPrefix, "/replies/").concat(this.id));
@@ -11738,6 +11742,8 @@ __webpack_require__.r(__webpack_exports__);
         _this.title = _this.form.title;
         _this.body = _this.form.body;
         flash(_this.translations.thread_updated);
+      })["catch"](function (error) {
+        flash('The thread contains spam', 'danger');
       });
     },
     resetForm: function resetForm() {
