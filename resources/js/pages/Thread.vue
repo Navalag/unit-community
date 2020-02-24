@@ -44,6 +44,9 @@
 
                     flash(this.translations.thread_updated);
                 })
+                .catch((error) => {
+                    flash('The thread contains spam', 'danger');
+                });
             },
 
             resetForm () {

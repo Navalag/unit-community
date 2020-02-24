@@ -3,6 +3,7 @@
 namespace App\Inspections;
 
 use Exception;
+use Illuminate\Support\Facades\Config;
 
 class InvalidKeywords
 {
@@ -11,9 +12,12 @@ class InvalidKeywords
      *
      * @var array
      */
-    protected $keywords = [
-        'yahoo customer support'
-    ];
+    protected $keywords;
+
+    public function __construct()
+    {
+        $this->keywords = Config::get('bannedwords.list');
+    }
 
     /**
      * Detect spam.

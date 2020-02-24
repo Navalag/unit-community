@@ -82,13 +82,14 @@
                     `/${this.urlPrefix}/replies/${this.id}`, {
                         body: this.body
                     })
+                    .then(() =>{
+                        flash(this.translations.flash_updated);
+                    })
                     .catch(error => {
                         flash(error.response.data, 'danger');
+                        this.editing = true;
                     });
-
                 this.editing = false;
-
-                flash(this.translations.flash_updated);
             },
 
             destroy() {
