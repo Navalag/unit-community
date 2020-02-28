@@ -29,7 +29,7 @@
             },
 
             endpoint() {
-                return '/replies/' + this.reply.id + '/favorites';
+                return `/${window.App.locale}/replies/${this.reply.id}/favorites`;
             }
         },
 

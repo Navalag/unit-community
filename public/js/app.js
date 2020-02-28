@@ -10925,7 +10925,7 @@ __webpack_require__.r(__webpack_exports__);
       return ['tt-icon-btn', this.active ? 'active' : ''];
     },
     endpoint: function endpoint() {
-      return '/replies/' + this.reply.id + '/favorites';
+      return "/".concat(window.App.locale, "/replies/").concat(this.reply.id, "/favorites");
     }
   },
   methods: {
@@ -11075,10 +11075,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['translations'],
   data: function data() {
     return {
       body: '',
@@ -11112,7 +11112,7 @@ __webpack_require__.r(__webpack_exports__);
         var data = _ref.data;
         _this.body = '';
         _this.completed = true;
-        flash('Reply has been posted.');
+        flash(_this.translations.flash_reply_posted);
 
         _this.$emit('created', data);
       });
@@ -11150,7 +11150,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['dataSet'],
+  props: ['dataSet', 'translations'],
   data: function data() {
     return {
       page: 1,
@@ -11214,8 +11214,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -11225,6 +11223,7 @@ __webpack_require__.r(__webpack_exports__);
     NewReply: _NewReply_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   mixins: [_mixins_collection__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  props: ['translations'],
   data: function data() {
     return {
       dataSet: false
@@ -11312,10 +11311,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['reply'],
+  props: ['reply', 'translations'],
   components: {
     Favorite: _Favorite_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -11324,7 +11326,8 @@ __webpack_require__.r(__webpack_exports__);
       editing: false,
       id: this.reply.id,
       body: this.reply.body,
-      isBest: this.reply.isBest
+      isBest: this.reply.isBest,
+      urlPrefix: window.App.locale
     };
   },
   computed: {
@@ -11341,20 +11344,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     update: function update() {
-      axios.patch('/replies/' + this.id, {
+      axios.patch("/".concat(this.urlPrefix, "/replies/").concat(this.id), {
         body: this.body
       })["catch"](function (error) {
         flash(error.response.data, 'danger');
       });
       this.editing = false;
-      flash('Updated!');
+      flash(this.translations.flash_updated);
     },
     destroy: function destroy() {
-      axios["delete"]('/replies/' + this.id);
+      axios["delete"]("/".concat(this.urlPrefix, "/replies/").concat(this.id));
       this.$emit('deleted', this.id);
     },
     markBestReply: function markBestReply() {
-      axios.post('/replies/' + this.id + '/best');
+      axios.post("/".concat(this.urlPrefix, "/replies/").concat(this.id, "/best"));
       window.events.$emit('best-reply-selected', this.id);
     }
   }
@@ -11376,19 +11379,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['active'],
+  props: ['active', 'translations'],
+  data: function data() {
+    return {
+      isActive: this.active
+    };
+  },
   computed: {
     classes: function classes() {
-      return ['btn btn-color01 btn-sm', this.active ? 'btn-secondary' : 'btn-primary'];
+      return ['btn btn-color01 btn-sm', this.isActive ? 'btn-secondary' : 'btn-primary'];
     },
     btnText: function btnText() {
-      return this.active ? 'Unsubscribe' : 'Subscribe';
+      return this.isActive ? this.translations.unsubscribe_text : this.translations.subscribe_text;
     }
   },
   methods: {
     subscribe: function subscribe() {
-      axios[this.active ? 'delete' : 'post'](location.pathname + '/subscriptions');
-      this.active = !this.active;
+      axios[this.isActive ? 'delete' : 'post'](location.pathname + '/subscriptions');
+      this.isActive = !this.isActive;
     }
   }
 });
@@ -11429,13 +11437,13 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    axios.get("/profiles/" + window.App.user.name + "/notifications").then(function (response) {
+    axios.get("/".concat(window.App.locale, "/profiles/").concat(window.App.user.name, "/notifications")).then(function (response) {
       return _this.notifications = response.data;
     });
   },
   methods: {
     markAsRead: function markAsRead(notification) {
-      axios["delete"]('/profiles/' + window.App.user.name + '/notifications/' + notification.id);
+      axios["delete"]("/".concat(window.App.locale, "/profiles/").concat(window.App.user.name, "/notifications/").concat(notification.id));
     }
   }
 });
@@ -11503,7 +11511,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['thread'],
+  props: ['thread', 'translations'],
   components: {
     Replies: _components_Replies_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     SubscribeButton: _components_SubscribeButton_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
@@ -11519,23 +11527,24 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   created: function created() {
+    console.log();
     this.resetForm();
   },
   methods: {
     toggleLock: function toggleLock() {
-      var uri = "/locked-threads/".concat(this.thread.slug);
+      var uri = "/".concat(window.App.locale, "/locked-threads/").concat(this.thread.slug);
       axios[this.locked ? 'delete' : 'post'](uri);
       this.locked = !this.locked;
     },
     update: function update() {
       var _this = this;
 
-      var uri = "/threads/".concat(this.thread.channel.slug, "/").concat(this.thread.slug);
+      var uri = "/".concat(window.App.locale, "/threads/").concat(this.thread.channel.slug, "/").concat(this.thread.slug);
       axios.patch(uri, this.form).then(function () {
         _this.editing = false;
         _this.title = _this.form.title;
         _this.body = _this.form.body;
-        flash('Your thread has been updated.');
+        flash(_this.translations.thread_updated);
       });
     },
     resetForm: function resetForm() {
@@ -84114,7 +84123,7 @@ var render = function() {
                 _c("wysiwyg", {
                   attrs: {
                     name: "body",
-                    placeholder: "Have something to say?",
+                    placeholder: _vm.translations.have_something_to_say,
                     shouldClear: _vm.completed
                   },
                   model: {
@@ -84129,22 +84138,18 @@ var render = function() {
               1
             ),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "btn btn-secondary",
-                attrs: { type: "submit" },
-                on: { click: _vm.addReply }
-              },
-              [_vm._v("Post")]
-            )
+            _c("button", {
+              staticClass: "btn btn-secondary",
+              attrs: { type: "submit" },
+              domProps: { textContent: _vm._s(_vm.translations.publish_reply) },
+              on: { click: _vm.addReply }
+            })
           ])
         ])
-      : _c("p", { staticClass: "text-center" }, [
-          _vm._v("\n        Please "),
-          _c("a", { attrs: { href: "/login" } }, [_vm._v("Sing In")]),
-          _vm._v(" to participate in this discussion.\n    ")
-        ])
+      : _c("p", {
+          staticClass: "text-center mt-4",
+          domProps: { innerHTML: _vm._s(_vm.translations.login_to_participate) }
+        })
   ])
 }
 var staticRenderFns = []
@@ -84186,9 +84191,10 @@ var render = function() {
                 }
               },
               [
-                _c("span", { attrs: { "aria-hidden": "true" } }, [
-                  _vm._v("« Prev")
-                ])
+                _c("span", {
+                  attrs: { "aria-hidden": "true" },
+                  domProps: { innerHTML: _vm._s(_vm.translations.prev) }
+                })
               ]
             )
           ]),
@@ -84207,9 +84213,10 @@ var render = function() {
                 }
               },
               [
-                _c("span", { attrs: { "aria-hidden": "true" } }, [
-                  _vm._v("Next »")
-                ])
+                _c("span", {
+                  attrs: { "aria-hidden": "true" },
+                  domProps: { innerHTML: _vm._s(_vm.translations.next) }
+                })
               ]
             )
           ])
@@ -84248,7 +84255,7 @@ var render = function() {
           { key: reply.id },
           [
             _c("reply", {
-              attrs: { reply: reply },
+              attrs: { reply: reply, translations: _vm.translations },
               on: {
                 deleted: function($event) {
                   return _vm.remove(index)
@@ -84261,17 +84268,20 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("paginator", {
-        attrs: { dataSet: this.dataSet },
+        attrs: { dataSet: this.dataSet, translations: _vm.translations },
         on: { changed: _vm.fetch }
       }),
       _vm._v(" "),
       _vm.$parent.locked
-        ? _c("p", [
-            _vm._v(
-              "\n        This thread has been locked. No more replies are allowed.\n    "
-            )
-          ])
-        : _c("new-reply", { on: { created: _vm.add } })
+        ? _c("p", {
+            domProps: {
+              textContent: _vm._s(_vm.translations.thread_was_locked)
+            }
+          })
+        : _c("new-reply", {
+            attrs: { translations: _vm.translations },
+            on: { created: _vm.add }
+          })
     ],
     2
   )
@@ -84319,7 +84329,10 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "tt-avatar-title" }, [
               _c("a", {
-                attrs: { href: "/profiles/" + _vm.reply.owner.name },
+                attrs: {
+                  href:
+                    "/" + _vm.urlPrefix + "/profiles/" + _vm.reply.owner.name
+                },
                 domProps: { textContent: _vm._s(_vm.reply.owner.name) }
               })
             ]),
@@ -84352,23 +84365,25 @@ var render = function() {
                   1
                 ),
                 _vm._v(" "),
-                _c("button", { staticClass: "btn btn-secondary btn-sm" }, [
-                  _vm._v("Update")
-                ]),
+                _c("button", {
+                  staticClass: "btn btn-secondary btn-sm",
+                  domProps: {
+                    textContent: _vm._s(_vm.translations.update_text)
+                  }
+                }),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-link btn-sm",
-                    attrs: { type: "button" },
-                    on: {
-                      click: function($event) {
-                        _vm.editing = false
-                      }
-                    }
+                _c("button", {
+                  staticClass: "btn btn-link btn-sm",
+                  attrs: { type: "button" },
+                  domProps: {
+                    textContent: _vm._s(_vm.translations.cancel_text)
                   },
-                  [_vm._v("Cancel")]
-                )
+                  on: {
+                    click: function($event) {
+                      _vm.editing = false
+                    }
+                  }
+                })
               ])
             ])
           : _c("div", {
@@ -84386,40 +84401,37 @@ var render = function() {
                 _c("div", { staticClass: "col-separator" }),
                 _vm._v(" "),
                 _vm.authorize("owns", _vm.reply) && !_vm.editing
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary btn-sm mr-2",
-                        on: {
-                          click: function($event) {
-                            _vm.editing = true
-                          }
-                        }
+                  ? _c("button", {
+                      staticClass: "btn btn-primary btn-sm mr-2",
+                      domProps: {
+                        textContent: _vm._s(_vm.translations.edit_text)
                       },
-                      [_vm._v("Edit")]
-                    )
+                      on: {
+                        click: function($event) {
+                          _vm.editing = true
+                        }
+                      }
+                    })
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.authorize("owns", _vm.reply)
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-danger btn-sm mr-2",
-                        on: { click: _vm.destroy }
+                  ? _c("button", {
+                      staticClass: "btn btn-danger btn-sm mr-2",
+                      domProps: {
+                        textContent: _vm._s(_vm.translations.delete_text)
                       },
-                      [_vm._v("Delete")]
-                    )
+                      on: { click: _vm.destroy }
+                    })
                   : _vm._e(),
                 _vm._v(" "),
                 _vm.authorize("owns", _vm.reply.thread) && !_vm.editing
-                  ? _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-success btn-sm ml-2",
-                        on: { click: _vm.markBestReply }
+                  ? _c("button", {
+                      staticClass: "btn btn-success btn-sm ml-2",
+                      domProps: {
+                        textContent: _vm._s(_vm.translations.best_reply)
                       },
-                      [_vm._v("Best Reply?")]
-                    )
+                      on: { click: _vm.markBestReply }
+                    })
                   : _vm._e()
               ],
               1

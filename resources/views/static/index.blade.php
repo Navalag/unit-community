@@ -8,16 +8,16 @@
             <div class="tt-wrapper-inner">
                 <ul class="nav nav-tabs pt-tabs-default" role="tablist">
                     <li class="nav-item">
-                        <a class="nav-link show active" data-toggle="tab" href="#about" role="tab"><span>About</span></a>
+                        <a class="nav-link show active" data-toggle="tab" href="#about" role="tab"><span>@lang('static_pages.about')</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#code-of-conduct" role="tab"><span>Code of Conduct</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#code-of-conduct" role="tab"><span>@lang('static_pages.code_of_conduct')</span></a>
                     </li>
                     <li class="nav-item tt-hide-xs">
-                        <a class="nav-link" data-toggle="tab" href="#terms-of-service" role="tab"><span>Terms of Service</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#terms-of-service" role="tab"><span>@lang('static_pages.terms_of_service')</span></a>
                     </li>
                     <li class="nav-item tt-hide-md">
-                        <a class="nav-link" data-toggle="tab" href="#privacy" role="tab"><span>Privacy</span></a>
+                        <a class="nav-link" data-toggle="tab" href="#privacy" role="tab"><span>@lang('static_pages.privacy')</span></a>
                     </li>
                 </ul>
             </div>

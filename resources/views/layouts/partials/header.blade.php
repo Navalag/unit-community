@@ -11,7 +11,7 @@
                 <!-- /toggle mobile menu -->
                 <!-- logo -->
                 <div class="tt-logo">
-                    <a href="{{ url('/') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
+                    <a href="{{ LaravelLocalization::localizeUrl('/threads') }}"><img src="{{ asset('images/logo.png') }}" alt=""></a>
                 </div>
                 <!-- /logo -->
                 <!-- desctop menu -->
@@ -25,9 +25,9 @@
                 <!-- Authentication Links -->
                 @guest
                     <div class="tt-account-btn">
-                        <a href="{{ route('login') }}" class="btn btn-primary">Log in</a>
+                        <a href="{{ LaravelLocalization::localizeUrl(route('login')) }}" class="btn btn-primary">@lang('header.log_in')</a>
                         @if (Route::has('register'))
-                            <a href="{{ route('register') }}" class="btn btn-secondary">Sign up</a>
+                            <a href="{{ LaravelLocalization::localizeUrl(route('register')) }}" class="btn btn-secondary">@lang('header.sign_up')</a>
                         @endif
                     </div>
                 @else
@@ -46,16 +46,16 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('profile', auth()->user()) }}">
-                                    My Profile
+                                <a class="dropdown-item" href="{{ LaravelLocalization::localizeUrl(route('profile', auth()->user())) }}">
+                                    @lang('header.my_profile')
                                 </a>
-                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                <a class="dropdown-item" href="{{ LaravelLocalization::localizeUrl(route('logout')) }}"
                                    onclick="event.preventDefault();
                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
+                                    @lang('header.logout')
                                 </a>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                <form id="logout-form" action="{{ LaravelLocalization::localizeUrl(route('logout')) }}" method="POST" style="display: none;">
                                     @csrf
                                 </form>
                             </div>

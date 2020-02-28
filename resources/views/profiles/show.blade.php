@@ -32,17 +32,17 @@
         <div class="tt-tab-wrapper">
             <div class="tt-topic-list">
                 <div class="tt-list-header user-activity">
-                    <div class="tt-col-topic">Topic</div>
-                    <div class="tt-col-value-large hide-mobile">Category</div>
-                    <div class="tt-col-value-large hide-mobile">Type</div>
-                    <div class="tt-col-value-large hide-mobile">Activity</div>
+                    <div class="tt-col-topic">@lang('profiles.topic')</div>
+                    <div class="tt-col-value-large hide-mobile">@lang('profiles.category')</div>
+                    <div class="tt-col-value-large hide-mobile">@lang('profiles.type')</div>
+                    <div class="tt-col-value-large hide-mobile">@lang('profiles.activity')</div>
                 </div>
                 @forelse ($activities as $activity)
                     @if(view()->exists("profiles.activities.{$activity->type}"))
                         @include ("profiles.activities.{$activity->type}")
                     @endif
                 @empty
-                    <p>There is no activity for this user yet.</p>
+                    <p>@lang('profiles.activity_empty_set')</p>
                 @endforelse
                 <div class="tt-row py-4">
                     {{ $activities->links() }}

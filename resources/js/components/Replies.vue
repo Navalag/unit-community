@@ -1,16 +1,14 @@
 <template>
     <div>
         <div v-for="(reply, index) in items" :key="reply.id">
-            <reply :reply="reply" @deleted="remove(index)"></reply>
+            <reply :reply="reply" :translations="translations" @deleted="remove(index)"></reply>
         </div>
 
-        <paginator :dataSet="this.dataSet" @changed="fetch"></paginator>
+        <paginator :dataSet="this.dataSet" :translations="translations" @changed="fetch"></paginator>
 
-        <p v-if="$parent.locked">
-            This thread has been locked. No more replies are allowed.
-        </p>
+        <p v-if="$parent.locked" v-text="translations.thread_was_locked"></p>
 
-        <new-reply @created="add" v-else></new-reply>
+        <new-reply :translations="translations" @created="add" v-else></new-reply>
     </div>
 </template>
 
@@ -23,6 +21,8 @@
         components: { Reply, NewReply },
 
         mixins: [collection],
+
+        props: ['translations'],
 
         data() {
             return { dataSet: false };

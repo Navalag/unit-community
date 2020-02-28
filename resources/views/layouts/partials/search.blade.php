@@ -11,9 +11,11 @@
         index-name="threads"
     >
         <ais-search-box class="search-form" v-cloak>
-            <ais-input placeholder="Search" :autofocus="false" :spellcheck="true" class="tt-search__input"></ais-input>
+            <ais-input placeholder="{{ trans('common.search') }}" :autofocus="false" :spellcheck="true" class="tt-search__input"></ais-input>
             <button class="tt-search__btn" type="button">
-                <img class="tt-icon" src="{{ asset('images/svg-sprite/icon-search.svg') }}">
+                <svg class="tt-icon">
+                    <use xlink:href="#icon-search"></use>
+                </svg>
             </button>
         </ais-search-box>
         <div class="search-results">
@@ -35,7 +37,7 @@
                     </ais-results>
                 </ul>
             </div>
-            <button type="button" class="tt-view-all" id="closeSearchPopUp">Close</button>
+            <button type="button" class="tt-view-all" id="closeSearchPopUp">@lang('common.close')</button>
         </div>
     </ais-index>
 </div>

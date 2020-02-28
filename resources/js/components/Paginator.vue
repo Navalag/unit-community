@@ -3,13 +3,13 @@
         <ul class="pagination">
             <li :class="classes(prevUrl)">
                 <a class="page-link" href="#" aria-label="Previous" @click.prevent="page--">
-                    <span aria-hidden="true">&laquo; Prev</span>
+                    <span aria-hidden="true" v-html="translations.prev"></span>
                 </a>
             </li>
 
             <li :class="classes(nextUrl)">
                 <a class="page-link" href="#" aria-label="Next" @click.prevent="page++">
-                    <span aria-hidden="true">Next &raquo;</span>
+                    <span aria-hidden="true" v-html="translations.next"></span>
                 </a>
             </li>
         </ul>
@@ -18,7 +18,7 @@
 
 <script>
     export default {
-        props: ['dataSet'],
+        props: ['dataSet', 'translations'],
 
         data() {
             return {

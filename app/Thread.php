@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
 use Stevebauman\Purify\Facades\Purify;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Thread extends Model
 {
@@ -66,7 +67,7 @@ class Thread extends Model
      */
     public function path()
     {
-        return "/threads/{$this->channel->slug}/{$this->slug}";
+        return LaravelLocalization::localizeUrl("/threads/{$this->channel->slug}/{$this->slug}");
     }
 
     /**

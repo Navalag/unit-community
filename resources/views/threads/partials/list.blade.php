@@ -21,7 +21,7 @@
                 </ul>
             </div>
             <div class="col-1 ml-auto show-mobile">
-                <div class="tt-value">1d</div>
+                <div class="tt-value">-</div>
             </div>
         </div>
     </div>

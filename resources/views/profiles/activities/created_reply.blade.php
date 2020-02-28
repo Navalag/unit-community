@@ -12,7 +12,7 @@
             </a>
         </h6>
         <div class="tt-col-message">
-            <a href="#">{{ $profileUser->name }} replied:</a> {!! $activity->subject->body !!}
+            <a href="#">{{ $profileUser->name }} @lang('profiles.replied')</a> {!! $activity->subject->body !!}
         </div>
     @endslot
 

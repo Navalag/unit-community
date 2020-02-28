@@ -4,25 +4,31 @@
 
 <script>
     export default {
-        props: ['active'],
+        props: ['active', 'translations'],
+
+        data() {
+            return {
+                isActive: this.active,
+            }
+        },
 
         computed: {
             classes() {
-                return ['btn btn-color01 btn-sm', this.active ? 'btn-secondary' : 'btn-primary'];
+                return ['btn btn-color01 btn-sm', this.isActive ? 'btn-secondary' : 'btn-primary'];
             },
 
             btnText() {
-                return this.active ? 'Unsubscribe' : 'Subscribe';
+                return this.isActive ? this.translations.unsubscribe_text : this.translations.subscribe_text;
             }
         },
 
         methods: {
             subscribe() {
                 axios[
-                    (this.active ? 'delete' : 'post')
+                    (this.isActive ? 'delete' : 'post')
                     ](location.pathname + '/subscriptions');
 
-                this.active = ! this.active;
+                this.isActive = ! this.isActive;
             }
         }
     }

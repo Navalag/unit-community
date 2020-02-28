@@ -3,7 +3,7 @@
     import SubscribeButton from '../components/SubscribeButton.vue';
 
     export default {
-        props: ['thread'],
+        props: ['thread', 'translations'],
 
         components: {Replies, SubscribeButton},
 
@@ -19,12 +19,13 @@
         },
 
         created () {
+            console.log();
             this.resetForm();
         },
 
         methods: {
             toggleLock () {
-                let uri = `/locked-threads/${this.thread.slug}`;
+                let uri = `/${window.App.locale}/locked-threads/${this.thread.slug}`;
 
                 axios[this.locked ? 'delete' : 'post'](uri);
 
@@ -32,7 +33,7 @@
             },
 
             update () {
-                let uri = `/threads/${this.thread.channel.slug}/${this.thread.slug}`;
+                let uri = `/${window.App.locale}/threads/${this.thread.channel.slug}/${this.thread.slug}`;
 
                 axios.patch(uri, this.form).then(() => {
                     this.editing = false;
@@ -41,7 +42,7 @@
 
                     this.body = this.form.body;
 
-                    flash('Your thread has been updated.');
+                    flash(this.translations.thread_updated);
                 })
             },
 

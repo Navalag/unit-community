@@ -2,22 +2,22 @@
     <nav>
         <ul>
             <li>
-                <a href="/threads"><span>Browse</span></a>
+                <a href="{{ LaravelLocalization::localizeUrl('/threads') }}"><span>@lang('header.browse')</span></a>
                 <ul>
-                    <li><a href="/threads">All Threads</a></li>
+                    <li><a href="{{ LaravelLocalization::localizeUrl('/threads') }}">@lang('header.all_threads')</a></li>
                     @if (auth()->check())
-                        <li><a href="/threads?by={{ auth()->user()->name }}">My Threads</a></li>
+                        <li><a href="{{ LaravelLocalization::localizeUrl('/threads?by=' . auth()->user()->name) }}">@lang('header.my_threads')</a></li>
                     @endif
-                    <li><a href="/threads?popular=1">Popular All Time</a></li>
-                    <li><a href="/threads?unanswered=1">Unanswered Threads</a></li>
+                    <li><a href="{{ LaravelLocalization::localizeUrl('/threads?popular=1') }}">@lang('header.popular_all_time')</a></li>
+                    <li><a href="{{ LaravelLocalization::localizeUrl('/threads?unanswered=1') }}">@lang('header.unanswered_threads')</a></li>
                 </ul>
             </li>
-            <li><a href="/threads/create"><span>New Thread</span></a></li>
+            <li><a href="{{ LaravelLocalization::localizeUrl('/threads/create') }}"><span>@lang('header.new_thread')</span></a></li>
             <li>
-                <a href="#"><span>Channels</span></a>
+                <a href="#"><span>@lang('header.channels')</span></a>
                 <ul>
                     @foreach ($channels as $channel)
-                        <li><a href="/threads/{{ $channel->slug }}">{{ $channel->name }}</a></li>
+                        <li><a href="{{ LaravelLocalization::localizeUrl('/threads/' . $channel->slug) }}">{{ $channel->name }}</a></li>
                     @endforeach
                 </ul>
             </li>

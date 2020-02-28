@@ -22,10 +22,10 @@
     <div class="tt-item-info info-bottom">
         <ul class="tt-list-badge tt-size-lg">
             <li>
-                <button class="btn btn-secondary btn-sm" @click="update">Update</button>
+                <button class="btn btn-secondary btn-sm" @click="update">@lang('common.update')</button>
             </li>
             <li>
-                <button class="btn btn-primary btn-sm" @click="resetForm">Cancel</button>
+                <button class="btn btn-primary btn-sm" @click="resetForm">@lang('common.cancel')</button>
             </li>
             @can ('update', $thread)
                 <li>
@@ -33,7 +33,7 @@
                         {{ csrf_field() }}
                         {{ method_field('DELETE') }}
 
-                        <button type="submit" class="btn btn-link btn-sm">Delete Thread</button>
+                        <button type="submit" class="btn btn-link btn-sm">@lang('common.delete_thread')</button>
                     </form>
                 </li>
             @endcan
@@ -77,13 +77,18 @@
             <li v-if="authorize('isAdmin')">
                 <button class="btn btn-secondary btn-color01 btn-sm"
                         @click="toggleLock"
-                        v-text="locked ? 'Unlock' : 'Lock'"></button>
+                        v-text="locked ? '{{ trans('common.unlock') }}' : '{{ trans('common.lock') }}'"></button>
             </li>
             <li v-if="signedIn">
-                <subscribe-button :active="{{ json_encode($thread->isSubscribedTo) }}"></subscribe-button>
+                <subscribe-button
+                    :active="{{ json_encode($thread->isSubscribedTo) }}"
+                    :translations="{{ json_encode([
+                        'unsubscribe_text' => trans('common.unsubscribe'),
+                        'subscribe_text' => trans('common.subscribe'),
+                    ]) }}"></subscribe-button>
             </li>
             <li v-if="authorize('owns', thread)">
-                <button class="btn btn-primary btn-sm" @click="editing = true">Edit</button>
+                <button class="btn btn-primary btn-sm" @click="editing = true">@lang('common.edit')</button>
             </li>
         </ul>
         <div class="col-separator"></div>

@@ -5,18 +5,17 @@
                 <div class="form-group">
                     <wysiwyg name="body"
                              v-model="body"
-                             placeholder="Have something to say?"
+                             :placeholder="translations.have_something_to_say"
                              :shouldClear="completed"></wysiwyg>
                 </div>
 
                 <button type="submit"
                         class="btn btn-secondary"
-                        @click="addReply">Post</button>
+                        @click="addReply"
+                        v-text="translations.publish_reply"></button>
             </div>
         </div>
-        <p v-else class="text-center">
-            Please <a href="/login">Sing In</a> to participate in this discussion.
-        </p>
+        <p v-else class="text-center mt-4" v-html="translations.login_to_participate"></p>
     </div>
 </template>
 
@@ -25,6 +24,8 @@
     import 'at.js';
 
     export default {
+        props: ['translations'],
+
         data() {
             return {
                 body: '',
@@ -56,7 +57,7 @@
                         this.body = '';
                         this.completed = true;
 
-                        flash('Reply has been posted.');
+                        flash(this.translations.flash_reply_posted);
 
                         this.$emit('created', data);
                     })

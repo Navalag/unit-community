@@ -8,7 +8,7 @@
     @slot('body')
         <h6 class="tt-title">
             <a href="{{ $activity->subject->favorited->path() }}">
-                {{ $profileUser->name }} favorited a reply.
+                {{ $profileUser->name }} @lang('profiles.favorited_a_reply')
             </a>
         </h6>
         <div class="tt-col-message">

@@ -7,7 +7,7 @@
 
     @slot('body')
         <h6 class="tt-title">
-            {{ $profileUser->name }} published
+            {{ $profileUser->name }} @lang('profiles.published')
             <a href="{{ $activity->subject->path() }}">
                 {{ $activity->subject->title }}
             </a>

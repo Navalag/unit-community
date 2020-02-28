@@ -22,6 +22,7 @@
             'csrfToken' => csrf_token(),
             'signedIn' => auth()->check(),
             'user' => Auth::user(),
+            'locale' => App::getLocale(),
         ]) !!};
     </script>
 

@@ -7,7 +7,7 @@
                         <i class="tt-icon"><img :src="reply.owner.avatar_path" alt=""></i>
                     </div>
                     <div class="tt-avatar-title">
-                        <a :href="'/profiles/' + reply.owner.name" v-text="reply.owner.name"></a>
+                        <a :href="'/' + urlPrefix + '/profiles/' + reply.owner.name" v-text="reply.owner.name"></a>
                     </div>
                     <a href="#" class="tt-info-time">
                         <i class="tt-icon"><img src="/images/svg-sprite/icon-time.svg" alt=""></i>{{ ago }}
@@ -20,8 +20,8 @@
                         <wysiwyg v-model="body" class-names="'pt-3'"></wysiwyg>
                     </div>
 
-                    <button class="btn btn-secondary btn-sm">Update</button>
-                    <button class="btn btn-link btn-sm" @click="editing = false" type="button">Cancel</button>
+                    <button class="btn btn-secondary btn-sm" v-text="translations.update_text"></button>
+                    <button class="btn btn-link btn-sm" @click="editing = false" type="button" v-text="translations.cancel_text"></button>
                 </form>
             </div>
             <div v-else class="tt-item-description" v-html="body"></div>
@@ -30,13 +30,16 @@
                 <div class="col-separator"></div>
                 <button class="btn btn-primary btn-sm mr-2"
                         v-if="authorize('owns', reply) && ! editing"
-                        @click="editing = true">Edit</button>
+                        @click="editing = true"
+                        v-text="translations.edit_text"></button>
                 <button class="btn btn-danger btn-sm mr-2"
                         v-if="authorize('owns', reply)"
-                        @click="destroy">Delete</button>
+                        @click="destroy"
+                        v-text="translations.delete_text"></button>
                 <button class="btn btn-success btn-sm ml-2"
                         v-if="authorize('owns', reply.thread) && ! editing"
-                        @click="markBestReply">Best Reply?</button>
+                        @click="markBestReply"
+                        v-text="translations.best_reply"></button>
             </div>
         </div>
     </div>
@@ -47,7 +50,7 @@
     import moment from 'moment';
 
     export default {
-        props: ['reply'],
+        props: ['reply', 'translations'],
 
         components: { Favorite },
 
@@ -57,6 +60,7 @@
                 id: this.reply.id,
                 body: this.reply.body,
                 isBest: this.reply.isBest,
+                urlPrefix: window.App.locale,
             };
         },
 
@@ -75,7 +79,7 @@
         methods: {
             update() {
                 axios.patch(
-                    '/replies/' + this.id, {
+                    `/${this.urlPrefix}/replies/${this.id}`, {
                         body: this.body
                     })
                     .catch(error => {
@@ -84,17 +88,17 @@
 
                 this.editing = false;
 
-                flash('Updated!');
+                flash(this.translations.flash_updated);
             },
 
             destroy() {
-                axios.delete('/replies/' + this.id);
+                axios.delete(`/${this.urlPrefix}/replies/${this.id}`);
 
                 this.$emit('deleted', this.id);
             },
 
             markBestReply() {
-                axios.post('/replies/' + this.id + '/best');
+                axios.post(`/${this.urlPrefix}/replies/${this.id}/best`);
 
                 window.events.$emit('best-reply-selected', this.id);
             }

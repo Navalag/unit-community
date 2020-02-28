@@ -1,17 +1,17 @@
 <div class="tt-layout-tab">
     <div class="tt-wrapper-inner">
         <h2 class="tt-title">
-            About UNIT Community
+            @lang('static_pages.about_tab.title')
         </h2>
-        This is a community of developers who come together to share ideas and help each other succeed.
+            @lang('static_pages.about_tab.line1')
         <br>
-        This is an open-source project, so everyone can <a href="https://github.com/Navalag/forum" target="_blank">contribute</a>.
+            @lang('static_pages.about_tab.line2')
         <h4 class="tt-title">
-            Contact Us
+            @lang('static_pages.about_tab.line3')
         </h4>
-        Please feel free to leave us a message at <a href="mailto:sample@sample.com" target="_blank">sample@sample.com</a> or via telegram <a href="tg://resolve?domain=Navalag" target="_blank">@Navalag</a>.
+            @lang('static_pages.about_tab.line4')
         <h3 class="tt-title">
-            Moderators
+            @lang('static_pages.about_tab.moderators')
         </h3>
         <div class="tt-list-avatar">
             <div class="row">
