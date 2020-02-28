@@ -50,4 +50,28 @@
             </div>
         </div>
     </div>
+    @if(Auth::check())
+        <div class="dispayingTextDiv"></div>
+        <div id="js-popup-settings" class="tt-popup-settings">
+            <div class="tt-btn-col-close">
+                <a href="#">
+                <span class="tt-icon-title">
+                    <svg>
+                        <use xlink:href="#icon-settings_fill"></use>
+                    </svg>
+                </span>
+                    <span class="tt-icon-text">
+                    Settings
+                </span>
+                    <span class="tt-icon-close">
+                    <svg>
+                        <use xlink:href="#icon-cancel"></use>
+                    </svg>
+                </span>
+                </a>
+            </div>
+
+            <user-settings :userdata="{{ $profileUser }}"></user-settings>
+        </div>
+    @endif
 @endsection

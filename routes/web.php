@@ -46,3 +46,7 @@ Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index'
 Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy');
 
 Route::get('about', 'StaticPagesController@index');
+
+Route::patch('profiles/{user}/settings', 'UserSettingsController@update');
+
+Route::get('profiles/{user}/settings/update-email/{id}/{token}/{email}', 'UserSettingsController@updateEmail')->name('emailverification');

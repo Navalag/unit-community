@@ -1,16 +1,18 @@
 /*
 	Button switching
 */
-(function(){
-	var ttPopupSettings = $('#js-settings-btn');
-	if (ttPopupSettings.length){
-		 ptToggleCol();
-	}
-	function ptToggleCol() {
-		var $body = $('body'),
-			$html = $('html'),
-			$popupSettings = $('#js-popup-settings'),
-			$btnClose = $('.tt-btn-col-close');
+
+$(document).ready(function () {
+
+    var ttPopupSettings = $('#js-settings-btn');
+    if (ttPopupSettings.length){
+        ptToggleCol();
+    }
+    function ptToggleCol() {
+        var $body = $('body'),
+            $html = $('html'),
+            $popupSettings = $('#js-popup-settings'),
+            $btnClose = $('.tt-btn-col-close');
 
         $('#js-settings-btn').on('click', function (e){
             e.preventDefault();
@@ -41,4 +43,4 @@
             return false;
         });
     }
-})();
+});
