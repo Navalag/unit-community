@@ -15,10 +15,11 @@
 
                 <div class="form-group">
                     <label for="title">@lang('threads.create.title2')</label>
-                    <div class="tt-value-wrapper">
-                        <input type="text" name="title" class="form-control" id="title" placeholder="{{ trans('threads.create.title_placeholder') }}" value="{{ old('title') }}" required>
-                        <span class="tt-value-input">99</span>
-                    </div>
+                    <thread-tittle-input
+                        :translation="{{ json_encode(trans('threads.create.title_placeholder')) }}"
+                        :value="{{ json_encode(old('title')) }}"
+                        :max-length="150">
+                    </thread-tittle-input>
                     <div class="tt-note">@lang('threads.create.title_helper_text')</div>
                 </div>
                 <div class="form-group">
