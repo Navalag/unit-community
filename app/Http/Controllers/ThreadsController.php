@@ -65,7 +65,7 @@ class ThreadsController extends Controller
     public function store(Recaptcha $recaptcha)
     {
         request()->validate([
-            'title' => 'required|spamfree',
+            'title' => 'required|spamfree|max:150',
             'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id',
             'g-recaptcha-response' => ['required', $recaptcha]
