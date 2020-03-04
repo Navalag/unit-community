@@ -3,15 +3,16 @@
 */
 (function(){
     var location = window.location.href,
-    	$ttDesctopMenu = $('#tt-header .tt-desktop-menu');
+        $ttDesctopMenu = $('#tt-header .tt-desktop-menu nav ul');
 
     if(!$ttDesctopMenu) return;
 
     $ttDesctopMenu.find('li').each(function(){
         var link = $(this).find('a').attr('href');
 
-        if (location.indexOf(link) !== -1){
-            $(this).addClass('active');
+        if (location === link){
+            var parent = $(this).parents('li');
+            (parent.length) ? parent.addClass('active') : $(this).addClass('active');
         }
     });
 
