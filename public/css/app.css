@@ -19656,6 +19656,22 @@ html.ie.gecko body.modal-open {
   min-width: 160px;
 }
 
+.tt-popup-settings .form-default .confirm-password-hidden:not(.isActive) {
+  display: none;
+}
+
+.tt-popup-settings .form-default .form-control.hasError {
+  border: 1px solid red;
+}
+
+.tt-popup-settings .form-default .custom-file-input::-webkit-file-upload-button {
+  visibility: hidden;
+}
+
+.tt-popup-settings .form-default .redirect-message-dots:not(.isActive) {
+  display: none;
+}
+
 .tt-popup-settings .checkbox-group + .checkbox-group {
   margin-top: 8px;
 }
