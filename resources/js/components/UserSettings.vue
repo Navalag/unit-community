@@ -1,7 +1,7 @@
 <template>
         <form class="form-default" >
             <div class="tt-form-upload">
-                    <avatar-form :user="user"></avatar-form>
+                <avatar-form :user="user"></avatar-form>
             </div>
             <div class="form-group">
                 <label for="settingsUserName">Username</label>
