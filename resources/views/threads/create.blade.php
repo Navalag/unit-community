@@ -10,7 +10,7 @@
             <h1 class="tt-title-border">
                 @lang('threads.create.title')
             </h1>
-            <form method="post" action="/threads" class="form-default form-create-topic">
+            <form method="post" action="{{ LaravelLocalization::localizeUrl('/threads') }}" class="form-default form-create-topic">
                 @csrf
 
                 <div class="form-group">

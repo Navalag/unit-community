@@ -8,7 +8,7 @@
         class="search-wrapper"
         app-id="{{ config('scout.algolia.id') }}"
         api-key="{{ config('scout.algolia.public') }}"
-        index-name="threads"
+        index-name="{{ config('scout.prefix') }}threads"
     >
         <ais-search-box class="search-form" v-cloak>
             <ais-input placeholder="{{ trans('common.search') }}" :autofocus="false" :spellcheck="true" class="tt-search__input"></ais-input>
