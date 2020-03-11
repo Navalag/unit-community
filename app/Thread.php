@@ -233,6 +233,14 @@ class Thread extends Model
     }
 
     /**
+     * Get sum of favorites for all thread's replies.
+     */
+    public function getRepliesFavoritesCountAttribute(): int
+    {
+        return $this->replies()->get()->sum('favorites_count');
+    }
+
+    /**
      * Create new Visits instance.
      *
      * @return Visits
