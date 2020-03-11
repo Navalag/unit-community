@@ -7,9 +7,7 @@
         <div class="container">
             <div class="tt-user-header">
                 <div class="tt-col-avatar">
-                    <div class="tt-icon">
                         <img class="tt-icon" src="{{ $profileUser->avatar_path }}" alt="{{ $profileUser->name }}">
-                    </div>
                 </div>
                 <div class="tt-col-title">
                     <div class="tt-title">
