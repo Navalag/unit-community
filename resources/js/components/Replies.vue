@@ -6,9 +6,11 @@
 
         <paginator :dataSet="this.dataSet" :translations="translations" @changed="fetch"></paginator>
 
-        <p v-if="$parent.locked" v-text="translations.thread_was_locked"></p>
+        <div v-if="$parent.locked" class="tt-wrapper-inner">
+            <h4 class="tt-title-separator"><span v-text="translations.thread_was_locked"></span></h4>
+        </div>
 
-        <new-reply :translations="translations" @created="add" v-else></new-reply>
+        <new-reply v-else :translations="translations" @created="add"></new-reply>
     </div>
 </template>
 

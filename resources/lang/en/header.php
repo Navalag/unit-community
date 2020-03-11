@@ -2,8 +2,6 @@
 
 return [
 
-    'log_in' => 'Log in',
-    'sign_up' => 'Sign up',
     'my_profile' => 'My Profile',
     'logout' => 'Logout',
 

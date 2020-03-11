@@ -25,9 +25,9 @@
                 <!-- Authentication Links -->
                 @guest
                     <div class="tt-account-btn">
-                        <a href="{{ LaravelLocalization::localizeUrl(route('login')) }}" class="btn btn-primary">@lang('header.log_in')</a>
+                        <a href="{{ LaravelLocalization::localizeUrl(route('login')) }}" class="btn btn-primary">@lang('auth.login')</a>
                         @if (Route::has('register'))
-                            <a href="{{ LaravelLocalization::localizeUrl(route('register')) }}" class="btn btn-secondary">@lang('header.sign_up')</a>
+                            <a href="{{ LaravelLocalization::localizeUrl(route('register')) }}" class="btn btn-secondary">@lang('auth.sign_up')</a>
                         @endif
                     </div>
                 @else

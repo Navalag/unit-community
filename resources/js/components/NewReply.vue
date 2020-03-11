@@ -15,7 +15,10 @@
                         v-text="translations.publish_reply"></button>
             </div>
         </div>
-        <p v-else class="text-center mt-4" v-html="translations.login_to_participate"></p>
+
+        <div v-else class="tt-wrapper-inner">
+            <h4 class="tt-title-separator"><span v-html="translations.login_to_participate"></span></h4>
+        </div>
     </div>
 </template>
 

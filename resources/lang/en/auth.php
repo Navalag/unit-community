@@ -15,5 +15,8 @@ return [
 
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'auth_block_include' => 'Looks like you are new here. Register to learn and contribute - it\'s easy.',
+    'login' => 'Log in',
+    'sign_up' => 'Sign up',
 
 ];

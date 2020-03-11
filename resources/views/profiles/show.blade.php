@@ -42,7 +42,7 @@
                         @include ("profiles.activities.{$activity->type}")
                     @endif
                 @empty
-                    <p>@lang('profiles.activity_empty_set')</p>
+                    @include('partials.empty_result_line', ['message' => trans('profiles.activity_empty_set')])
                 @endforelse
                 <div class="tt-row py-4">
                     {{ $activities->links() }}

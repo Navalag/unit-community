@@ -18,8 +18,12 @@
             @endforeach
             @forelse($threads->where('is_trending', false) as $thread)
                 @include('threads.partials.list')
+
+                @if(auth()->guest() && $loop->last)
+                    @include('partials.auth_block')
+                @endif
             @empty
-                <p>@lang('threads.empty_threads_list')</p>
+                @include('partials.empty_result_line', ['message' => trans('threads.empty_threads_list')])
             @endforelse
 
             <div class="tt-row py-4">
