@@ -54,7 +54,19 @@ class Visits
      */
     public function count()
     {
-        return Redis::get($this->cacheKey()) ?? 0;
+        $count = Redis::get($this->cacheKey());
+
+        if ($count) {
+            if ($count >= 1000000) {
+                return round($count / 1000000, 1) . 'm';
+            }
+            else if ($count >= 1000) {
+                return round($count / 1000, 1) . 'k';
+            }
+            return $count;
+        }
+
+        return 0;
     }
 
     /**

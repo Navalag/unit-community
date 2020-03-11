@@ -25,7 +25,7 @@
                 </ul>
             </div>
             <div class="col-1 ml-auto show-mobile">
-                <div class="tt-value">-</div>
+                <div class="tt-value">{{ \Carbon\Carbon::parse($thread->updated_at)->diffForHumans(null, true, true)}}</div>
             </div>
         </div>
     </div>
@@ -35,8 +35,8 @@
             {{ $thread->channel->name }}
         </a>
     </div>
-    <div class="tt-col-value hide-mobile">-</div>
+    <div class="tt-col-value hide-mobile">{{ $thread->replies_favorites_count }}</div>
     <div class="tt-col-value tt-color-select hide-mobile">{{ $thread->replies_count }}</div>
     <div class="tt-col-value hide-mobile">{{ $thread->visits()->count() }}</div>
-    <div class="tt-col-value hide-mobile">-</div>
+    <div class="tt-col-value hide-mobile">{{ \Carbon\Carbon::parse($thread->updated_at)->diffForHumans(null, true, true)}}</div>
 </div>
