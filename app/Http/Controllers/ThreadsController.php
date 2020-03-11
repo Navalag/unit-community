@@ -172,9 +172,16 @@ class ThreadsController extends Controller
                 $thread->is_trending = false;
             }
 
+            $thread->visits_count = $this->getVisitsCount($thread->visits()->count());
+            $thread->favorites_count = $thread->replies()->get()->sum('favorites_count');
+
             return $thread;
         });
 
         return $threads;
+    }
+
+    protected function getVisitsCount($count) {
+        return ($count > 999) ? round($count / 1000, 1) . 'k' : $count;
     }
 }
