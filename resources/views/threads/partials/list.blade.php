@@ -17,7 +17,11 @@
         <div class="row align-items-center no-gutters  hide-desktope">
             <div class="col-11">
                 <ul class="tt-list-badge">
-                    <li class="show-mobile"><a href="#"><span class="tt-color{{ $thread->channel->id }} tt-badge">{{ $thread->channel->name }}</span></a></li>
+                    <li class="show-mobile">
+                        <a href="{{ LaravelLocalization::localizeUrl('/threads/' . $thread->channel->slug) }}">
+                            <span class="tt-color{{ $thread->channel->id }} tt-badge">{{ $thread->channel->name }}</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div class="col-1 ml-auto show-mobile">
@@ -25,7 +29,12 @@
             </div>
         </div>
     </div>
-    <div class="tt-col-category"><span class="tt-color{{ $thread->channel->id }} tt-badge">{{ $thread->channel->name }}</span></div>
+    <div class="tt-col-category">
+        <a class="tt-color{{ $thread->channel->id }} tt-badge"
+           href="{{ LaravelLocalization::localizeUrl('/threads/' . $thread->channel->slug) }}">
+            {{ $thread->channel->name }}
+        </a>
+    </div>
     <div class="tt-col-value hide-mobile">-</div>
     <div class="tt-col-value tt-color-select hide-mobile">{{ $thread->replies_count }}</div>
     <div class="tt-col-value hide-mobile">{{ $thread->visits()->count() }}</div>
