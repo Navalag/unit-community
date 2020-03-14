@@ -264,6 +264,10 @@
 			}
 		}
 		.tt-col-category{
+            .tt-badge:hover{
+                color: #ffffff;
+                text-decoration: none;
+            }
 			&:not(.tt-col-value-large){
 				@media (min-width: 992px){
 					width: 16.66667%;
