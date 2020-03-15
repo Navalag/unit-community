@@ -1,8 +1,10 @@
 @component('profiles.activities.activity')
     @slot('avatar')
-        <img class="tt-icon"
-             src="{{ $activity->subject->thread->creator->avatar_path }}"
-             alt="{{ $activity->subject->thread->creator->name }}">
+        <a href="{{ url('profiles/' . $activity->subject->thread->creator->name) }}">
+            <img class="tt-icon"
+                 src="{{ $activity->subject->thread->creator->avatar_path }}"
+                 alt="{{ $activity->subject->thread->creator->name }}">
+        </a>
     @endslot
 
     @slot('body')

@@ -33,9 +33,9 @@
                 @else
                     <div class="tt-user-info d-flex justify-content-center">
                         <user-notifications></user-notifications>
-                        <div class="tt-avatar-icon tt-size-md">
+                        <a class="tt-avatar-icon tt-size-md" href="{{ url('profiles/' . auth()->user()->name) }}">
                             <i class="tt-icon"><img src="{{ auth()->user()->avatar_path }}" alt="{{ auth()->user()->name }}"></i>
-                        </div>
+                        </a>
                         <div class="custom-select-01">
                             <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                 {{ auth()->user()->name }}<i class="tt-icon"><svg><use xlink:href="#icon-arrow_below"></use></svg></i>

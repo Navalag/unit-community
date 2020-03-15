@@ -3,9 +3,9 @@
         <div class="tt-single-topic">
             <div class="tt-item-header pt-noborder">
                 <div class="tt-item-info info-top">
-                    <div class="tt-avatar-icon">
+                    <a class="tt-avatar-icon" :href="'/' + urlPrefix + '/profiles/' + reply.owner.name">
                         <i class="tt-icon"><img :src="reply.owner.avatar_path" alt=""></i>
-                    </div>
+                    </a>
                     <div class="tt-avatar-title">
                         <a :href="'/' + urlPrefix + '/profiles/' + reply.owner.name" v-text="reply.owner.name"></a>
                     </div>

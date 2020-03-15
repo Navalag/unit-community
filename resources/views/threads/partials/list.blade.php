@@ -1,7 +1,7 @@
 <div class="tt-item @if($thread->is_trending) tt-itemselect @endif">
-    <div class="tt-col-avatar">
+    <a class="tt-col-avatar" href="{{ url('profiles/' . $thread->creator->name) }}">
         <img class="tt-icon" src="{{ $thread->creator->avatar_path }}" alt="">
-    </div>
+    </a>
     <div class="tt-col-description">
         <h6 class="tt-title">
             <a href="{{ $thread->path() }}">
