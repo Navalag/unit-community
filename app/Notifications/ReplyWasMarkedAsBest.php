@@ -2,48 +2,38 @@
 
 namespace App\Notifications;
 
-use App\Reply;
-use App\Thread;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
+use App\Reply;
+use App\User;
 
-class ThreadWasUpdated extends Notification
+class ReplyWasMarkedAsBest extends Notification
 {
     use Queueable;
 
-    /**
-     * The thread that was updated.
-     *
-     * @var Thread
-     */
-    protected $thread;
-
-    /**
-     * The new reply.
-     *
-     * @var Reply
-     */
     protected $reply;
+
+    protected $user;
 
     /**
      * Create a new notification instance.
      *
-     * @param $thread
-     * @param $reply
+     * @return void
      */
-    public function __construct($thread, $reply)
+    public function __construct(Reply $reply, User $user)
     {
-        $this->thread = $thread;
         $this->reply = $reply;
+        $this->user = $user;
     }
 
     /**
      * Get the notification's delivery channels.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
         return ['mail', 'database'];
     }
@@ -56,25 +46,25 @@ class ThreadWasUpdated extends Notification
      */
     public function toMail($notifiable)
     {
-
         $url = $this->reply->path();
 
         return (new MailMessage)
-            ->subject('Thread received reply')
-            ->action($this->reply->owner->name .' replied to ' .$this->thread->title , $url)
+            ->subject('Your reply was marked as best')
+            ->action($this->user->name . ' marked your reply as best at ' . $this->reply->thread->title, $url)
             ->line('Thank you for using our application!');
     }
 
     /**
      * Get the array representation of the notification.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
-            'message' => $this->reply->owner->name . ' replied to ' . $this->thread->title,
-            'link'    => $this->reply->path()
+            'message' => $this->user->name . ' marked your reply as best at ' . $this->reply->thread->title,
+            'link' => $this->reply->path()
         ];
     }
 }

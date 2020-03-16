@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReplyReceivedLike;
 use Illuminate\Http\Request;
 use App\Reply;
 use Illuminate\Support\Facades\Redirect;
+use App\User;
 
 class FavoritesController extends Controller
 {
@@ -24,8 +26,8 @@ class FavoritesController extends Controller
      */
     public function store(Reply $reply)
     {
-        $reply->favorite();
-
+        $user = auth()->user();
+        $reply->favorite($reply, $user);
         return back();
     }
 

@@ -2,48 +2,34 @@
 
 namespace App\Notifications;
 
-use App\Reply;
-use App\Thread;
-use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\MailMessage;
-use Illuminate\Notifications\Notification;
 
-class ThreadWasUpdated extends Notification
+use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Notification;
+use Illuminate\Notifications\Messages\MailMessage;
+
+class ReplyWasEdited extends Notification
 {
     use Queueable;
 
-    /**
-     * The thread that was updated.
-     *
-     * @var Thread
-     */
-    protected $thread;
-
-    /**
-     * The new reply.
-     *
-     * @var Reply
-     */
     protected $reply;
 
     /**
      * Create a new notification instance.
      *
-     * @param $thread
-     * @param $reply
+     * @return void
      */
-    public function __construct($thread, $reply)
+    public function __construct($reply)
     {
-        $this->thread = $thread;
         $this->reply = $reply;
     }
 
     /**
      * Get the notification's delivery channels.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function via()
+    public function via($notifiable)
     {
         return ['mail', 'database'];
     }
@@ -56,25 +42,25 @@ class ThreadWasUpdated extends Notification
      */
     public function toMail($notifiable)
     {
-
         $url = $this->reply->path();
 
         return (new MailMessage)
-            ->subject('Thread received reply')
-            ->action($this->reply->owner->name .' replied to ' .$this->thread->title , $url)
+            ->subject('Reply was edited')
+            ->action($this->reply->owner->name . ' has edit reply at ' . $this->reply->thread->title, $url)
             ->line('Thank you for using our application!');
     }
 
     /**
      * Get the array representation of the notification.
      *
+     * @param  mixed  $notifiable
      * @return array
      */
-    public function toArray()
+    public function toArray($notifiable)
     {
         return [
-            'message' => $this->reply->owner->name . ' replied to ' . $this->thread->title,
-            'link'    => $this->reply->path()
+            'message' => $this->reply->owner->name . ' has edit reply at ' . $this->reply->thread->title,
+            'link' => $this->reply->path()
         ];
     }
 }

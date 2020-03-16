@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReplyEdited;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 use App\Reply;
@@ -64,6 +65,8 @@ class RepliesController extends Controller
         $this->authorize('update', $reply);
 
         $reply->update(request()->validate(['body' => 'required|spamfree']));
+
+        event(new ReplyEdited($reply));
     }
 
     /**

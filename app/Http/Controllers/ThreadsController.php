@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Events\ThreadEdited;
 use App\Thread;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -122,7 +123,10 @@ class ThreadsController extends Controller
             'body' => 'required|spamfree',
         ]));
 
+        event(new ThreadEdited($thread));
+
         return $thread;
+
     }
 
     /**
@@ -171,9 +175,9 @@ class ThreadsController extends Controller
             } else {
                 $thread->is_trending = false;
             }
-
             return $thread;
         });
+
 
         return $threads;
     }

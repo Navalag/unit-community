@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ReplyReceivedBestMark;
 use App\Reply;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
@@ -17,7 +18,7 @@ class BestRepliesController extends Controller
     public function store(Reply $reply)
     {
         $this->authorize('update', $reply->thread);
-
-        $reply->thread->markBestReply($reply);
+        $user = auth()->user();
+        $reply->thread->markBestReply($reply, $user);
     }
 }

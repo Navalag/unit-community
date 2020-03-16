@@ -4,6 +4,7 @@ namespace App\Notifications;
 
 use App\Reply;
 use Illuminate\Bus\Queueable;
+use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
 class YouWereMentioned extends Notification
@@ -33,7 +34,23 @@ class YouWereMentioned extends Notification
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['mail', 'database'];
+    }
+
+    /**
+     * Get the mail representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return \Illuminate\Notifications\Messages\MailMessage
+     */
+    public function toMail($notifiable)
+    {
+        $url = $this->reply->path();
+
+        return (new MailMessage)
+            ->subject('You were mentioned')
+            ->action($this->reply->owner->name . ' mentioned you in ' . $this->reply->thread->title, $url)
+            ->line('Thank you for using our application!');
     }
 
     /**

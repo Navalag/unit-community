@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Events\ReplyReceivedBestMark;
+use App\Notifications\ReplyWasMarkedAsBest;
 use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
@@ -255,9 +257,11 @@ class Thread extends Model
      *
      * @param Reply $reply
      */
-    public function markBestReply(Reply $reply)
+    public function markBestReply(Reply $reply, User $user)
     {
         $this->update(['best_reply_id' => $reply->id]);
+        event(new ReplyReceivedBestMark($reply, $user));
+
     }
 
     /**
