@@ -1,12 +1,13 @@
 <template>
     <div>
-        <label for="imgupload" class="btn btn-primary custom-upload">Upload picture</label>
+        <label for="imgupload" class="btn btn-primary custom-upload" v-text="translations"></label>
         <input type="file" id="imgupload" accept="image/*" class="btn btn-primary custom-upload d-none" @change="onChange">
     </div>
 </template>
 
 <script>
     export default {
+        props: ['translations'],
         methods: {
             onChange(e) {
                 if (! e.target.files.length) return;

@@ -19,5 +19,7 @@ return [
     'best_reply' => 'Лучший ответ?',
     'delete' => 'Удалить',
     'publish_reply' => 'Отправить',
+    'updated_successfully' => 'Успешно обновлено',
+    'error_general' => 'Что-то пошло не так',
 
 ];

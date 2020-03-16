@@ -7,7 +7,7 @@
         </div>
         <div class="col-auto ml-auto">
             <form v-if="canUpdate" method="POST" enctype="multipart/form-data">
-                <image-upload name="avatar" class="mr-1" @loaded="onLoad"></image-upload>
+                <image-upload name="avatar" class="mr-1" @loaded="onLoad" :translations="translations.upload_picture"></image-upload>
             </form>
         </div>
     </div>
@@ -17,7 +17,7 @@
     import ImageUpload from './ImageUpload.vue';
 
     export default {
-        props: ['user'],
+        props: ['user', 'translations'],
 
         components: { ImageUpload },
 

@@ -48,28 +48,35 @@
             </div>
         </div>
     </div>
-    @if(Auth::check())
+    @if(auth()->check())
         <div class="dispayingTextDiv"></div>
         <div id="js-popup-settings" class="tt-popup-settings">
             <div class="tt-btn-col-close">
                 <a href="#">
-                <span class="tt-icon-title">
-                    <svg>
-                        <use xlink:href="#icon-settings_fill"></use>
-                    </svg>
-                </span>
                     <span class="tt-icon-text">
-                    Settings
-                </span>
+                        @lang('auth.user_settings.settings')
+                    </span>
                     <span class="tt-icon-close">
-                    <svg>
-                        <use xlink:href="#icon-cancel"></use>
-                    </svg>
-                </span>
+                        <svg>
+                            <use xlink:href="#icon-cancel"></use>
+                        </svg>
+                    </span>
                 </a>
             </div>
 
-            <user-settings :userdata="{{ $profileUser }}"></user-settings>
+            <user-settings :userdata="{{ $profileUser }}" :translations="{{
+                json_encode([
+                    'username' => trans('auth.user_settings.username'),
+                    'email' => trans('auth.user_settings.email'),
+                    'old_password' => trans('auth.user_settings.old_password'),
+                    'new_password' => trans('auth.user_settings.new_password'),
+                    'confirm_new_password' => trans('auth.user_settings.confirm_new_password'),
+                    'upload_picture' => trans('auth.user_settings.upload_picture'),
+                    'redirect_msg' => trans('auth.user_settings.redirect_to_profile'),
+                    'email_not_verified' => trans('auth.user_settings.email_not_verified'),
+                    'update' => trans('common.update'),
+                ])
+            }}"></user-settings>
         </div>
     @endif
 @endsection
