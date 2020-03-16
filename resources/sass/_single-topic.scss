@@ -242,16 +242,13 @@
 				display: none;
 			}
 			.tt-icon-btn{
-				margin-left: 0px;
+				margin-left: 0;
 			}
 		}
         &:not(.tt-small-indent){
             & + .tt-icon-btn{
                 margin-left: 18px;
             }
-        }
-        .tt-text{
-            display: none;
         }
     }
 }

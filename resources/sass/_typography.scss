@@ -33,6 +33,10 @@ html.win.ie body.no-scroll{
 .ais-highlight > em { background: yellow; font-style: normal; }
 input.ais-refinement-list__checkbox { margin-right: .4em; }
 @media (max-width: 767px){
+    .row {
+        margin-right: -10px;
+        margin-left: -10px;
+    }
     [class^="col"],
     .container-fluid,
     .container{
@@ -40,8 +44,8 @@ input.ais-refinement-list__checkbox { margin-right: .4em; }
         padding-left: 10px;
     }
     > .row{
-        margin-right: 0px;
-        margin-left: 0px;
+        margin-right: 0;
+        margin-left: 0;
     }
 }
 /*

@@ -28,18 +28,23 @@
             <div class="tt-item-info info-bottom" v-if="signedIn">
                 <favorite :reply="reply"></favorite>
                 <div class="col-separator"></div>
-                <button class="btn btn-primary btn-sm mr-2"
-                        v-if="authorize('owns', reply) && ! editing"
-                        @click="editing = true"
-                        v-text="translations.edit_text"></button>
-                <button class="btn btn-danger btn-sm mr-2"
-                        v-if="authorize('owns', reply)"
-                        @click="destroy"
-                        v-text="translations.delete_text"></button>
-                <button class="btn btn-success btn-sm ml-2"
-                        v-if="authorize('owns', reply.thread) && ! editing"
-                        @click="markBestReply"
-                        v-text="translations.best_reply"></button>
+                <ul class="tt-list-badge tt-size-lg">
+                    <li v-if="authorize('owns', reply) && ! editing">
+                        <button class="btn btn-primary btn-sm"
+                                @click="editing = true"
+                                v-text="translations.edit_text"></button>
+                    </li>
+                    <li v-if="authorize('owns', reply)">
+                        <button class="btn btn-danger btn-sm"
+                                @click="destroy"
+                                v-text="translations.delete_text"></button>
+                    </li>
+                    <li v-if="authorize('owns', reply.thread) && ! editing">
+                        <button class="btn btn-success btn-sm"
+                                @click="markBestReply"
+                                v-text="translations.best_reply"></button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

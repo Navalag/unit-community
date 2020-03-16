@@ -1,7 +1,7 @@
 <template>
     <li v-show="notifications.length" class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-            <i class="fas fa-bell"></i>
+        <a href="#" class="tt-btn-icon dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+            <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
         </a>
 
         <div v-for="notification in notifications" class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

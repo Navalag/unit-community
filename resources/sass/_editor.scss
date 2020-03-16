@@ -18,6 +18,10 @@ trix-toolbar {
             display: flex;
             flex-direction: column;
             flex-wrap: wrap;
+
+            .trix-button-group-spacer {
+                display: none;
+            }
         }
         > *:not(:last-child){
             margin-bottom: 10px;
@@ -48,13 +52,18 @@ trix-toolbar {
         }
 
         @media (max-width: 575px){
-            justify-content: space-around;
+            justify-content: flex-start;
             align-items: center;
-            padding-bottom: 3px;
+            padding: 0;
+            margin-left: 0;
 
             .trix-button{
-                padding-left: 8px;
-                padding-right: 8px;
+                padding-left: 14px;
+                padding-right: 14px;
+
+                &:not(:last-child) {
+                    margin-right: 10px;
+                }
             }
         }
     }

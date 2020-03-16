@@ -33,16 +33,12 @@
                 @else
                     <div class="tt-user-info d-flex justify-content-center">
                         <user-notifications></user-notifications>
-                        {{-- refactor icon below to vue component --}}
-                        <a href="#" class="tt-btn-icon">
-                            <i class="tt-icon"><svg><use xlink:href="#icon-notification"></use></svg></i>
-                        </a>
                         <div class="tt-avatar-icon tt-size-md">
                             <i class="tt-icon"><img src="{{ auth()->user()->avatar_path }}" alt="{{ auth()->user()->name }}"></i>
                         </div>
                         <div class="custom-select-01">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ auth()->user()->name }} <span class="caret"></span>
+                            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ auth()->user()->name }}<i class="tt-icon"><svg><use xlink:href="#icon-arrow_below"></use></svg></i>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

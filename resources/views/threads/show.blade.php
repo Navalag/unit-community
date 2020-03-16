@@ -5,7 +5,9 @@
 @endsection
 
 @section('content')
-    <thread-view :thread="{{ $thread }}" :translations="{{ json_encode(['thread_updated' => trans('common.thread_updated')]) }}" inline-template>
+    <thread-view :thread="{{ $thread }}"
+                 :translations="{{ json_encode(['thread_updated' => trans('common.thread_updated')]) }}"
+                 inline-template>
         <div class="container">
             <div class="tt-single-topic-list" v-cloak>
                 <div class="tt-item mt-0">
