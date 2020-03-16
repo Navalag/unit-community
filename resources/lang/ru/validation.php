@@ -193,6 +193,9 @@ return [
         'time'                  => 'Время',
         'available'             => 'Доступно',
         'size'                  => 'Размер',
+        'newPassword'           => 'Новый пароль',
+        'confirmNewPassword'    => 'Подтвердите новый пароль',
+        'oldPassword'           => 'Старый пароль',
     ],
 
 ];

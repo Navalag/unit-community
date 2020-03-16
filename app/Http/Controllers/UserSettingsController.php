@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UpdateUserRequest;
 use App\Notifications\VerifyEmailChange;
 use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Routing\Redirector;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\User;
@@ -15,38 +17,48 @@ use Illuminate\Support\Facades\Notification;
 class UserSettingsController extends Controller
 {
     /**
-     * Update user settings
+     * Update user
      *
-     * @param  UpdateUserRequest $request
+     * @param User $user
+     * @param UpdateUserRequest $request
      * @return Response
      */
     public function update(User $user, UpdateUserRequest $request)
     {
-            $newEmailNotVerifiedMessage = null;
-            $user_id = Auth::user()->id;
-            $currentUser = $user->find($user_id);
-            $request->filled('name') ? $currentUser->name = $request->name : 0;
+        $newEmailNotVerifiedMessage = null;
+        $user_id = Auth::user()->id;
+        $currentUser = $user->find($user_id);
+        $request->filled('name') ? $currentUser->name = $request->name : 0;
 
-            if(!$currentUser->email_verified_at){
-                $request->filled('email') ? $currentUser->email = $request->email : 0;
-                $currentUser->sendEmailVerificationNotification();
-            }
-            if($currentUser->email_verified_at && $request->filled('email')){
-                Notification::route('mail', $request->email)->notify(new VerifyEmailChange($currentUser, $request->email));
-                $newEmailNotVerifiedMessage = __('Your email will be changed after verifying');
-            }
+        if (!$currentUser->email_verified_at) {
+            $request->filled('email') ? $currentUser->email = $request->email : 0;
+            $currentUser->sendEmailVerificationNotification();
+        }
 
-            $request->filled('newPassword') ? $currentUser->password = Hash::make($request->newPassword) : 0;
+        if ($currentUser->email_verified_at && $request->filled('email')) {
+            Notification::route('mail', $request->email)->notify(new VerifyEmailChange($currentUser, $request->email));
+            $newEmailNotVerifiedMessage = trans('auth.user_settings.after_verifying');
+        }
 
-            if($currentUser->save()) {
-                $currentUser->message = __('Updated successfully');
-                $currentUser->emailMessage = $newEmailNotVerifiedMessage;
-                return response($currentUser, 200);
-            }
+        $request->filled('newPassword') ? $currentUser->password = Hash::make($request->newPassword) : 0;
 
-            return response(['message' => __('Something went wrong')]);
+        if ($currentUser->save()) {
+            $currentUser->message = trans('common.updated_successfully');
+            $currentUser->emailMessage = $newEmailNotVerifiedMessage;
+
+            return response($currentUser, 200);
+        }
+
+        return response(['message' => trans('common.error_general')]);
     }
 
+    /**
+     * Update email
+     *
+     * @param User $user
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     */
     public function updateEmail(User $user, Request $request)
     {
         $user = $user->find($request->id);

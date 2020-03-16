@@ -2,15 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Exceptions\ThrottleException;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use App\Reply;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Auth;
 
 class UpdateUserRequest extends FormRequest
 {
@@ -37,17 +32,17 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['nullable','sometimes', 'string', 'max:255', 'unique:users'],
-            'email' => ['nullable', 'sometimes', 'string', 'email', 'max:255', 'unique:users'],
-            'oldPassword' => ['nullable', 'sometimes','required_with:newPassword', function ($attribute, $value, $fail) {
-                if (!Hash::check($value, Auth::user()->password)) {
-                    return $fail(__('The old password is incorrect.'));
+            'name' => ['required', 'string', 'max:255', 'alpha_num', 'unique:users,name,'.$this->user->id],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->user->id],
+            'oldPassword' => ['nullable', 'required_with:newPassword', function ($attribute, $value, $fail) {
+                if (! Hash::check($value, $this->user->password)) {
+                    return $fail(trans('auth.user_settings.old_password_incorrect'));
                 }
+
+                return true;
             }],
-            'newPassword' => ['nullable', 'sometimes','required_with:oldPassword','string','min:8'],
-            'confirmNewPassword' => ['nullable', 'sometimes','required_with:newPassword,', 'same:newPassword'],
+            'newPassword' => ['nullable', 'required_with:oldPassword', 'string', 'min:8', 'max:50'],
+            'confirmNewPassword' => ['nullable', 'required_with:newPassword', 'same:newPassword'],
         ];
     }
-
-
 }

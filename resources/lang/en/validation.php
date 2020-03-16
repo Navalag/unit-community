@@ -174,6 +174,9 @@ return [
         'time'                  => 'Time',
         'available'             => 'Available',
         'size'                  => 'Size',
+        'newPassword'           => 'New password',
+        'confirmNewPassword'    => 'Confirm new password',
+        'oldPassword'           => 'Old password',
     ],
 
 ];

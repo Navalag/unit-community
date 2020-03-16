@@ -19,5 +19,7 @@ return [
     'best_reply' => 'Best Reply?',
     'delete' => 'Delete',
     'publish_reply' => 'Post',
+    'updated_successfully' => 'Updated successfully',
+    'error_general' => 'Something went wrong',
 
 ];
