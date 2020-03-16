@@ -4,7 +4,9 @@
             <div class="tt-item-header pt-noborder">
                 <div class="tt-item-info info-top">
                     <div class="tt-avatar-icon">
-                        <i class="tt-icon"><img :src="reply.owner.avatar_path" alt=""></i>
+                        <a :href="`/${urlPrefix}/profiles/${reply.owner.name}`">
+                            <i class="tt-icon"><img :src="reply.owner.avatar_path" alt=""></i>
+                        </a>
                     </div>
                     <div class="tt-avatar-title">
                         <a :href="'/' + urlPrefix + '/profiles/' + reply.owner.name" v-text="reply.owner.name"></a>
