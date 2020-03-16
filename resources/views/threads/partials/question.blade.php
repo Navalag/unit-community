@@ -3,7 +3,9 @@
     <div class="tt-item-header">
         <div class="tt-item-info info-top">
             <div class="tt-avatar-icon">
-                <i class="tt-icon"><img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}"></i>
+                <a href="{{ LaravelLocalization::localizeUrl('/profiles/' . $thread->creator->name) }}">
+                    <i class="tt-icon"><img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}"></i>
+                </a>
             </div>
             <div class="tt-avatar-title">
                 <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>
@@ -56,7 +58,9 @@
     <div class="tt-item-header">
         <div class="tt-item-info info-top">
             <div class="tt-avatar-icon">
-                <i class="tt-icon"><img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}"></i>
+                <a href="{{ LaravelLocalization::localizeUrl('/profiles/' . $thread->creator->name) }}">
+                    <i class="tt-icon"><img src="{{ $thread->creator->avatar_path }}" alt="{{ $thread->creator->name }}"></i>
+                </a>
             </div>
             <div class="tt-avatar-title">
                 <a href="{{ route('profile', $thread->creator) }}">{{ $thread->creator->name }}</a>

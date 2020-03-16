@@ -55,11 +55,6 @@
                                     @csrf
                                 </form>
                             </div>
-{{--                            <select>--}}
-{{--                                <option value="Default Sorting">{{ Auth::user()->name }}</option>--}}
-{{--                                <option value="value 01">value 01</option>--}}
-{{--                                <option value="value 02">value 02</option>--}}
-{{--                            </select>--}}
                         </div>
                     </div>
                 @endguest

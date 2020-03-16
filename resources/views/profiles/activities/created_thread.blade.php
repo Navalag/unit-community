@@ -1,8 +1,10 @@
 @component('profiles.activities.activity')
     @slot('avatar')
-        <img class="tt-icon"
-             src="{{ $activity->subject->creator->avatar_path }}"
-             alt="{{ $activity->subject->creator->name }}">
+        <a href="{{ LaravelLocalization::localizeUrl('profiles/' . $activity->subject->creator->name) }}">
+            <img class="tt-icon"
+                 src="{{ $activity->subject->creator->avatar_path }}"
+                 alt="{{ $activity->subject->creator->name }}">
+        </a>
     @endslot
 
     @slot('body')

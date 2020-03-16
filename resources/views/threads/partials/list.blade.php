@@ -1,6 +1,8 @@
 <div class="tt-item @if($thread->is_trending) tt-itemselect @endif">
     <div class="tt-col-avatar">
-        <img class="tt-icon" src="{{ $thread->creator->avatar_path }}" alt="">
+        <a href="{{ LaravelLocalization::localizeUrl('/profiles/' . $thread->creator->name) }}">
+            <img class="tt-icon" src="{{ $thread->creator->avatar_path }}" alt="">
+        </a>
     </div>
     <div class="tt-col-description">
         <h6 class="tt-title">
