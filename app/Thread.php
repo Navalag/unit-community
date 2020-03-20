@@ -221,7 +221,7 @@ class Thread extends Model
      */
     public function setSlugAttribute($value)
     {
-        $slug = Str::kebab($value);
+        $slug = Str::slug(Str::limit($value, 50, ''), '-');
         $original = $slug;
         $count = 2;
 
