@@ -7,17 +7,17 @@
                 <a href="{{ url('/') }}" class="tt-block-title">
                     <img src="{{ asset('images/logo.png') }}" alt="Logo img">
                     <div class="tt-title">
-                        Welcome to UNIT Community
+                        @lang('auth.welcome')
                     </div>
                     <div class="tt-description">
-                        Join the forum to unlock true power of community.
+                        @lang('auth.join_the_forum')
                     </div>
                 </a>
                 <form class="form-default" method="POST" action="{{ route('register') }}">
                     @csrf
 
                     <div class="form-group">
-                        <label for="name">Username</label>
+                        <label for="name">@lang('auth.username')</label>
                         <input type="text" name="name" class="form-control @error('name') is-invalid @enderror" id="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
                         @error('name')
@@ -27,7 +27,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="email">@lang('auth.email')</label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" id="email" value="{{ old('email') }}" required autocomplete="email">
 
                         @error('email')
@@ -37,7 +37,7 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="password">Password</label>
+                        <label for="password">@lang('auth.password')</label>
                         <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" id="password" required autocomplete="new-password">
 
                         @error('password')
@@ -47,17 +47,16 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="password-confirm">Confirm Password</label>
+                        <label for="password-confirm">@lang('auth.confirm_password')</label>
                         <input type="password" name="password_confirmation" class="form-control" id="password-confirm" required autocomplete="new-password">
                     </div>
                     <div class="form-group">
-                        <button type="submit"  class="btn btn-secondary btn-block">Create my account</button>
+                        <button type="submit"  class="btn btn-secondary btn-block">@lang('auth.create_my_account')</button>
                     </div>
 
-                    <p>Already have an account? <a href="{{ route('login') }}" class="tt-underline">Login here</a></p>
+                    <p>@lang('auth.already_have') <a href="{{ route('login') }}" class="tt-underline">@lang('auth.login_here')</a></p>
                     <div class="tt-notes">
-                        By signing up, signing in or continuing, I agree to
-                        Forum19’s <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy.</a>
+                        @lang('auth.agree_terms')
                     </div>
                 </form>
             </div>
