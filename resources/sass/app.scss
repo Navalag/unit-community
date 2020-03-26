@@ -9,7 +9,7 @@
 	1.5 Perfect scrollbar
 	1.6 Form
 	1.7 typography
-	1.8 Fonts
+	1.8 tribute
 2. Header
 3. Page Content
 	3.1 Basic settings for page content
@@ -67,6 +67,10 @@ $border02:                  #e2e7ea;
 
 /*-------  1.7 typography  --------*/
 @import "_typography";
+
+/*-------  1.8 tribute  --------*/
+@import "~tributejs/src/tribute";
+@import "_tribute";
 
 /*---------------------------------------*/
 /*--------     2. Header         --------*/

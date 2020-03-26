@@ -1,0 +1,16 @@
+.tribute-container {
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    color: #666f74;
+    border-radius: 0.25rem;
+
+    ul {
+        margin: 0;
+        background: #fff;
+    }
+
+    li {
+        &.highlight {
+            background: #f8f9fa;
+        }
+    }
+}
