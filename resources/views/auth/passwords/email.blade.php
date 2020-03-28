@@ -4,12 +4,10 @@
     <div class="container">
         <div class="tt-loginpages-wrapper">
             <div class="tt-loginpages">
-                <a href="{{ url('/') }}" class="tt-block-title">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo img">
-                    <div class="tt-title">
-                        @lang('auth.reset_password')
-                    </div>
-                </a>
+                @include('auth.partials.welcome_part', [
+                    'title' => trans('auth.reset_password'),
+                    'description' => false,
+                ])
 
                 @if (session('status'))
                     <div class="alert alert-success" role="alert">

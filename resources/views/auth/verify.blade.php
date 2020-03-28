@@ -4,12 +4,10 @@
     <div class="container">
         <div class="tt-loginpages-wrapper">
             <div class="tt-loginpages">
-                <a href="{{ url('/') }}" class="tt-block-title">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo img">
-                    <div class="tt-title">
-                        @lang('auth.verify')
-                    </div>
-                </a>
+                @include('auth.partials.welcome_part', [
+                    'title' => trans('auth.verify'),
+                    'description' => false,
+                ])
 
                 @if (session('resent'))
                     <div class="alert alert-success" role="alert">

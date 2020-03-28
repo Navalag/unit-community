@@ -4,15 +4,11 @@
     <div class="container">
         <div class="tt-loginpages-wrapper">
             <div class="tt-loginpages">
-                <a href="{{ url('/') }}" class="tt-block-title">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo img">
-                    <div class="tt-title">
-                        @lang('auth.welcome')
-                    </div>
-                    <div class="tt-description">
-                        @lang('auth.log_into')
-                    </div>
-                </a>
+                @include('auth.partials.welcome_part', [
+                    'title' => trans('auth.welcome'),
+                    'description' => trans('auth.join_the_forum'),
+                ])
+
                 <form class="form-default" method="POST" action="{{ route('login') }}">
                     @csrf
 
@@ -60,9 +56,8 @@
                     </div>
 
                     <p>@lang('auth.dont_have_an_account') <a href="{{ route('register') }}" class="tt-underline">@lang('auth.signup_here')</a></p>
-                    <div class="tt-notes">
-                        @lang('auth.agree_terms')
-                    </div>
+
+                    @include('auth.partials.agree_terms_and_privacy')
                 </form>
             </div>
         </div>

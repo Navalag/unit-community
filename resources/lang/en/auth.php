@@ -27,7 +27,7 @@ return [
     'forgot_password'       => 'Forgot Password',
     'dont_have_an_account'  => 'Don’t have an account?',
     'signup_here'           => 'Signup here',
-    'agree_terms'           => 'By Logging in, signing in or continuing, I agree to UNIT Community <a href="#" class="tt-underline">Terms of Use</a> and <a href="#" class="tt-underline">Privacy Policy</a>.',
+    'agree_terms'           => 'By Logging in, signing in or continuing, I agree to UNIT Community :terms and :privacy.',
 
     'join_the_forum'        => 'Join the forum to unlock true power of community.',
     'username'              => 'Username',

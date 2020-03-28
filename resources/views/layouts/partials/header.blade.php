@@ -37,8 +37,8 @@
                             <i class="tt-icon"><img src="{{ auth()->user()->avatar_path }}" alt="{{ auth()->user()->name }}"></i>
                         </div>
                         <div class="custom-select-01">
-                            <a id="navbarDropdown" class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ auth()->user()->name }}<i class="tt-icon"><svg><use xlink:href="#icon-arrow_below"></use></svg></i>
+                            <a id="navbarDropdown" class="nav-link" href="#" title="{{ auth()->user()->name }}" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                {{ Str::limit(auth()->user()->name, 7, '') }}<i class="tt-icon"><svg><use xlink:href="#icon-arrow_below"></use></svg></i>
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

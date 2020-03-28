@@ -27,7 +27,7 @@ return [
     'forgot_password'       => 'Забув пароль',
     'dont_have_an_account'  => 'У вас немає облікового запису?',
     'signup_here'           => 'Зареєструйтесь',
-    'agree_terms'           => 'При входженні в систему, реєстрації або при продовженні, я погоджуюсь з UNIT Community <a href="#" class="tt-underline">Умовами використання</a> та <a href="#" class="tt-underline">Політикою конфіденційності</a>.',
+    'agree_terms'           => 'При входженні в систему, реєстрації або при продовженні, я погоджуюсь з UNIT Community :terms та :privacy.',
 
     'join_the_forum'        => 'Приєднуйтесь та відкрийте всі можливості спільноти.',
     'username'              => 'Ім\'я користувача',

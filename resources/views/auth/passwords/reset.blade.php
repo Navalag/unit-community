@@ -4,12 +4,10 @@
     <div class="container">
         <div class="tt-loginpages-wrapper">
             <div class="tt-loginpages">
-                <a href="{{ url('/') }}" class="tt-block-title">
-                    <img src="{{ asset('images/logo.png') }}" alt="Logo img">
-                    <div class="tt-title">
-                        @lang('auth.reset_password')
-                    </div>
-                </a>
+                @include('auth.partials.welcome_part', [
+                    'title' => trans('auth.reset_password'),
+                    'description' => false,
+                ])
                 <form class="form-default" method="POST" action="{{ route('password.update') }}">
                     @csrf
 
@@ -21,8 +19,8 @@
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -31,8 +29,8 @@
 
                         @error('password')
                         <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
+                            <strong>{{ $message }}</strong>
+                        </span>
                         @enderror
                     </div>
                     <div class="form-group">
@@ -43,9 +41,7 @@
                         <button type="submit" class="btn btn-secondary btn-block">@lang('auth.reset_password')</button>
                     </div>
 
-                    <div class="tt-notes">
-                        @lang('auth.agree_terms')
-                    </div>
+                    @include('auth.partials.agree_terms_and_privacy')
                 </form>
             </div>
         </div>
