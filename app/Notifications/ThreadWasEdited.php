@@ -4,7 +4,7 @@ namespace App\Notifications;
 
 use Illuminate\Notifications\Messages\MailMessage;
 
-class ThreadWasUpdated extends BaseNotification
+class ThreadWasEdited extends BaseNotification
 {
     /**
      * Set the mail delivery channel.
@@ -19,6 +19,17 @@ class ThreadWasUpdated extends BaseNotification
     }
 
     /**
+     * Get the notification's delivery channels.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function via($notifiable)
+    {
+        return $this->channels;
+    }
+
+    /**
      * Get the mail representation of the notification.
      *
      * @param  mixed  $notifiable
@@ -27,9 +38,9 @@ class ThreadWasUpdated extends BaseNotification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject(trans('notifications.thread_was_updated.subject'))
-            ->greeting($this->data['reply']->owner->name . ' ' . trans('notifications.thread_was_updated.action') . ' ' . $this->data['thread']->title)
-            ->action(trans('notifications.button'), $this->data['reply']->path())
+            ->subject(trans('notifications.thread_was_edited.subject'))
+            ->greeting($this->data['thread']->creator->name . ' ' . trans('notifications.thread_was_edited.action') . ' ' . $this->data['thread']->title)
+            ->action(trans('notifications.button'), $this->data['thread']->path())
             ->line(trans('notifications.thanks_line'));
     }
 }

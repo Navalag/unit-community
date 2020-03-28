@@ -66,6 +66,33 @@
             <div v-if="formErrors.confirmNewPassword" v-text="formErrors.confirmNewPassword"></div>
         </div>
         <div class="form-group">
+            <label>Notify me via Email</label>
+            <div class="checkbox-group">
+                <input type="checkbox" id="settingsCheckBox01" name="checkbox" v-model="notifications.notifyThreadWasUpdated">
+                <label for="settingsCheckBox01">
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    <span class="tt-text" v-text="translations.checkbox_thread_was_updated"></span>
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="settingsCheckBox02" name="checkbox" v-model="notifications.notifyReplyReaction">
+                <label for="settingsCheckBox02">
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    <span class="tt-text" v-text="translations.checkbox_likes_reply"></span>
+                </label>
+            </div>
+            <div class="checkbox-group">
+                <input type="checkbox" id="settingsCheckBox03" name="checkbox" v-model="notifications.notifyMention">
+                <label for="settingsCheckBox03">
+                    <span class="check"></span>
+                    <span class="box"></span>
+                    <span class="tt-text" v-text="translations.checkbox_mentions_me"></span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
             <button class="btn btn-secondary"
                     v-on:click.prevent="submitForm"
                     :disabled="loading">{{ translations.update }}<i v-if="loading" class="fas fa-spinner fa-spin ml-2"></i></button>
@@ -97,6 +124,11 @@
                 },
                 isActive: false,
                 hasError: false,
+                notifications: {
+                    notifyThreadWasUpdated: this.userdata.is_receive_thread_updates_mail,
+                    notifyReplyReaction: this.userdata.is_receive_reply_reactions_mail,
+                    notifyMention: this.userdata.is_receive_mention_mail,
+                },
                 formErrors: {
                     username: null,
                     email: null,
@@ -114,7 +146,6 @@
                 loading: false,
             }
         },
-
         methods: {
             submitForm() {
                 this.loading = true;
@@ -124,7 +155,8 @@
                     'email': this.user.email,
                     'oldPassword': this.user.oldPassword,
                     'newPassword': this.user.newPassword,
-                    'confirmNewPassword': this.user.confirmNewPassword
+                    'confirmNewPassword': this.user.confirmNewPassword,
+                    'notifications' : this.notifications,
                 })
                     .then((response) => {
                         this.showStatus(response.data.message);
@@ -154,8 +186,8 @@
                 let property = e.target.name;
                 this.formErrors[property] = null;
             },
-
             showStatus(message) {
+
                 this.statusMessage = message;
                 var self = this;
 

@@ -19,7 +19,7 @@ class NotifyMentionedUsers
         User::whereIn('name', $event->reply->mentionedUsers())
             ->get()
             ->each(function (User $user) use ($event) {
-                $user->notify(new YouWereMentioned($event->reply));
+                $user->notify((new YouWereMentioned(['user' => $user, 'reply' => $event->reply]))->locale($user->locale));
             });
     }
 }

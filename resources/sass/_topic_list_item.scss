@@ -320,7 +320,7 @@
 			.tt-col-btn{
 				display: flex;
 			    flex-direction: row;
-			    flex-wrap: wrap;
+			    flex-wrap: nowrap;
 			    justify-content: flex-end;
 			    align-content: center;
 			    align-items: center;
@@ -388,6 +388,18 @@
 					}
 				}
 			}
+            @media (max-width: 420px){
+                .tt-col-btn{
+                    display: flex;
+                    justify-content: center;
+                    flex-wrap: wrap;
+
+                    [class^="btn"]{
+                        float: none;
+                        margin-top: 10px;
+                    }
+                }
+            }
 		}
 	}
 	.tt-color-select{

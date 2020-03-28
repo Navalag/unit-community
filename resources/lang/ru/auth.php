@@ -46,17 +46,20 @@ return [
     'request_another'       => 'нажмите здесь для получения нового',
 
     'user_settings'         => [
-        'username'                  => 'Имя пользователя',
-        'email'                     => 'Электронная почта',
-        'old_password'              => 'Старый пароль',
-        'new_password'              => 'Новый пароль',
-        'confirm_new_password'      => 'Подтвердите новый пароль',
-        'upload_picture'            => 'Загрузить изображение',
-        'old_password_incorrect'    => 'Старый пароль неверен',
-        'settings'                  => 'Настройки',
-        'redirect_to_profile'       => 'Сейчас страница обновится новым данным',
-        'email_not_verified'        => 'Ваш емейл не подтвержден',
-        'after_verifying'           => 'Ваш email будет изменен после подтверждения',
-    ],
+        'username'                      => 'Имя пользователя',
+        'email'                         => 'Электронная почта',
+        'old_password'                  => 'Старый пароль',
+        'new_password'                  => 'Новый пароль',
+        'confirm_new_password'          => 'Подтвердите новый пароль',
+        'upload_picture'                => 'Загрузить изображение',
+        'old_password_incorrect'        => 'Старый пароль неверен',
+        'settings'                      => 'Настройки',
+        'redirect_to_profile'           => 'Сейчас страница обновится новым данным',
+        'email_not_verified'            => 'Ваш емейл не подтвержден',
+        'after_verifying'               => 'Ваш email будет изменен после подтверждения',
+        'checkbox_thread_was_updated'   => 'Когда тема была обновлена',
+        'checkbox_likes_reply'          => 'Когда мой ответ понравился',
+        'checkbox_mentions_me'          => 'Когда кто-то отметил меня',
+    ]
 
 ];

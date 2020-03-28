@@ -4,7 +4,6 @@ namespace App\Notifications;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use App\User;
 
@@ -12,13 +11,21 @@ class VerifyEmailChange extends Notification
 {
     use Queueable;
 
+    /**
+     * @var User
+     */
     protected $user;
+
+    /**
+     * var email
+     */
     protected $email;
 
     /**
      * Create a new notification instance.
      *
-     * @return void
+     * @param User $user
+     * @param $email
      */
     public function __construct(User $user, $email)
     {
@@ -53,8 +60,9 @@ class VerifyEmailChange extends Notification
         ]);
 
         return (new MailMessage)
-                    ->line('Click on the button to verify your email')
-                    ->action('Verify your email', $url)
-                    ->line('Thank you for using our application!');
+            ->subject(trans('notifications.verify_email_change.subject'))
+            ->line(trans('notifications.verify_email_change.line'))
+            ->action(trans('notifications.verify_email_change.action'), $url)
+            ->line(trans('notifications.thanks_line'));
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Channel;
+use App\Events\ThreadEdited;
 use App\Thread;
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Exception;
 use App\Filters\ThreadFilters;
@@ -122,6 +122,8 @@ class ThreadsController extends Controller
             'body' => 'required|spamfree',
         ]));
 
+        event(new ThreadEdited($thread));
+
         return $thread;
     }
 
@@ -161,7 +163,7 @@ class ThreadsController extends Controller
         if ($channel->exists) {
             $threads->where('channel_id', $channel->id);
         }
-
+        
         return $threads->simplePaginate(15);
     }
 }

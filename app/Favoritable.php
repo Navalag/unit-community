@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ReplyReceivedLike;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -60,13 +61,17 @@ trait Favoritable
     /**
      * Favorite the current reply.
      *
+     * @param Reply $reply
+     * @param User $user
      * @return Model
      */
-    public function favorite()
+    public function favorite(Reply $reply, User $user)
     {
         $attributes = ['user_id' => auth()->id()];
 
         if (!$this->favorites()->where($attributes)->exists()) {
+            event(new ReplyReceivedLike($reply, $user));
+
             return $this->favorites()->create($attributes);
         }
     }
