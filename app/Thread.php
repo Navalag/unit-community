@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Events\ReplyReceivedBestMark;
 use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
@@ -16,7 +17,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Thread extends Model
 {
-    use RecordsActivity, Searchable;
+    use RecordsActivity;
+    use Searchable;
 
     /**
      * Don't auto-apply mass assignment protection.
@@ -55,7 +57,7 @@ class Thread extends Model
     {
         parent::boot();
 
-        static::deleting(function ($thread){
+        static::deleting(function ($thread) {
             $thread->replies->each->delete();
         });
     }
@@ -255,9 +257,10 @@ class Thread extends Model
      *
      * @param Reply $reply
      */
-    public function markBestReply(Reply $reply)
+    public function markBestReply(Reply $reply, User $user)
     {
         $this->update(['best_reply_id' => $reply->id]);
+        event(new ReplyReceivedBestMark($reply, $user));
     }
 
     /**

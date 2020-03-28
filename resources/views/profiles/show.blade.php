@@ -75,6 +75,9 @@
                     'redirect_msg' => trans('auth.user_settings.redirect_to_profile'),
                     'email_not_verified' => trans('auth.user_settings.email_not_verified'),
                     'update' => trans('common.update'),
+                    'checkbox_thread_was_updated' => trans('auth.user_settings.checkbox_thread_was_updated'),
+                    'checkbox_likes_reply' => trans('auth.user_settings.checkbox_likes_reply'),
+                    'checkbox_mentions_me' => trans('auth.user_settings.checkbox_mentions_me'),
                 ])
             }}"></user-settings>
         </div>

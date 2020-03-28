@@ -35,12 +35,16 @@ class UserSettingsController extends Controller
             $currentUser->sendEmailVerificationNotification();
         }
 
-        if ($currentUser->email_verified_at && $request->filled('email')) {
+        if ($currentUser->email_verified_at && $request->filled('email') && $currentUser->email != $request->email) {
             Notification::route('mail', $request->email)->notify(new VerifyEmailChange($currentUser, $request->email));
             $newEmailNotVerifiedMessage = trans('auth.user_settings.after_verifying');
         }
 
         $request->filled('newPassword') ? $currentUser->password = Hash::make($request->newPassword) : 0;
+
+         $currentUser->is_receive_thread_updates_mail = $request->notifications['notifyThreadWasUpdated'];
+         $currentUser->is_receive_reply_reactions_mail = $request->notifications['notifyReplyReaction'];
+         $currentUser->is_receive_mention_mail = $request->notifications['notifyMention'];
 
         if ($currentUser->save()) {
             $currentUser->message = trans('common.updated_successfully');

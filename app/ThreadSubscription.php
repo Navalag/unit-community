@@ -42,6 +42,6 @@ class ThreadSubscription extends Model
      */
     public function notify($reply)
     {
-        $this->user->notify(new ThreadWasUpdated($this->thread, $reply));
+        $this->user->notify((new ThreadWasUpdated(['user' => $this->user, 'thread' => $this->thread, 'reply' => $reply]))->locale($this->user->locale));
     }
 }

@@ -45,18 +45,21 @@ return [
     'did_not_receive'       => 'Якщо ви не отримали лист,',
     'request_another'       => 'натисніть тут для отримання нового',
 
-    'user_settings' => [
-        'username'                  => 'Ім\'я користувача',
-        'email'                     => 'Електронна пошта',
-        'old_password'              => 'Старий пароль',
-        'new_password'              => 'Новий пароль',
-        'confirm_new_password'      => 'Підтвердіть новий пароль',
-        'upload_picture'            => 'Завантажити зображення',
-        'old_password_incorrect'    => 'Старий пароль невірний',
-        'settings'                  => 'Налаштування',
-        'redirect_to_profile'       => 'Зараз сторінка оновиться з новими даними',
-        'email_not_verified'        => 'Ваш емейл не підтверджено',
-        'after_verifying'           => 'Ваш email буде змінено після підтвердження',
+    'user_settings'         => [
+        'username'                      => 'Ім\'я користувача',
+        'email'                         => 'Електронна пошта',
+        'old_password'                  => 'Старий пароль',
+        'new_password'                  => 'Новий пароль',
+        'confirm_new_password'          => 'Підтвердіть новий пароль',
+        'upload_picture'                => 'Завантажити зображення',
+        'old_password_incorrect'        => 'Старий пароль невірний',
+        'settings'                      => 'Налаштування',
+        'redirect_to_profile'           => 'Зараз сторінка оновиться з новими даними',
+        'email_not_verified'            => 'Ваш емейл не підтверджено',
+        'after_verifying'               => 'Ваш email буде змінено після підтвердження',
+        'checkbox_thread_was_updated'   => 'Коли тему було оновлено',
+        'checkbox_likes_reply'          => 'Коли моя відповідь сподобалась',
+        'checkbox_mentions_me'          => 'Коли хтось відмітив мене',
     ],
 
 ];
