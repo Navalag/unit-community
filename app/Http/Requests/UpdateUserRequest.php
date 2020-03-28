@@ -32,7 +32,7 @@ class UpdateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', 'string', 'max:255', 'alpha_num', 'unique:users,name,'.$this->user->id],
+            'name' => ['required', 'string', 'max:30', 'alpha_dash', 'unique:users,name,'.$this->user->id],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email,'.$this->user->id],
             'oldPassword' => ['nullable', 'required_with:newPassword', function ($attribute, $value, $fail) {
                 if (! Hash::check($value, $this->user->password)) {
