@@ -1,4 +1,4 @@
-<div class="tt-item @if($thread->is_trending) tt-itemselect @endif">
+<div class="tt-item @if(auth()->check() && $thread->hasUpdatesFor(auth()->user())) tt-itemselect @endif">
     <div class="tt-col-avatar">
         <a href="{{ LaravelLocalization::localizeUrl('/profiles/' . $thread->creator->name) }}">
             <img class="tt-icon" src="{{ $thread->creator->avatar_path }}" alt="">
@@ -16,7 +16,7 @@
                 @endif
             </a>
         </h6>
-        <div class="row align-items-center no-gutters  hide-desktope">
+        <div class="row align-items-center no-gutters hide-desktope">
             <div class="col-11">
                 <ul class="tt-list-badge">
                     <li class="show-mobile">

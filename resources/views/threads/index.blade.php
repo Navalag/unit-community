@@ -13,10 +13,7 @@
                 <div class="tt-col-value hide-mobile">@lang('threads.views')</div>
                 <div class="tt-col-value">@lang('threads.activity')</div>
             </div>
-            @foreach($threads->where('is_trending', true) as $thread)
-                @include('threads.partials.list')
-            @endforeach
-            @forelse($threads->where('is_trending', false) as $thread)
+            @forelse($threads as $thread)
                 @include('threads.partials.list')
 
                 @if(auth()->guest() && $loop->last)

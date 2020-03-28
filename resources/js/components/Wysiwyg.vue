@@ -41,7 +41,7 @@
                     },
                     selectTemplate: function (item) {
                         return (
-                            `<a href="/${window.App.locale}/profiles/${item.original.name}">@${item.original.name}</a>`
+                            `<a href="/profiles/${item.original.name}">@${item.original.name}</a>`
                         );
                     },
                     menuShowMinLength: 2,
