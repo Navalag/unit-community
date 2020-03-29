@@ -84,10 +84,13 @@
 			font-weight: 500;
 			margin: 3px 0 0 0;
 			letter-spacing: 0.01em;
+            word-break: normal;
+            overflow-wrap: break-word;
 			a{
 				display: inline-block;
 				color: $default_color_title;
 				transition:color $speed linear;
+                word-break: break-word;
 				&:hover{
 					color: $default_color;
 				}
@@ -107,6 +110,13 @@
 	.tt-item-description{
 		padding-top: 21px;
 		letter-spacing: 0.01em;
+        word-break: normal;
+        overflow-wrap: break-word;
+
+        p{
+            word-break: normal;
+            overflow-wrap: break-word;
+        }
 		.tt-title{
 			font-size: 16px;
 			line-height: 26px;

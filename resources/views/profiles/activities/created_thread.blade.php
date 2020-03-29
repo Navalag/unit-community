@@ -14,9 +14,7 @@
                 {{ $activity->subject->title }}
             </a>
         </h6>
-        <div class="tt-col-message">
-            {!! $activity->subject->body !!}
-        </div>
+        <div class="tt-col-message" v-html="{{ json_encode($activity->subject->body) }}"></div>
     @endslot
 
     @slot('channel')
