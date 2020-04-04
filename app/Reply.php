@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Services\Reputation;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -41,10 +42,14 @@ class Reply extends Model
 
         static::created(function ($reply){
             $reply->thread->increment('replies_count');
+
+            Reputation::award($reply->owner, Reputation::REPLY_POSTED);
         });
 
         static::deleting(function ($reply){
             $reply->thread->decrement('replies_count');
+
+            Reputation::reduce($reply->owner, Reputation::REPLY_POSTED);
         });
     }
 

@@ -2,6 +2,8 @@
 
 namespace App\Events;
 
+use App\Reply;
+use App\User;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
 
@@ -12,16 +14,17 @@ class ReplyReceivedBestMark
 
     public $reply;
 
-    public $user;
+//    public $user;
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param Reply $reply
+//     * @param User $user
      */
-    public function __construct($reply, $user)
+    public function __construct(Reply $reply)
     {
         $this->reply = $reply;
-        $this->user = $user;
+//        $this->user = $user;
     }
 }

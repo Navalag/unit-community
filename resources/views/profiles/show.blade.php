@@ -14,7 +14,7 @@
                         <a href="#">{{ $profileUser->name }}</a>
                     </div>
                     <ul class="tt-list-badge">
-                        <li><a href="#"><span class="tt-color14 tt-badge">LVL : 0</span></a></li>
+                        <li><a href="#"><span class="tt-color14 tt-badge">LVL : {{ $profileUser->reputation }}</span></a></li>
                     </ul>
                     <a href="#" class="tt-btn-icon" id="js-settings-btn">
                         <svg class="tt-icon">

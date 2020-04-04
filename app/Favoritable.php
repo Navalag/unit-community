@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Events\ReplyReceivedLike;
+use App\Services\Reputation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
@@ -65,7 +66,7 @@ trait Favoritable
      * @param User $user
      * @return Model
      */
-    public function favorite(Reply $reply, User $user)
+    public function favorite(Reply $reply, User $user): ?Model
     {
         $attributes = ['user_id' => auth()->id()];
 
@@ -74,12 +75,14 @@ trait Favoritable
 
             return $this->favorites()->create($attributes);
         }
+
+        return null;
     }
 
     /**
      * Unfavorite the current reply.
      */
-    public function unfavorite()
+    public function unfavorite(): void
     {
         $attributes = ['user_id' => auth()->id()];
 

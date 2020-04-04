@@ -16,11 +16,9 @@ class NotifyMarkedAsBestUsers
      */
     public function handle(ReplyReceivedBestMark $event)
     {
-        User::where('id', $event->reply->owner->id)
-            ->where('id', '!=', $event->user->id)
-            ->get()
-            ->each(function (User $user) use ($event) {
-                $user->notify((new ReplyWasMarkedAsBest(['user' => $event->user, 'reply' => $event->reply]))->locale($user->locale));
-            });
+        /** @var User $user */
+        $user = User::find($event->reply->owner->id);
+
+        $user->notify((new ReplyWasMarkedAsBest(['reply' => $event->reply]))->locale($user->locale));
     }
 }

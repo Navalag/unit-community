@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
@@ -25,7 +26,10 @@ class ThreadTest extends TestCase
     {
         $thread = create('App\Thread');
 
-        $this->assertEquals("/threads/{$thread->channel->slug}/{$thread->slug}", $thread->path());
+        $this->assertEquals(
+            LaravelLocalization::localizeUrl("/threads/{$thread->channel->slug}/{$thread->slug}"),
+            $thread->path()
+        );
     }
 
     /** @test */
@@ -38,6 +42,19 @@ class ThreadTest extends TestCase
     public function a_thread_has_a_creator()
     {
         $this->assertInstanceOf('App\User', $this->thread->creator);
+    }
+
+    /** @test */
+    function a_thread_can_have_a_best_reply()
+    {
+        $reply = $this->thread->addReply([
+            'body' => 'Foobar',
+            'user_id' => 1
+        ]);
+
+        $this->thread->markBestReply($reply);
+
+        $this->assertEquals($reply->id, $this->thread->bestReply->id);
     }
 
     /** @test */

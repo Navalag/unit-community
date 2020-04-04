@@ -29,7 +29,7 @@ class ReplyWasMarkedAsBest extends BaseNotification
     {
         return (new MailMessage)
             ->subject(trans('notifications.reply_was_marked_as_best.subject'))
-            ->greeting($this->data['user']->name . ' ' . trans('notifications.reply_was_marked_as_best.action') . ' ' . $this->data['reply']->thread->title)
+            ->greeting($this->data['reply']->thread->creator->name . ' ' . trans('notifications.reply_was_marked_as_best.action') . ' ' . $this->data['reply']->thread->title)
             ->action(trans('notifications.button'), $this->data['reply']->path())
             ->line(trans('notifications.thanks_line'));
     }

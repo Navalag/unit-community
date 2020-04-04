@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use App\Exceptions\Handler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
 use Illuminate\Support\Facades\DB;
+use Mcamara\LaravelLocalization\LaravelLocalization;
 
 abstract class TestCase extends BaseTestCase
 {
@@ -48,5 +49,18 @@ abstract class TestCase extends BaseTestCase
         $this->app->instance(ExceptionHandler::class, $this->oldExceptionHandler);
 
         return $this;
+    }
+
+    protected function refreshApplicationWithLocale($locale)
+    {
+        self::tearDown();
+        putenv(LaravelLocalization::ENV_ROUTE_KEY . '=' . $locale);
+        self::setUp();
+    }
+
+    protected function tearDown(): void
+    {
+        putenv(LaravelLocalization::ENV_ROUTE_KEY);
+        parent::tearDown();
     }
 }

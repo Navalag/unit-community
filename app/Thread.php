@@ -3,12 +3,14 @@
 namespace App;
 
 use App\Events\ReplyReceivedBestMark;
+use App\Services\Reputation;
 use Illuminate\Database\Eloquent\Model;
 use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use App\Events\ThreadReceivedNewReply;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 use Laravel\Scout\Searchable;
@@ -57,8 +59,14 @@ class Thread extends Model
     {
         parent::boot();
 
+        static::created(function ($thread) {
+            Reputation::award($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
+        });
+
         static::deleting(function ($thread) {
             $thread->replies->each->delete();
+
+            Reputation::reduce($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
         });
     }
 
@@ -67,7 +75,7 @@ class Thread extends Model
      *
      * @return string
      */
-    public function path()
+    public function path(): string
     {
         return LaravelLocalization::localizeUrl("/threads/{$this->channel->slug}/{$this->slug}");
     }
@@ -77,7 +85,7 @@ class Thread extends Model
      *
      * @return HasMany
      */
-    public function replies()
+    public function replies(): HasMany
     {
         return $this->hasMany(Reply::class)
                     ->withCount('favorites')
@@ -89,7 +97,7 @@ class Thread extends Model
      *
      * @return BelongsTo
      */
-    public function creator()
+    public function creator(): BelongsTo
     {
         return $this->belongsTo(User::class, 'user_id');
     }
@@ -99,9 +107,19 @@ class Thread extends Model
      *
      * @return BelongsTo
      */
-    public function channel()
+    public function channel(): BelongsTo
     {
         return $this->belongsTo(Channel::class);
+    }
+
+    /**
+     * A thread can have a best reply.
+     *
+     * @return HasOne
+     */
+    public function bestReply(): HasOne
+    {
+        return $this->hasOne(Reply::class, 'thread_id');
     }
 
     /**
@@ -110,7 +128,7 @@ class Thread extends Model
      * @param  array $reply
      * @return Model
      */
-    public function addReply($reply)
+    public function addReply($reply): Model
     {
         $reply = $this->replies()->create($reply);
 
@@ -126,7 +144,7 @@ class Thread extends Model
      * @param  ThreadFilters $filters
      * @return Builder
      */
-    public function scopeFilter($query, ThreadFilters $filters)
+    public function scopeFilter($query, ThreadFilters $filters): Builder
     {
         return $filters->apply($query);
     }
@@ -151,7 +169,7 @@ class Thread extends Model
      *
      * @param int|null $userId
      */
-    public function unsubscribe($userId = null)
+    public function unsubscribe($userId = null): void
     {
         $this->subscriptions()
              ->where('user_id', $userId ?: auth()->id())
@@ -163,7 +181,7 @@ class Thread extends Model
      *
      * @return HasMany
      */
-    public function subscriptions()
+    public function subscriptions(): HasMany
     {
         return $this->hasMany(ThreadSubscription::class);
     }
@@ -173,7 +191,7 @@ class Thread extends Model
      *
      * @return boolean
      */
-    public function getIsSubscribedToAttribute()
+    public function getIsSubscribedToAttribute(): bool
     {
         return $this->subscriptions()
             ->where('user_id', auth()->id())
@@ -188,7 +206,7 @@ class Thread extends Model
      *
      * @throws
      */
-    public function hasUpdatesFor($user)
+    public function hasUpdatesFor($user): bool
     {
         $key = $user->visitedThreadCacheKey($this);
 
@@ -200,7 +218,7 @@ class Thread extends Model
      *
      * @return string
      */
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }
@@ -211,7 +229,7 @@ class Thread extends Model
      * @param  string $body
      * @return string
      */
-    public function getBodyAttribute($body)
+    public function getBodyAttribute($body): string
     {
         return Purify::clean($body);
     }
@@ -257,10 +275,27 @@ class Thread extends Model
      *
      * @param Reply $reply
      */
-    public function markBestReply(Reply $reply, User $user)
+    public function markBestReply(Reply $reply): void
     {
+        if ($this->hasBestReply()) {
+            Reputation::reduce($this->bestReply->owner, Reputation::BEST_REPLY_AWARDED);
+        }
+
         $this->update(['best_reply_id' => $reply->id]);
-        event(new ReplyReceivedBestMark($reply, $user));
+
+        Reputation::award($reply->owner, Reputation::BEST_REPLY_AWARDED);
+
+        event(new ReplyReceivedBestMark($reply));
+    }
+
+    /**
+     * Determine if the thread has a current best reply.
+     *
+     * @return bool
+     */
+    public function hasBestReply(): bool
+    {
+        return ! is_null($this->best_reply_id);
     }
 
     /**
@@ -268,7 +303,7 @@ class Thread extends Model
      *
      * @return array
      */
-    public function toSearchableArray()
+    public function toSearchableArray(): array
     {
         return $this->toArray() + ['path' => $this->path()];
     }

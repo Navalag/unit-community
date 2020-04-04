@@ -7,6 +7,7 @@
                         <a :href="`/${urlPrefix}/profiles/${reply.owner.name}`">
                             <i class="tt-icon"><img :src="reply.owner.avatar_path" alt=""></i>
                         </a>
+                        <small class="d-block">LVL: {{ reply.owner.reputation }}</small>
                     </div>
                     <div class="tt-avatar-title">
                         <a :href="'/' + urlPrefix + '/profiles/' + reply.owner.name" v-text="reply.owner.name"></a>
