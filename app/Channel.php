@@ -10,7 +10,6 @@ class Channel extends Model
 {
     protected $fillable = [
         'name',
-        'slug',
         'description',
     ];
 
@@ -52,12 +51,13 @@ class Channel extends Model
     }
 
     /**
-     * Set the proper slug attribute.
+     * Set the proper name attribute.
      *
-     * @param string $value
+     * @param string $name
      */
-    public function setSlugAttribute($value)
+    public function setNameAttribute($name): void
     {
-        $this->attributes['slug'] = Str::slug($value, '-');
+        $this->attributes['name'] = $name;
+        $this->attributes['slug'] = Str::slug($name, '-');
     }
 }

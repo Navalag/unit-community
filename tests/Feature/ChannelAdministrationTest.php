@@ -26,7 +26,6 @@ class ChannelAdministrationTest extends TestCase
     {
         $this->createChannel([
             'name' => 'php',
-            'slug' => 'php',
             'description' => 'This is the channel for discussing all things PHP.',
         ]);
 
@@ -118,7 +117,7 @@ class ChannelAdministrationTest extends TestCase
         $channel = create(Channel::class);
 
         $this->delete('/en/channels/' . $channel->slug)
-            ->assertSessionHas('flash', 'Channel has been deleted!');
+            ->assertStatus(302);
     }
 
     /** @test */
