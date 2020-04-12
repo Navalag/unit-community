@@ -2,6 +2,8 @@
 
 namespace Tests;
 
+use App\User;
+use Exception;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 use App\Exceptions\Handler;
 use Illuminate\Contracts\Debug\ExceptionHandler;
@@ -30,6 +32,15 @@ abstract class TestCase extends BaseTestCase
         return $this;
     }
 
+    protected function signInAdmin($admin = null)
+    {
+        $admin = $admin ?: create(User::class, ['name' => config('unit_community.admins')[0]]);
+
+        $this->actingAs($admin);
+
+        return $this;
+    }
+
     // Hat tip, @adamwathan.
     protected function disableExceptionHandling()
     {
@@ -37,8 +48,8 @@ abstract class TestCase extends BaseTestCase
 
         $this->app->instance(ExceptionHandler::class, new class extends Handler {
             public function __construct() {}
-            public function report(\Exception $e) {}
-            public function render($request, \Exception $e) {
+            public function report(Exception $e) {}
+            public function render($request, Exception $e) {
                 throw $e;
             }
         });

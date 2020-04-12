@@ -3,6 +3,7 @@
 return [
 
     'app_name' => 'UNIT Community',
+    'create' => 'Create',
     'close' => 'Close',
     'back' => 'Back',
     'search' => 'Search',
@@ -21,5 +22,7 @@ return [
     'publish_reply' => 'Post',
     'updated_successfully' => 'Updated successfully',
     'error_general' => 'Something went wrong',
+    'dialog_confirm' => 'Please confirm the action.',
+    'threads' => 'Threads',
 
 ];

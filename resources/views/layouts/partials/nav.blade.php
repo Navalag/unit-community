@@ -14,7 +14,7 @@
             </li>
             <li><a href="{{ LaravelLocalization::localizeUrl('/threads/create') }}"><span>@lang('header.new_thread')</span></a></li>
             <li>
-                <a href="#"><span>@lang('header.channels')</span></a>
+                <a href="{{ LaravelLocalization::localizeUrl('/channels') }}"><span>@lang('header.channels')</span></a>
                 <ul>
                     @foreach ($channels as $channel)
                         <li><a href="{{ LaravelLocalization::localizeUrl('/threads/' . $channel->slug) }}">{{ $channel->name }}</a></li>

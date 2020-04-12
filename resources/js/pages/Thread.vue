@@ -19,7 +19,6 @@
         },
 
         created () {
-            console.log();
             this.resetForm();
         },
 

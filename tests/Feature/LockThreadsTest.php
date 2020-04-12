@@ -9,6 +9,13 @@ class LockThreadsTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->refreshApplicationWithLocale('en');
+    }
+
     /** @test */
     function non_administrators_may_not_lock_threads()
     {

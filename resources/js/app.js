@@ -7,6 +7,7 @@
 require('./bootstrap');
 require('perfect-scrollbar/dist/js/perfect-scrollbar.jquery');
 
+require('./modules/helpers');
 require('./modules/_mobile_menu');
 require('./modules/_desktop_ menu');
 require('./modules/_avatar_mobile_aside');
@@ -62,6 +63,7 @@ Vue.component('avatar-form', require('./components/AvatarForm.vue').default);
 Vue.component('wysiwyg', require('./components/Wysiwyg.vue').default);
 Vue.component('user-settings', require('./components/UserSettings.vue').default);
 Vue.component('thread-tittle-input', require('./components/ThreadTittleInput.vue').default);
+Vue.component('channel-card', require('./components/ChannelCard.vue').default);
 
 Vue.component('thread-view', require('./pages/Thread.vue').default);
 

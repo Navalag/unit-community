@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ChannelsController;
+use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -56,6 +58,8 @@ Route::group(
 
     Route::patch('profiles/{user}/settings', 'UserSettingsController@update');
     Route::get('profiles/{user}/settings/update-email/{id}/{token}/{email}', 'UserSettingsController@updateEmail')->name('emailverification');
+
+    Route::resource('channels', '\\' . ChannelsController::class)->only(['index', 'create', 'store', 'update', 'destroy']);
 });
 
 Route::get('api/users', 'Api\UsersController@index');

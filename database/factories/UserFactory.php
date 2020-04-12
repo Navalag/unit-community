@@ -28,6 +28,6 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->state(User::class, 'administrator', function () {
     return [
-        'name' => 'JohnDoe'
+        'name' => config('unit_community.admins')[0]
     ];
 });

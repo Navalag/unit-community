@@ -4,9 +4,23 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 
 class Channel extends Model
 {
+    protected $fillable = [
+        'name',
+        'slug',
+        'description',
+    ];
+
+    /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    public $appends = ['threads_count'];
+
     /**
      * Get the route key name for Laravel.
      *
@@ -25,5 +39,25 @@ class Channel extends Model
     public function threads()
     {
         return $this->hasMany(Thread::class);
+    }
+
+    /**
+     * Add threads count to the model.
+     *
+     * @return integer
+     */
+    public function getThreadsCountAttribute(): int
+    {
+        return $this->threads()->count();
+    }
+
+    /**
+     * Set the proper slug attribute.
+     *
+     * @param string $value
+     */
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = Str::slug($value, '-');
     }
 }

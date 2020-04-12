@@ -3,6 +3,7 @@
 return [
 
     'app_name' => 'UNIT Community',
+    'create' => 'Створити',
     'close' => 'Закрити',
     'back' => 'Назад',
     'search' => 'Пошук',
@@ -21,5 +22,7 @@ return [
     'publish_reply' => 'Відправити',
     'updated_successfully' => 'Оновлено успішно',
     'error_general' => 'Щось пішло не так',
+    'dialog_confirm' => 'Ви підтверджуєте дію?',
+    'threads' => 'Публікації',
 
 ];
