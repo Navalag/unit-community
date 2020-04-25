@@ -26,7 +26,7 @@ class FavoritesController extends Controller
     {
         $reply->favorite($reply, auth()->user());
 
-        Reputation::award($reply->owner, Reputation::REPLY_FAVORITED);
+        Reputation::gain($reply->owner, Reputation::REPLY_FAVORITED);
 
         return back();
     }
@@ -40,6 +40,6 @@ class FavoritesController extends Controller
     {
         $reply->unfavorite();
 
-        Reputation::reduce($reply->owner, Reputation::REPLY_FAVORITED);
+        Reputation::lose($reply->owner, Reputation::REPLY_FAVORITED);
     }
 }

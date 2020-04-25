@@ -43,13 +43,13 @@ class Reply extends Model
         static::created(function ($reply){
             $reply->thread->increment('replies_count');
 
-            Reputation::award($reply->owner, Reputation::REPLY_POSTED);
+            Reputation::gain($reply->owner, Reputation::REPLY_POSTED);
         });
 
         static::deleting(function ($reply){
             $reply->thread->decrement('replies_count');
 
-            Reputation::reduce($reply->owner, Reputation::REPLY_POSTED);
+            Reputation::lose($reply->owner, Reputation::REPLY_POSTED);
         });
     }
 
@@ -106,17 +106,17 @@ class Reply extends Model
     }
 
     /**
-     * Determine if the current reply is marked as the best.
+     * Access the body attribute.
      *
-     * @return bool
+     * @param  string $body
+     * @return string
      */
-    public function isBest()
+    public function getBodyAttribute($body)
     {
-        return $this->thread->best_reply_id == $this->id;
+        return Purify::clean($body);
     }
 
     /**
-     *
      * Determine if the current reply is marked as the best.
      *
      * @return bool
@@ -127,13 +127,12 @@ class Reply extends Model
     }
 
     /**
-     * Access the body attribute.
+     * Determine if the current reply is marked as the best.
      *
-     * @param  string $body
-     * @return string
+     * @return bool
      */
-    public function getBodyAttribute($body)
+    public function isBest()
     {
-        return Purify::clean($body);
+        return $this->thread->best_reply_id == $this->id;
     }
 }

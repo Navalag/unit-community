@@ -60,13 +60,13 @@ class Thread extends Model
         parent::boot();
 
         static::created(function ($thread) {
-            Reputation::award($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
+            Reputation::gain($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
         });
 
         static::deleting(function ($thread) {
             $thread->replies->each->delete();
 
-            Reputation::reduce($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
+            Reputation::lose($thread->creator, Reputation::THREAD_WAS_PUBLISHED);
         });
     }
 
@@ -278,12 +278,12 @@ class Thread extends Model
     public function markBestReply(Reply $reply): void
     {
         if ($this->hasBestReply()) {
-            Reputation::reduce($this->bestReply->owner, Reputation::BEST_REPLY_AWARDED);
+            Reputation::lose($this->bestReply->owner, Reputation::BEST_REPLY_AWARDED);
         }
 
         $this->update(['best_reply_id' => $reply->id]);
 
-        Reputation::award($reply->owner, Reputation::BEST_REPLY_AWARDED);
+        Reputation::gain($reply->owner, Reputation::BEST_REPLY_AWARDED);
 
         event(new ReplyReceivedBestMark($reply));
     }

@@ -24,7 +24,7 @@
                     </div>
 
                     <button class="btn btn-secondary btn-sm" v-text="translations.update_text"></button>
-                    <button class="btn btn-link btn-sm" @click="editing = false" type="button" v-text="translations.cancel_text"></button>
+                    <button class="btn btn-link btn-sm" @click="cancel" type="button" v-text="translations.cancel_text"></button>
                 </form>
             </div>
             <div v-else class="tt-item-description" v-html="body"></div>
@@ -98,6 +98,11 @@
                         this.editing = true;
                     });
                 this.editing = false;
+            },
+
+            cancel() {
+                this.editing = false;
+                this.body = this.reply.body;
             },
 
             destroy() {

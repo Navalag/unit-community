@@ -5,13 +5,14 @@
 ### Step 1.
 
 > To run this project, you must have PHP 7.3 and MySQL installed as a prerequisite.
-Begin by cloning this repository to your machine, and installing all Composer dependencies.
+Begin by cloning this repository to your machine, and installing all Composer & NPM dependencies.
 
 ```bash
 git clone https://github.com/Navalag/unit-community.git
-cd unit-community && composer install
+cd unit-community && composer install && npm install
 mv .env.example .env
 php artisan key:generate
+npm run dev
 ```
 
 ### Step 2.
