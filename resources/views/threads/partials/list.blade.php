@@ -7,6 +7,16 @@
     <div class="tt-col-description">
         <h6 class="tt-title">
             <a href="{{ $thread->path() }}">
+                @if ($thread->locked)
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-locked"></use>
+                    </svg>
+                @endif
+                @if ($thread->pinned)
+                    <svg class="tt-icon">
+                        <use xlink:href="#icon-pinned"></use>
+                    </svg>
+                @endif
                 @if (auth()->check() && $thread->hasUpdatesFor(auth()->user()))
                     <strong>
                         {{ $thread->title }}

@@ -1,9 +1,5 @@
 @extends('layouts.main')
 
-@section('head')
-    <link rel="stylesheet" href="/css/vendor/jquery.atwho.css">
-@endsection
-
 @section('content')
     <thread-view :thread="{{ $thread }}"
                  :translations="{{ json_encode(['thread_updated' => trans('common.thread_updated')]) }}"

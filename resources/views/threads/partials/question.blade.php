@@ -83,6 +83,11 @@
                         @click="toggleLock"
                         v-text="locked ? '{{ trans('common.unlock') }}' : '{{ trans('common.lock') }}'"></button>
             </li>
+            <li v-if="authorize('isAdmin')">
+                <button class="btn btn-secondary btn-color01 btn-sm"
+                        @click="togglePin"
+                        v-text="pinned ? '{{ trans('common.unpin') }}' : '{{ trans('common.pin') }}'"></button>
+            </li>
             <li v-if="signedIn">
                 <subscribe-button
                     :active="{{ json_encode($thread->isSubscribedTo) }}"

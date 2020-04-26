@@ -12,6 +12,8 @@ return [
     'delete_thread' => 'Delete Thread',
     'unlock' => 'Unlock',
     'lock' => 'Lock',
+    'pin' => 'Pin',
+    'unpin' => 'Unpin',
     'edit' => 'Edit',
     'thread_updated' => 'Your thread has been updated.',
     'unsubscribe' => 'Unsubscribe',
