@@ -9,6 +9,7 @@ use App\Filters\ThreadFilters;
 use Illuminate\Database\Eloquent\Builder;
 use App\Events\ThreadReceivedNewReply;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Facades\Cache;
@@ -34,7 +35,7 @@ class Thread extends Model
      *
      * @var array
      */
-    protected $with = ['creator', 'channel'];
+    protected $with = ['creator', 'channel', 'tags'];
 
     /**
      * The accessors to append to the model's array form.
@@ -111,6 +112,16 @@ class Thread extends Model
     public function channel(): BelongsTo
     {
         return $this->belongsTo(Channel::class);
+    }
+
+    /**
+     * A thread has many tags.
+     *
+     * @return BelongsToMany
+     */
+    public function tags(): BelongsToMany
+    {
+        return $this->belongsToMany(Tag::class);
     }
 
     /**

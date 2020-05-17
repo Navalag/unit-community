@@ -41,6 +41,24 @@ class Channel extends Model
     }
 
     /**
+     * Get tags associated with a channel.
+     *
+     * @param int $limit
+     * @return array
+     */
+    public function getSimilarTags(int $limit = 10): array
+    {
+        return $this->threads
+            ->map(function ($thread) {
+                return $thread->tags->pluck('name');
+            })
+            ->flatten()
+            ->unique()
+            ->slice(0, $limit)
+            ->toArray();
+    }
+
+    /**
      * Add threads count to the model.
      *
      * @return integer

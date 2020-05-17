@@ -17,6 +17,9 @@
         <div class="form-default form-group mb-0 mt-3">
             <input type="text" class="form-control" v-model="form.title">
         </div>
+        <div class="form-default form-group mb-0 mt-3">
+            <input type="text" class="form-control" v-model="form.tags" placeholder="{{ trans('threads.create.comma_separate_tags') }}">
+        </div>
     </div>
     <div class="tt-item-description pt-3">
         <wysiwyg v-model="form.body" :class-names="'pt-2'"></wysiwyg>
@@ -39,7 +42,6 @@
                     </form>
                 </li>
             @endcan
-
         </ul>
         <div class="col-separator"></div>
         <a href="#" class="tt-icon-btn tt-hover-02 tt-small-indent">
@@ -72,6 +74,13 @@
         <h3 class="tt-item-title">
             <a href="#" v-text="title"></a>
         </h3>
+        <div class="tt-item-tag" v-if="tags.length">
+            <ul class="tt-list-badge">
+                <li v-for="tag in tags">
+                    <a :href="`/${locale}/threads?tag=${tag}`"><span class="tt-badge" v-text="tag"></span></a>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="tt-item-description">
         <p v-html="body"></p>

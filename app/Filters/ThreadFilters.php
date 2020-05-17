@@ -12,7 +12,7 @@ class ThreadFilters extends Filters
      *
      * @var array
      */
-    protected $filters = ['by', 'popular', 'unanswered'];
+    protected $filters = ['by', 'popular', 'unanswered', 'tag'];
 
     /**
      * Filter the query by a given username.
@@ -20,7 +20,7 @@ class ThreadFilters extends Filters
      * @param  string $username
      * @return Builder
      */
-    protected function by($username)
+    protected function by($username): Builder
     {
         $user = User::where('name', $username)->firstOrFail();
 
@@ -32,7 +32,7 @@ class ThreadFilters extends Filters
      *
      * @return Builder
      */
-    protected function popular()
+    protected function popular(): Builder
     {
         $this->builder->getQuery()->orders = [];
 
@@ -44,8 +44,21 @@ class ThreadFilters extends Filters
      *
      * @return Builder
      */
-    protected function unanswered()
+    protected function unanswered(): Builder
     {
         return $this->builder->where('replies_count', 0);
+    }
+
+    /**
+     * Filter the query by a given tag.
+     *
+     * @param  string $tag
+     * @return Builder
+     */
+    protected function tag($tag): Builder
+    {
+        return $this->builder->whereHas('tags', function ($q) use ($tag) {
+            $q->where('name', $tag);
+        });
     }
 }

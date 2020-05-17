@@ -5,13 +5,19 @@
         <div class="tt-categories-title">
             <div class="tt-title">@lang('channel.channels')</div>
             @if (auth()->check() && auth()->user()->is_admin)
-                <button type="button" class="btn btn-primary btn-sm ml-3" data-toggle="modal" data-target="#createChannel">@lang('common.create')</button>
+                <button type="button"
+                        class="btn btn-primary btn-sm ml-3"
+                        data-toggle="modal"
+                        data-target="#createChannel"
+                >@lang('common.create')</button>
             @endif
         </div>
         <div class="tt-categories-list">
             <div class="row">
                 @foreach($channels as $channel)
-                    <channel-card :channel-initial="{{ json_encode($channel) }}"
+                    <channel-card
+                        :init-channel="{{ json_encode($channel) }}"
+                        :similar-tags="{{ json_encode($channel->getSimilarTags()) }}"
                         :translate="{{ json_encode([
                             'name' => trans('channel.name'),
                             'description' => trans('channel.description'),

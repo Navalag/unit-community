@@ -26,7 +26,7 @@
                 @endif
             </a>
         </h6>
-        <div class="row align-items-center no-gutters hide-desktope">
+        <div class="row align-items-center no-gutters">
             <div class="col-11">
                 <ul class="tt-list-badge">
                     <li class="show-mobile">
@@ -34,6 +34,9 @@
                             <span class="tt-color{{ $thread->channel->id }} tt-badge">{{ $thread->channel->name }}</span>
                         </a>
                     </li>
+                    @foreach($thread->tags as $tag)
+                        <li><a href="{{ LaravelLocalization::localizeUrl('/threads?tag=' . $tag->name) }}"><span class="tt-badge">{{ $tag->name }}</span></a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class="col-1 ml-auto show-mobile">

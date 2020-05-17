@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Events\ThreadEdited;
+use App\Tag;
 use App\Thread;
 use Illuminate\Http\Response;
 use Exception;
@@ -68,9 +69,11 @@ class ThreadsController extends Controller
             'title' => 'required|spamfree|max:150',
             'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id',
+            'tags' => 'nullable|spamfree|string|max:50',
             'g-recaptcha-response' => ['required', $recaptcha]
         ]);
 
+        /** @var Thread $thread */
         $thread = Thread::create([
             'user_id'    => auth()->id(),
             'channel_id' => request('channel_id'),
@@ -78,6 +81,8 @@ class ThreadsController extends Controller
             'body'       => request('body'),
             'slug'       => request('title'),
         ]);
+
+        $this->saveTags($thread, request('tags', ''));
 
         return redirect($thread->path())
             ->with('flash', 'Your thread has been published!');
@@ -117,10 +122,20 @@ class ThreadsController extends Controller
     {
         $this->authorize('update', $thread);
 
-        $thread->update(request()->validate([
+        request()->validate([
             'title' => 'required|spamfree',
             'body' => 'required|spamfree',
-        ]));
+            'tags' => 'nullable|spamfree|string|max:50',
+        ]);
+
+        $thread->update([
+            'title' => request('title'),
+            'body' => request('body'),
+        ]);
+
+        $this->saveTags($thread, request('tags', ''));
+
+        $thread = $thread->fresh();
 
         event(new ThreadEdited($thread));
 
@@ -167,5 +182,31 @@ class ThreadsController extends Controller
         }
         
         return $threads->simplePaginate(15);
+    }
+
+
+    /**
+     * Save tags associated with thread.
+     *
+     * @param Thread $thread
+     * @param string $tags
+     */
+    protected function saveTags(Thread $thread, string $tags): void
+    {
+        $tags = array_map(
+            'trim', array_slice(
+                explode(',', $tags), 0, 3
+            )
+        );
+
+        $tagsId = [];
+
+        foreach ($tags as $name) {
+            if ($name) {
+                $tagsId[] = Tag::firstOrCreate(['name' => $name])->id;
+            }
+        }
+
+        $thread->tags()->sync($tagsId);
     }
 }

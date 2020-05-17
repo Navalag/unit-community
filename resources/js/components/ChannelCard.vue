@@ -34,6 +34,14 @@
                 </div>
                 <div class="tt-item-layout">
                     <div class="innerwrapper" v-text="channel.description"></div>
+                    <div class="innerwrapper" v-if="similarTags.length">
+                        <h6 class="tt-title">Similar TAGS</h6>
+                        <ul class="tt-list-badge">
+                            <li v-for="tag in similarTags">
+                                <a :href="`/${locale}/threads?tag=${tag}`"><span class="tt-badge" v-text="tag"></span></a>
+                            </li>
+                        </ul>
+                    </div>
                     <div v-if="authorize('isAdmin')" class="innerwrapper text-right">
                         <button type="button" class="btn btn-sm btn-link" @click="editing = true" v-text="translate.edit"></button>
                     </div>
@@ -45,12 +53,13 @@
 
 <script>
     export default {
-        props: ['channelInitial', 'translate'],
+        props: ['initChannel', 'similarTags', 'translate'],
 
         data() {
             return {
+                locale: window.App.locale,
                 localePrefix: window.App.locale,
-                channel: this.channelInitial,
+                channel: this.initChannel,
                 editing: false,
             }
         },

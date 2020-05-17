@@ -9,11 +9,13 @@
 
         data() {
             return {
+                locale: window.App.locale,
                 repliesCount: this.thread.replies_count,
                 locked: this.thread.locked,
                 pinned: this.thread.pinned,
                 title: this.thread.title,
                 body: this.thread.body,
+                tags: this.thread.tags.map(tag => tag.name),
                 form: {},
                 editing: false
             };
@@ -25,7 +27,7 @@
 
         methods: {
             toggleLock () {
-                let uri = `/${window.App.locale}/locked-threads/${this.thread.slug}`;
+                let uri = `/${this.locale}/locked-threads/${this.thread.slug}`;
 
                 axios[this.locked ? 'delete' : 'post'](uri);
 
@@ -41,12 +43,14 @@
             update () {
                 let uri = `/${window.App.locale}/threads/${this.thread.channel.slug}/${this.thread.slug}`;
 
-                axios.patch(uri, this.form).then(() => {
+                axios.patch(uri, this.form).then((response) => {
                     this.editing = false;
 
-                    this.title = this.form.title;
+                    this.title = response.data.title;
 
-                    this.body = this.form.body;
+                    this.body = response.data.body;
+
+                    this.tags = response.data.tags.map(tag => tag.name);
 
                     flash(this.translations.thread_updated);
                 })
@@ -58,7 +62,7 @@
             resetForm () {
                 this.form = {
                     title: this.thread.title,
-
+                    tags: this.thread.tags.map(tag => tag.name).join(', '),
                     body: this.thread.body
                 };
 
