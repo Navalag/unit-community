@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Reply;
+use App\Thread;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Services\Reputation;
@@ -10,10 +13,17 @@ class ReputationTest extends TestCase
 {
     use RefreshDatabase;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->refreshApplicationWithLocale('en');
+    }
+
     /** @test */
     public function a_user_gains_points_when_they_create_a_thread()
     {
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $this->assertEquals(Reputation::THREAD_WAS_PUBLISHED, $thread->creator->reputation);
     }
@@ -21,11 +31,9 @@ class ReputationTest extends TestCase
     /** @test */
     public function a_user_lose_points_when_they_delete_a_thread()
     {
-        $this->refreshApplicationWithLocale('en');
-
         $this->signIn();
 
-        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $thread = create(Thread::class, ['user_id' => auth()->id()]);
 
         $this->assertEquals(Reputation::THREAD_WAS_PUBLISHED, $thread->creator->reputation);
 
@@ -37,10 +45,10 @@ class ReputationTest extends TestCase
     /** @test */
     public function a_user_gains_points_when_they_reply_to_a_thread()
     {
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $reply = $thread->addReply([
-            'user_id' => create('App\User')->id,
+            'user_id' => create(User::class)->id,
             'body' => 'Here is a reply.'
         ]);
 
@@ -50,15 +58,13 @@ class ReputationTest extends TestCase
     /** @test */
     public function a_user_loses_points_when_their_reply_to_a_thread_is_deleted()
     {
-        $this->refreshApplicationWithLocale('en');
-
         $this->signIn();
 
-        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        $reply = create(Reply::class, ['user_id' => auth()->id()]);
 
         $this->assertEquals(Reputation::REPLY_POSTED, $reply->owner->reputation);
 
-        $this->delete("/en/replies/{$reply->id}");
+        $this->delete(route('replies.destroy', $reply->id));
 
         $this->assertEquals(0, $reply->owner->fresh()->reputation);
     }
@@ -66,7 +72,7 @@ class ReputationTest extends TestCase
     /** @test */
     public function a_user_gains_points_when_their_reply_is_marked_as_best()
     {
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $thread->markBestReply($reply = $thread->addReply([
             'user_id' => create('App\User')->id,
@@ -81,9 +87,9 @@ class ReputationTest extends TestCase
     public function when_a_thread_owner_changes_their_preferred_best_reply_the_points_should_be_transferred()
     {
         // Given we have a current best reply...
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
         $thread->markBestReply($firstReply = $thread->addReply([
-            'user_id' => create('App\User')->id,
+            'user_id' => create(User::class)->id,
             'body' => 'Here is a reply.'
         ]));
 
@@ -93,7 +99,7 @@ class ReputationTest extends TestCase
 
         // But, if the owner of the thread decides to choose a different best reply...
         $thread->markBestReply($secondReply = $thread->addReply([
-            'user_id' => create('App\User')->id,
+            'user_id' => create(User::class)->id,
             'body' => 'Here is a better reply.'
         ]));
 
@@ -109,18 +115,16 @@ class ReputationTest extends TestCase
     /** @test */
     public function a_user_gains_points_when_their_reply_is_favorited()
     {
-        $this->refreshApplicationWithLocale('en');
-
         $this->signIn();
 
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $reply = $thread->addReply([
-            'user_id' => create('App\User')->id,
+            'user_id' => create(User::class)->id,
             'body' => 'Some reply'
         ]);
 
-        $this->post("/en/replies/{$reply->id}/favorites");
+        $this->post(route('replies.favorites.store', $reply->id));
 
         $total = Reputation::REPLY_POSTED + Reputation::REPLY_FAVORITED;
 
@@ -131,18 +135,16 @@ class ReputationTest extends TestCase
     /** @test */
     public function a_user_loses_points_when_their_favorited_reply_is_unfavorited()
     {
-        $this->refreshApplicationWithLocale('en');
-
-        $reply = create('App\Reply', ['user_id' => create('App\User')]);
+        $reply = create(Reply::class, ['user_id' => create(User::class)]);
 
         $this->signIn();
 
-        $this->post("/en/replies/{$reply->id}/favorites");
+        $this->post(route('replies.favorites.store', $reply->id));
 
         $total = Reputation::REPLY_POSTED + Reputation::REPLY_FAVORITED;
         $this->assertEquals($total, $reply->owner->fresh()->reputation);
 
-        $this->delete("/en/replies/{$reply->id}/favorites");
+        $this->delete(route('replies.favorites.destroy', $reply->id));
 
         $total = Reputation::REPLY_POSTED + Reputation::REPLY_FAVORITED - Reputation::REPLY_FAVORITED;
         $this->assertEquals($total, $reply->owner->fresh()->reputation);

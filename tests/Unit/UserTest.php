@@ -2,9 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Reply;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Hash;
 
 class UserTest extends TestCase
 {
@@ -13,9 +14,9 @@ class UserTest extends TestCase
     /** @test */
     public function a_user_can_fetch_their_most_recent_reply()
     {
-        $user = create('App\User');
+        $user = create(User::class);
 
-        $reply = create('App\Reply', ['user_id' => $user->id]);
+        $reply = create(Reply::class, ['user_id' => $user->id]);
 
         $this->assertEquals($reply->id, $user->lastReply->id);
     }
@@ -23,7 +24,7 @@ class UserTest extends TestCase
     /** @test */
     function a_user_can_determine_their_avatar_path()
     {
-        $user = create('App\User');
+        $user = create(User::class);
 
         $this->assertEquals(asset('images/svg-sprite/icon-ava-' . strtolower(substr($user->name, 0, 1)) . '.svg'), $user->avatar_path);
 

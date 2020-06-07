@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Reply;
+use App\Thread;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -9,22 +12,29 @@ class ParticipateInThreadsTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->refreshApplicationWithLocale('en');
+    }
+
     /** @test */
     public function unauthenticated_users_may_not_add_replies()
     {
         $this->withExceptionHandling()
-             ->post('/threads/some-channel/1/replies', [])
-             ->assertRedirect('/login');
+             ->post(route('threads.channel.replies.store', ['some-channel', 1]), [])
+             ->assertRedirect(route('login'));
     }
 
     /** @test */
     public function an_authenticated_user_may_participate_in_forum_threads()
     {
-        $this->be(create('App\User'));
+        $this->be(create(User::class));
 
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
-        $reply = make('App\Reply');
+        $reply = make(Reply::class);
         $this->post($thread->path() . '/replies', $reply->toArray());
 
         $this->assertDatabaseHas('replies', ['body' => $reply->body]);
@@ -36,8 +46,8 @@ class ParticipateInThreadsTest extends TestCase
     {
         $this->withExceptionHandling()->signIn();
 
-        $thread = create('App\Thread');
-        $reply  = make('App\Reply', ['body' => null]);
+        $thread = create(Thread::class);
+        $reply  = make(Reply::class, ['body' => null]);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
             ->assertSessionHasErrors('body');
@@ -48,13 +58,13 @@ class ParticipateInThreadsTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
-        $this->delete("/replies/{$reply->id}")
-             ->assertRedirect('login');
+        $this->delete(route('replies.destroy', $reply->id))
+             ->assertRedirect(route('login'));
 
         $this->signIn()
-             ->delete("/replies/{$reply->id}")
+             ->delete(route('replies.destroy', $reply->id))
              ->assertStatus(403);
     }
 
@@ -63,9 +73,9 @@ class ParticipateInThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        $reply = create(Reply::class, ['user_id' => auth()->id()]);
 
-        $this->delete("/replies/{$reply->id}")->assertStatus(302);
+        $this->delete(route('replies.destroy', $reply->id))->assertStatus(302);
 
         $this->assertDatabaseMissing('replies', ['id' => $reply->id]);
         $this->assertEquals(0, $reply->thread->fresh()->replies_count);
@@ -76,13 +86,13 @@ class ParticipateInThreadsTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
-        $this->patch("/replies/{$reply->id}")
-            ->assertRedirect('login');
+        $this->patch(route('replies.update', $reply->id))
+            ->assertRedirect(route('login'));
 
         $this->signIn()
-            ->delete("/replies/{$reply->id}")
+            ->delete(route('replies.destroy', $reply->id))
             ->assertStatus(403);
     }
 
@@ -91,10 +101,10 @@ class ParticipateInThreadsTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply', ['user_id' => auth()->id()]);
+        $reply = create(Reply::class, ['user_id' => auth()->id()]);
 
         $updatedReply = 'You been changed, fool.';
-        $this->patch("/replies/{$reply->id}", ['body' => $updatedReply]);
+        $this->patch(route('replies.update', $reply->id), ['body' => $updatedReply]);
 
         $this->assertDatabaseHas('replies', [
             'id' => $reply->id,
@@ -109,10 +119,10 @@ class ParticipateInThreadsTest extends TestCase
 
         $this->signIn();
 
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
-        $reply = make('App\Reply', [
-            'body' => 'Yahoo Customer Support'
+        $reply = make(Reply::class, [
+            'body' => 'This forum is shit!'
         ]);
 
         $this->json('post', $thread->path() . '/replies', $reply->toArray())
@@ -126,9 +136,9 @@ class ParticipateInThreadsTest extends TestCase
 
         $this->signIn();
 
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
-        $reply = make('App\Reply');
+        $reply = make(Reply::class);
 
         $this->post($thread->path() . '/replies', $reply->toArray())
              ->assertStatus(201);

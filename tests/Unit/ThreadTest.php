@@ -2,7 +2,9 @@
 
 namespace Tests\Unit;
 
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use App\Channel;
+use App\Thread;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
@@ -12,22 +14,23 @@ class ThreadTest extends TestCase
 {
     use RefreshDatabase;
 
+    /** @var Thread $thread */
     private $thread;
 
     public function setUp(): void
     {
-        parent::setUp();
+        $this->refreshApplicationWithLocale('en');
 
-        $this->thread = create('App\Thread');
+        $this->thread = create(Thread::class);
     }
 
     /** @test */
     public function a_thread_has_a_path()
     {
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $this->assertEquals(
-            LaravelLocalization::localizeUrl("/threads/{$thread->channel->slug}/{$thread->slug}"),
+            url("/en/threads/{$thread->channel->slug}/{$thread->slug}"),
             $thread->path()
         );
     }
@@ -41,7 +44,7 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_has_a_creator()
     {
-        $this->assertInstanceOf('App\User', $this->thread->creator);
+        $this->assertInstanceOf(User::class, $this->thread->creator);
     }
 
     /** @test */
@@ -71,64 +74,58 @@ class ThreadTest extends TestCase
     /** @test */
     public function a_thread_belongs_to_a_channel()
     {
-        $thread = create('App\Thread');
-
-        $this->assertInstanceOf('App\Channel', $thread->channel);
+        $this->assertInstanceOf(Channel::class, $this->thread->channel);
     }
 
     /** @test */
     function a_thread_notifies_all_registered_subscribers_when_a_reply_is_added()
     {
         Notification::fake();
+
         $this->signIn()
             ->thread
             ->subscribe()
             ->addReply([
                 'body' => 'Foobar',
-                'user_id' => 999
+                'user_id' => create(User::class)->id
             ]);
+
         Notification::assertSentTo(auth()->user(), ThreadWasUpdated::class);
     }
 
     /** @test */
     public function a_thread_can_be_subscribed_to()
     {
-        $thread = create('App\Thread');
-
         $this->signIn();
 
-        $thread->subscribe($userId = 1);
+        $this->thread->subscribe(auth()->id());
 
         $this->assertEquals(
             1,
-            $thread->subscriptions()->where('user_id', $userId)->count()
+            $this->thread->subscriptions()->where('user_id', auth()->id())->count()
         );
     }
 
     /** @test */
     public function a_thread_can_be_unsubscribed_from()
     {
-        $thread = create('App\Thread');
+        $this->thread->subscribe($userId = 1);
 
-        $thread->subscribe($userId = 1);
+        $this->thread->unsubscribe($userId);
 
-        $thread->unsubscribe($userId);
-
-        $this->assertCount(0, $thread->subscriptions);
+        $this->assertCount(0, $this->thread->subscriptions);
     }
 
     /** @test */
     public function it_knows_if_the_authenticated_user_is_subscribed_to_it()
     {
-        $thread = create('App\Thread');
-
         $this->signIn();
 
-        $this->assertFalse($thread->isSubscribedTo);
+        $this->assertFalse($this->thread->isSubscribedTo);
 
-        $thread->subscribe();
+        $this->thread->subscribe();
 
-        $this->assertTrue($thread->isSubscribedTo);
+        $this->assertTrue($this->thread->isSubscribedTo);
     }
 
     /** @test */
@@ -136,39 +133,35 @@ class ThreadTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create('App\Thread');
+        tap(auth()->user(), function (User $user) {
+            $this->assertTrue($this->thread->hasUpdatesFor($user));
 
-        tap(auth()->user(), function ($user) use ($thread) {
-            $this->assertTrue($thread->hasUpdatesFor($user));
+            $user->read($this->thread);
 
-            $user->read($thread);
-
-            $this->assertFalse($thread->hasUpdatesFor($user));
+            $this->assertFalse($this->thread->hasUpdatesFor($user));
         });
     }
 
     /** @test */
     public function a_thread_records_each_visit()
     {
-        $thread = make('App\Thread', ['id' => 1]);
+        $this->thread->visits()->reset();
 
-        $thread->visits()->reset();
+        $this->assertsame(0, $this->thread->visits()->count());
 
-        $this->assertsame(0, $thread->visits()->count());
+        $this->thread->visits()->record();
 
-        $thread->visits()->record();
+        $this->assertEquals(1, $this->thread->visits()->count());
 
-        $this->assertEquals(1, $thread->visits()->count());
+        $this->thread->visits()->record();
 
-        $thread->visits()->record();
-
-        $this->assertEquals(2, $thread->visits()->count());
+        $this->assertEquals(2, $this->thread->visits()->count());
     }
 
     /** @test */
     function a_threads_body_is_sanitized_automatically()
     {
-        $thread = make('App\Thread', ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
+        $thread = make(Thread::class, ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
 
         $this->assertEquals("<p>This is okay.</p>", $thread->body);
     }

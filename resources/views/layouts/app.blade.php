@@ -36,7 +36,7 @@
     </div>
 
     <!-- Svg sprite -->
-    {!! file_get_contents(asset('images/svg-sprite/sprite.svg')) !!}
+    @include('svg-sprite')
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>

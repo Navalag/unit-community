@@ -6,8 +6,8 @@ use App\Channel;
 use App\Thread;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Validation\ValidationException;
 use Tests\TestCase;
+use Symfony\Component\HttpFoundation\Response;
 
 class ChannelAdministrationTest extends TestCase
 {
@@ -17,8 +17,9 @@ class ChannelAdministrationTest extends TestCase
     {
         parent::setUp();
 
-        $this->withExceptionHandling();
         $this->refreshApplicationWithLocale('en');
+
+        $this->withExceptionHandling();
     }
 
     /** @test */
@@ -29,7 +30,7 @@ class ChannelAdministrationTest extends TestCase
             'description' => 'This is the channel for discussing all things PHP.',
         ]);
 
-        $this->get('/en/channels')
+        $this->get(route('channels.index'))
             ->assertSee('php')
             ->assertSee('This is the channel for discussing all things PHP.');
     }
@@ -37,46 +38,42 @@ class ChannelAdministrationTest extends TestCase
     /** @test */
     public function non_administrators_cannot_create_channels()
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
-
         $regularUser = create(User::class);
 
-
         $this->actingAs($regularUser)
-            ->post('/en/channels', [
+            ->post(route('channels.store'), [
                 'name' => 'forbidden',
                 'description' => 'forbidden channel description',
-            ]);
+            ])
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
     public function non_administrators_cannot_edit_channels()
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
-
         $regularUser = create(User::class);
         $channel = create(Channel::class);
 
         $this->actingAs($regularUser)
-            ->patch('/en/channels/' . $channel->slug, [
+            ->patch(route('channels.update', $channel->slug), [
                 'name' => 'forbidden',
                 'description' => 'forbidden channel description',
-            ]);
+            ])
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
     public function non_administrators_cannot_delete_channels()
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
-
         $regularUser = create(User::class);
         $channel = create(Channel::class);
 
         $this->actingAs($regularUser)
-            ->delete('/en/channels/' . $channel->slug, [
+            ->delete(route('channels.destroy', $channel->slug), [
                 'name' => 'forbidden',
                 'description' => 'forbidden channel description',
-            ]);
+            ])
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
@@ -85,14 +82,14 @@ class ChannelAdministrationTest extends TestCase
         $this->signInAdmin();
 
         $this->patch(
-            '/en/channels/' . create(Channel::class)->slug,
+            route('channels.update', create(Channel::class)->slug),
             $updatedChannel = [
                 'name' => 'altered',
                 'description' => 'altered channel description',
             ]
         );
 
-        $this->get('/en/channels')
+        $this->get(route('channels.index'))
             ->assertSee($updatedChannel['name'])
             ->assertSee($updatedChannel['description']);
     }
@@ -100,13 +97,12 @@ class ChannelAdministrationTest extends TestCase
     /** @test */
     public function an_administrator_cannot_delete_channel_with_threads()
     {
-        $this->expectException('Symfony\Component\HttpKernel\Exception\HttpException');
-
         $this->signInAdmin();
 
         $thread = create(Thread::class);
 
-        $this->delete('/en/channels/' . $thread->channel->slug);
+        $this->delete(route('channels.destroy', $thread->channel->slug))
+            ->assertStatus(Response::HTTP_FORBIDDEN);
     }
 
     /** @test */
@@ -116,24 +112,22 @@ class ChannelAdministrationTest extends TestCase
 
         $channel = create(Channel::class);
 
-        $this->delete('/en/channels/' . $channel->slug)
+        $this->delete(route('channels.destroy', $channel->slug))
             ->assertStatus(302);
     }
 
     /** @test */
     public function a_channel_requires_a_name()
     {
-        $this->expectException(ValidationException::class);
-
-        $this->createChannel(['name' => null]);
+        $this->createChannel(['name' => null])
+            ->assertSessionHasErrors('name');
     }
 
     /** @test */
     public function a_channel_requires_a_description()
     {
-        $this->expectException(ValidationException::class);
-
-        $this->createChannel(['description' => null]);
+        $this->createChannel(['description' => null])
+            ->assertSessionHasErrors('description');
     }
 
     protected function createChannel($overrides = [])
@@ -142,6 +136,6 @@ class ChannelAdministrationTest extends TestCase
 
         $channel = make(Channel::class, $overrides);
 
-        return $this->post('/en/channels', $channel->toArray());
+        return $this->post(route('channels.store'), $channel->toArray());
     }
 }

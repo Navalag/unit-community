@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Reply;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -9,12 +10,19 @@ class FavoritesTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->refreshApplicationWithLocale('en');
+    }
+
     /** @test */
     public function guests_cannot_favorite_anything()
     {
         $this->withExceptionHandling()
-             ->post('replies/1/favorites')
-             ->assertRedirect('/login');
+             ->post(route('replies.favorites.store', 1))
+             ->assertRedirect(route('login'));
     }
     
     /** @test */
@@ -22,9 +30,9 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
-        $this->post('replies/' . $reply->id . '/favorites');
+        $this->post(route('replies.favorites.store', $reply->id));
 
         $this->assertCount(1, $reply->favorites);
     }
@@ -34,11 +42,11 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
-        $reply->favorite();
+        $reply->favorite($reply, auth()->user());
 
-        $this->delete('replies/' . $reply->id . '/favorites');
+        $this->delete(route('replies.favorites.destroy', $reply->id));
 
         $this->assertCount(0, $reply->favorites);
     }
@@ -48,11 +56,11 @@ class FavoritesTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
         try {
-            $this->post('replies/' . $reply->id . '/favorites');
-            $this->post('replies/' . $reply->id . '/favorites');
+            $this->post(route('replies.favorites.store', $reply->id));
+            $this->post(route('replies.favorites.store', $reply->id));
         } catch (\Exception $e) {
             $this->fail('Did not expect to insert the same record set twice.');
         }

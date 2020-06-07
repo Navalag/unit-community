@@ -2,7 +2,8 @@
 
 namespace Tests\Feature;
 
-use Carbon\Carbon;
+use App\Reply;
+use App\Thread;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Activity;
@@ -16,13 +17,13 @@ class ActivityTest extends TestCase
     {
         $this->signIn();
 
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $this->assertDatabaseHas('activities', [
             'type'         => 'created_thread',
             'user_id'      => auth()->id(),
             'subject_id'   => $thread->id,
-            'subject_type' => 'App\Thread',
+            'subject_type' => Thread::class,
         ]);
 
         $activity = Activity::first();
@@ -35,7 +36,7 @@ class ActivityTest extends TestCase
     {
         $this->signIn();
 
-        $reply = create('App\Reply');
+        create(Reply::class);
 
         $this->assertEquals(2, Activity::count());
     }
@@ -45,7 +46,7 @@ class ActivityTest extends TestCase
     {
         $this->signIn();
 
-        create('App\Thread', ['user_id' => auth()->user()], 2);
+        create(Thread::class, ['user_id' => auth()->user()], 2);
 
         $feed = Activity::feed(auth()->user(), 50);
 

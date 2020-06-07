@@ -24,7 +24,7 @@ class PinThreadsTest extends TestCase
 
         $this->signIn();
 
-        $thread = create('App\Thread', ['user_id' => auth()->id()]);
+        $thread = create(Thread::class, ['user_id' => auth()->id()]);
 
         $this->post(route('pinned-threads.store', $thread))->assertStatus(403);
 
@@ -36,7 +36,7 @@ class PinThreadsTest extends TestCase
     {
         $this->signInAdmin();
 
-        $thread = create('App\Thread');
+        $thread = create(Thread::class);
 
         $this->post(route('pinned-threads.store', $thread));
 
@@ -48,7 +48,7 @@ class PinThreadsTest extends TestCase
     {
         $this->signInAdmin();
 
-        $thread = create('App\Thread', ['pinned' => true]);
+        $thread = create(Thread::class, ['pinned' => true]);
 
         $this->delete(route('pinned-threads.destroy', $thread));
 

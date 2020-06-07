@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Http\Requests\UpdateUserRequest;
@@ -13,7 +14,9 @@ class UpdateUserSettingsTest extends TestCase
 
     public function setUp(): void
     {
-        parent::setUp();
+        $this->markTestSkipped('Set up user update tests later!');
+
+        $this->refreshApplicationWithLocale('en');
 
         $this->withExceptionHandling();
 
@@ -23,7 +26,7 @@ class UpdateUserSettingsTest extends TestCase
     /** @test  */
     function can_update_email_if_not_verified()
     {
-        $user = create('App\User');
+        $user = create(User::class);
 
         $this->assertFalse($user->email_verified_at == null);
 

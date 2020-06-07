@@ -1,18 +1,21 @@
 <?php
 
-/* @var $factory \Illuminate\Database\Eloquent\Factory */
+/* @var $factory Factory */
 
+use App\User;
+use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Notifications\DatabaseNotification;
 use Faker\Generator as Faker;
+use Ramsey\Uuid\Uuid;
 
 $factory->define(DatabaseNotification::class, function (Faker $faker) {
     return [
-        'id' => \Ramsey\Uuid\Uuid::uuid4()->toString(),
+        'id' => Uuid::uuid4()->toString(),
         'type' => 'App\Notifications\ThreadWasUpdated',
         'notifiable_id' => function () {
-            return auth()->id() ?: factory('App\User')->create()->id;
+            return auth()->id() ?: factory(User::class)->create()->id;
         },
-        'notifiable_type' => 'App\User',
+        'notifiable_type' => User::class,
         'data' => ['foo' => 'bar']
     ];
 });

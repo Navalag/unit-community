@@ -10,7 +10,6 @@ class ThreadWasUpdated extends BaseNotification
      * Set the mail delivery channel.
      * @return void
      */
-
     public function setChannels()
     {
         if ($this->data['user']->is_receive_thread_updates_mail) {

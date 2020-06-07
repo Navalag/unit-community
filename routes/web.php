@@ -32,7 +32,7 @@ Route::group(
     Route::patch('threads/{channel}/{thread}', 'ThreadsController@update');
     Route::delete('threads/{channel}/{thread}', 'ThreadsController@destroy');
     Route::post('threads', 'ThreadsController@store')->middleware('verified')->name('threads.store');
-    Route::get('threads/{channel}', 'ThreadsController@index');
+    Route::get('threads/{channel}', 'ThreadsController@index')->name('threads.channel');
 
     Route::post('locked-threads/{thread}', 'LockedThreadsController@store')->name('locked-threads.store')->middleware('admin');
     Route::delete('locked-threads/{thread}', 'LockedThreadsController@destroy')->name('locked-threads.destroy')->middleware('admin');
@@ -40,9 +40,9 @@ Route::group(
     Route::post('pinned-threads/{thread}', 'PinnedThreadsController@store')->name('pinned-threads.store')->middleware('admin');
     Route::delete('pinned-threads/{thread}', 'PinnedThreadsController@destroy')->name('pinned-threads.destroy')->middleware('admin');
 
-    Route::get('/threads/{channel}/{thread}/replies', 'RepliesController@index');
-    Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store');
-    Route::patch('/replies/{reply}', 'RepliesController@update');
+    Route::get('/threads/{channel}/{thread}/replies', 'RepliesController@index')->name('threads.channel.replies.index');
+    Route::post('/threads/{channel}/{thread}/replies', 'RepliesController@store')->name('threads.channel.replies.store');
+    Route::patch('/replies/{reply}', 'RepliesController@update')->name('replies.update');
     Route::delete('/replies/{reply}', 'RepliesController@destroy')->name('replies.destroy');
 
     Route::post('/replies/{reply}/best', 'BestRepliesController@store')->name('best-replies.store');
@@ -50,20 +50,20 @@ Route::group(
     Route::post('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@store')->middleware('auth');
     Route::delete('/threads/{channel}/{thread}/subscriptions', 'ThreadSubscriptionsController@destroy')->middleware('auth');
 
-    Route::post('/replies/{reply}/favorites', 'FavoritesController@store');
-    Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy');
+    Route::post('/replies/{reply}/favorites', 'FavoritesController@store')->name('replies.favorites.store');
+    Route::delete('/replies/{reply}/favorites', 'FavoritesController@destroy')->name('replies.favorites.destroy');
 
     Route::get('/profiles/{user}', 'ProfilesController@show')->name('profile');
-    Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index');
-    Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy');
+    Route::get('/profiles/{user}/notifications', 'UserNotificationsController@index')->name('profile.notifications.index');
+    Route::delete('/profiles/{user}/notifications/{notification}', 'UserNotificationsController@destroy')->name('profile.notifications.destroy');
 
     Route::get('about', 'StaticPagesController@index');
 
     Route::patch('profiles/{user}/settings', 'UserSettingsController@update');
     Route::get('profiles/{user}/settings/update-email/{id}/{token}/{email}', 'UserSettingsController@updateEmail')->name('emailverification');
 
-    Route::resource('channels', '\\' . ChannelsController::class)->only(['index', 'create', 'store', 'update', 'destroy']);
+    Route::resource('channels', '\\' . ChannelsController::class)->only(['index', 'store', 'update', 'destroy']);
 });
 
-Route::get('api/users', 'Api\UsersController@index');
-Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('avatar');
+Route::get('api/users', 'Api\UsersController@index')->name('api.users');
+Route::post('api/users/{user}/avatar', 'Api\UserAvatarController@store')->middleware('auth')->name('api.users.avatar');

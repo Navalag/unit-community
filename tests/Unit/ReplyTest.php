@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\User;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -14,15 +15,16 @@ class ReplyTest extends TestCase
     /** @test */
     public function it_has_an_owner()
     {
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
-        $this->assertInstanceOf('App\User', $reply->owner);
+        $this->assertInstanceOf(User::class, $reply->owner);
     }
 
     /** @test */
     function it_knows_if_it_was_just_published()
     {
-        $reply = create('App\Reply');
+        /** @var Reply $reply */
+        $reply = create(Reply::class);
 
         $this->assertTrue($reply->wasJustPublished());
 
@@ -42,22 +44,9 @@ class ReplyTest extends TestCase
     }
 
     /** @test */
-    function it_wraps_mentioned_user_names_in_the_body_within_anchor_tags()
-    {
-        $reply = new Reply([
-            'body' => 'Hello @Jane-Doe.'
-        ]);
-
-        $this->assertEquals(
-            'Hello <a href="/profiles/Jane-Doe">@Jane-Doe</a>.',
-            $reply->body
-        );
-    }
-
-    /** @test */
     function it_knows_if_it_is_the_best_reply()
     {
-        $reply = create('App\Reply');
+        $reply = create(Reply::class);
 
         $this->assertFalse($reply->isBest());
 
@@ -69,7 +58,7 @@ class ReplyTest extends TestCase
     /** @test */
     function a_reply_body_is_sanitized_automatically()
     {
-        $reply = make('App\Reply', ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
+        $reply = make(Reply::class, ['body' => '<script>alert("bad")</script><p>This is okay.</p>']);
 
         $this->assertEquals("<p>This is okay.</p>", $reply->body);
     }

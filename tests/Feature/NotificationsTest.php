@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Thread;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Notifications\DatabaseNotification;
 use Tests\TestCase;
@@ -14,13 +16,15 @@ class NotificationsTest extends TestCase
     {
         parent::setUp();
 
+        $this->refreshApplicationWithLocale('en');
+
         $this->signIn();
     }
 
     /** @test */
     public function a_notification_is_prepared_when_a_subscribed_thread_receives_a_new_reply_that_is_not_by_the_current_user()
     {
-        $thread = create('App\Thread')->subscribe();
+        $thread = create(Thread::class)->subscribe();
 
         $this->assertCount(0, auth()->user()->notifications);
 
@@ -32,7 +36,7 @@ class NotificationsTest extends TestCase
         $this->assertCount(0, auth()->user()->fresh()->notifications);
 
         $thread->addReply([
-            'user_id' => create('App\User')->id,
+            'user_id' => create(User::class)->id,
             'body' => 'Some reply here.'
         ]);
 
@@ -46,7 +50,7 @@ class NotificationsTest extends TestCase
 
         $this->assertCount(
             1,
-            $this->getJson("/profiles/" . auth()->user()->name . "/notifications")->json()
+            $this->getJson(route('profile.notifications.index', auth()->user()->name))->json()
         );
     }
     
@@ -58,7 +62,7 @@ class NotificationsTest extends TestCase
         tap(auth()->user(), function ($user) {
             $this->assertCount(1, $user->unreadNotifications);
 
-            $this->delete("/profiles/{$user->name}/notifications/" . $user->unreadNotifications->first()->id);
+            $this->delete(route('profile.notifications.destroy', [auth()->user()->name, $user->unreadNotifications->first()->id]));
 
             $this->assertCount(0, $user->fresh()->unreadNotifications);
         });

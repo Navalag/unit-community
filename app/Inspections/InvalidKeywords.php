@@ -3,7 +3,6 @@
 namespace App\Inspections;
 
 use Exception;
-use Illuminate\Support\Facades\Config;
 
 class InvalidKeywords
 {
@@ -16,7 +15,7 @@ class InvalidKeywords
 
     public function __construct()
     {
-        $this->keywords = Config::get('bannedwords.list');
+        $this->keywords = config('bannedwords.list');
     }
 
     /**

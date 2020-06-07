@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Thread;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -12,8 +13,6 @@ class UpdateThreadsTest extends TestCase
 
     public function setUp(): void
     {
-        parent::setUp();
-
         $this->refreshApplicationWithLocale('en');
 
         $this->withExceptionHandling();
@@ -24,7 +23,7 @@ class UpdateThreadsTest extends TestCase
     /** @test */
     function unauthorized_users_may_not_update_threads()
     {
-        $thread = create(Thread::class, ['user_id' => create('App\User')->id]);
+        $thread = create(Thread::class, ['user_id' => create(User::class)->id]);
 
         $this->patch($thread->path(), [])->assertStatus(403);
     }

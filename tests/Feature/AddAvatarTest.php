@@ -16,7 +16,7 @@ class AddAvatarTest extends TestCase
     {
         $this->withExceptionHandling();
 
-        $this->json('POST', 'api/users/1/avatar')
+        $this->json('POST', route('api.users.avatar', 1))
             ->assertStatus(401);
     }
 
@@ -25,7 +25,7 @@ class AddAvatarTest extends TestCase
     {
         $this->withExceptionHandling()->signIn();
 
-        $this->json('POST', 'api/users/' . auth()->id() . '/avatar', [
+        $this->json('POST', route('api.users.avatar', auth()->id()), [
             'avatar' => 'not-an-image'
         ])->assertStatus(422);
     }
@@ -37,7 +37,7 @@ class AddAvatarTest extends TestCase
 
         Storage::fake('public');
 
-        $this->json('POST', 'api/users/' . auth()->id() . '/avatar', [
+        $this->json('POST', route('api.users.avatar', auth()->id()), [
             'avatar' => $file = UploadedFile::fake()->image('avatar.jpg')
         ]);
 
