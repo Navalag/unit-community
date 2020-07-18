@@ -7,7 +7,7 @@
         <div class="container">
             <div class="tt-user-header">
                 <div class="tt-col-avatar">
-                        <img class="tt-icon" src="{{ $profileUser->avatar_path }}" alt="{{ $profileUser->name }}">
+                    <img class="tt-icon" src="{{ $profileUser->avatar_path }}" alt="{{ $profileUser->name }}">
                 </div>
                 <div class="tt-col-title">
                     <div class="tt-title">
@@ -16,11 +16,13 @@
                     <ul class="tt-list-badge">
                         <li><a href="#"><span class="tt-color14 tt-badge">LVL : {{ $profileUser->reputation }}</span></a></li>
                     </ul>
-                    <a href="#" class="tt-btn-icon" id="js-settings-btn">
-                        <svg class="tt-icon">
-                            <use xlink:href="#icon-settings_fill"></use>
-                        </svg>
-                    </a>
+                    @if(auth()->id() === $profileUser->id)
+                        <a href="#" class="tt-btn-icon" id="js-settings-btn">
+                            <svg class="tt-icon">
+                                <use xlink:href="#icon-settings_fill"></use>
+                            </svg>
+                        </a>
+                    @endif
                 </div>
             </div>
         </div>
@@ -48,7 +50,7 @@
             </div>
         </div>
     </div>
-    @if(auth()->check())
+    @if(auth()->check() && auth()->id() === $profileUser->id)
         <div class="dispayingTextDiv"></div>
         <div id="js-popup-settings" class="tt-popup-settings">
             <div class="tt-btn-col-close">
